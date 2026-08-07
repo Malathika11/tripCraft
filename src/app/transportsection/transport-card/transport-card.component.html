@@ -1,0 +1,167 @@
+<div class="cls-transportCard" *ngFor="let transport of transportList" [ngClass]="transport.theme">
+
+    <!-- LEFT SIDE -->
+
+    <div class="cls-left">
+
+        <div class="cls-top">
+
+            <div class="cls-icon">
+
+                <span [class]="transport.icon"></span>
+
+            </div>
+
+            <div class="cls-head">
+
+                <div class="cls-titleRow">
+
+                    <h3>{{transport.name}}</h3>
+
+                    <span class="cls-badge">
+                        {{transport.badge}}
+                    </span>
+
+                </div>
+
+                <div class="cls-price">
+
+                    ₹{{transport.price | number}}
+
+                    <small>
+                        Total for {{transport.days}} Days
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Vehicle -->
+
+        <div class="cls-vehicle">
+
+            <img [src]="transport.image">
+
+        </div>
+
+
+        <!-- Features -->
+
+        <ul class="cls-featureList">
+
+            <li *ngFor="let item of transport.features">
+
+                <span class="cls-checked"></span>
+
+                {{item}}
+
+            </li>
+
+        </ul>
+
+
+        <!-- Tags -->
+
+        <div class="cls-tags">
+
+            <span *ngFor="let tag of transport.tags" class="cls-tag">
+
+                {{tag}}
+
+            </span>
+
+        </div>
+
+
+        <!-- Bottom -->
+
+        <div class="cls-footerText">
+
+            <span class="cls-people"></span>
+
+            {{transport.footer}}
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="cls-right">
+
+        <!-- Wishlist -->
+
+        <button class="cls-like" (click)="toggleFavourite(transport)" [class.active]="transport.favourite">
+
+            <span class="cls-heart"></span>
+
+        </button>
+
+
+        <!-- Map -->
+
+        <div class="cls-map">
+
+            <img [src]="transport.map">
+
+        </div>
+
+
+        <!-- Route -->
+
+        <div class="cls-route">
+
+            <span>
+                Total Coverage:
+                {{transport.coverage}}
+            </span>
+
+            <span>•</span>
+
+            <span>
+                {{transport.days}} Days
+            </span>
+
+            <span>•</span>
+
+            <span>
+                ~{{transport.distance}} KM
+            </span>
+
+        </div>
+
+
+        <!-- Buttons -->
+
+        <div class="cls-btnRow">
+
+            <button class="cls-details">
+
+                View Details
+
+            </button>
+
+
+            <button class="cls-select" (click)="selectTransport(transport)"
+                [class.active]="selectedTransport?.id==transport.id">
+
+                <span *ngIf="selectedTransport?.id==transport.id">
+                    ✔ Selected
+                </span>
+
+                <span *ngIf="selectedTransport?.id!=transport.id">
+                    Select This Option →
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

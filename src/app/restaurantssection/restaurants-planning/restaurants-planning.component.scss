@@ -1,0 +1,561 @@
+.cls-restaurantPlanning{
+
+    padding:30px;
+
+    background:#f7f9fc;
+}
+
+/*======================*/
+
+.cls-pageHeader{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.cls-pageHeader h2{
+
+    margin:0;
+
+    color:#1d3557;
+
+    font-size:32px;
+
+    font-weight:700;
+}
+
+.cls-pageHeader p{
+
+    margin-top:8px;
+
+    color:#6b7280;
+
+    font-size:15px;
+}
+
+/*======================*/
+
+.cls-tripCard{
+
+    display:flex;
+
+    gap:15px;
+
+    align-items:center;
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:14px;
+
+    padding:18px 22px;
+
+    min-width:260px;
+}
+
+.cls-tripCard span{
+
+    color:#2563eb;
+
+    font-size:30px;
+}
+
+.cls-tripCard h4{
+
+    margin:2px 0;
+
+    color:#172554;
+}
+
+.cls-tripCard small{
+
+    color:#64748b;
+}
+
+/*======================*/
+
+.cls-hotelSection{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    background:#fff;
+
+    padding:18px;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:16px;
+
+    margin-bottom:20px;
+}
+
+.cls-dayBadge{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    font-weight:600;
+
+    padding:8px 16px;
+
+    border-radius:8px;
+}
+
+.cls-hotelName{
+
+    flex:1;
+
+    font-weight:600;
+
+    color:#172554;
+}
+
+.cls-hotelBtn{
+
+    border:1px solid #2563eb;
+
+    background:#fff;
+
+    color:#2563eb;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+/*======================*/
+
+.cls-hotelCard{
+
+    display:flex;
+
+    gap:20px;
+
+    background:#fff;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    border:1px solid #e5e7eb;
+}
+
+.cls-hotelImg{
+
+    width:170px;
+
+    height:120px;
+
+    object-fit:cover;
+
+    border-radius:14px;
+}
+
+.cls-hotelContent{
+
+    flex:1;
+}
+
+.cls-date{
+
+    margin-bottom:18px;
+
+    color:#475569;
+
+    font-weight:500;
+}
+
+.cls-mealStatus{
+
+    display:flex;
+
+    gap:18px;
+}
+
+.cls-status{
+
+    flex:1;
+
+    display:flex;
+
+    gap:12px;
+
+    align-items:center;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:12px;
+
+    padding:16px;
+}
+
+.cls-status h5{
+
+    margin:0;
+
+    color:#1e293b;
+}
+
+.cls-status p{
+
+    margin:4px 0 0;
+
+    font-size:13px;
+}
+
+.breakfast span{
+
+    color:#16a34a;
+}
+
+.breakfast p{
+
+    color:#16a34a;
+}
+
+.lunch span,
+.dinner span{
+
+    color:#ef4444;
+}
+
+.lunch p,
+.dinner p{
+
+    color:#ef4444;
+}
+
+.cls-restaurantsSection{
+
+    margin-top:35px;
+}
+
+.cls-sectionHeader{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+}
+
+.cls-sectionHeader h3{
+
+    color:#172554;
+
+    font-size:22px;
+
+    margin:0;
+}
+
+.cls-scrollBtn{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    font-size:22px;
+}
+
+.cls-restaurantsWrapper{
+
+    display:flex;
+
+    gap:20px;
+
+    overflow-x:auto;
+
+    scroll-behavior:smooth;
+
+    scrollbar-width:none;
+}
+
+.cls-restaurantsWrapper::-webkit-scrollbar{
+
+    display:none;
+}
+
+.cls-restaurantCard{
+
+    min-width:280px;
+
+    background:#fff;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    border:1px solid #e5e7eb;
+
+    transition:.3s;
+
+    flex-shrink:0;
+}
+
+.cls-restaurantCard:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.12);
+}
+
+.cls-imageSection{
+
+    position:relative;
+}
+
+.cls-imageSection img{
+
+    width:100%;
+
+    height:170px;
+
+    object-fit:cover;
+}
+
+.cls-rating{
+
+    position:absolute;
+
+    left:10px;
+
+    top:10px;
+
+    background:#fff;
+
+    padding:5px 10px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+}
+
+.cls-cardBody{
+
+    padding:18px;
+}
+
+.cls-cardBody h4{
+
+    margin:0;
+
+    color:#172554;
+}
+
+.cls-review{
+
+    color:#2563eb;
+
+    font-size:13px;
+
+    margin:5px 0 15px;
+}
+
+.cls-infoRow{
+
+    margin-bottom:8px;
+
+    color:#475569;
+
+    font-size:14px;
+}
+
+.cls-btnGroup{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:18px;
+}
+
+.routeBtn{
+
+    flex:1;
+
+    border:1px solid #2563eb;
+
+    background:#fff;
+
+    color:#2563eb;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+.selectBtn{
+
+    flex:1;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    border:none;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+.cls-scrollButtons{
+
+display:flex;
+
+gap:10px;
+
+}
+
+.cls-scroll{
+
+width:42px;
+
+height:42px;
+
+border-radius:50%;
+
+border:none;
+
+background:#2563eb;
+
+color:white;
+
+font-size:20px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.cls-scroll:hover{
+
+transform:scale(1.1);
+
+}
+
+.cls-favourite{
+
+position:absolute;
+
+right:12px;
+
+top:12px;
+
+width:38px;
+
+height:38px;
+
+border:none;
+
+border-radius:50%;
+
+background:white;
+
+cursor:pointer;
+
+font-size:18px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+}
+
+.cls-badges{
+
+margin:12px 0;
+
+}
+
+.cls-badges span{
+
+background:#EEF4FF;
+
+color:#2563eb;
+
+padding:5px 12px;
+
+border-radius:20px;
+
+font-size:12px;
+
+font-weight:600;
+
+}
+
+.cls-selectedCard{
+
+border:2px solid #2563eb;
+
+box-shadow:0 15px 35px rgba(37,99,235,.18);
+
+}
+.cls-selectedBtn{
+
+background:#16a34a !important;
+
+}
+.cls-restaurantCard{
+
+transition:.35s;
+
+}
+
+.cls-restaurantCard:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 18px 40px rgba(0,0,0,.18);
+
+}
+
+.routeBtn:hover{
+
+background:#2563eb;
+
+color:white;
+
+transition:.3s;
+
+}
+
+.selectBtn:hover{
+
+opacity:.9;
+
+}

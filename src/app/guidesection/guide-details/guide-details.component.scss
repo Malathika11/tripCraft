@@ -1,0 +1,13 @@
+.cls-guide-main{
+    .cls-guide-body{
+        display: flex;
+        justify-content: space-between;
+        padding: 40px;
+        .cls-guide-card{
+            width: 70%;
+        }
+        .cls-guide-budget{
+            width: 25%;
+        }
+    }
+}

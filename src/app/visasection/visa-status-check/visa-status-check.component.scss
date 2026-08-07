@@ -1,0 +1,70 @@
+.cls-visaStatus-main{
+    position: fixed;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;  
+    align-items: center;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, .4);
+    .cls-visa-container{
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        border-radius: 20px;
+        border: 1px solid #888;
+        width: 60%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+        padding: 25px;
+        text-align: center;
+        .cls-headerText{
+            font: 28px var(--primaryBold);
+            text-transform: capitalize;
+        }
+        .cls-headerPara{
+            font: 14px var(--primaryLight);
+            margin: 15px 0px;
+        }
+        .cls-statusCard{
+            display: flex;
+            justify-content: space-evenly;
+            margin: 40px 0px;
+            .cls-visaCard{
+                width: 30%;
+                border-radius: 10px;
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+                padding: 30px 20px;
+                .cls-cardImg{
+                    width: 70%;
+                }
+                .cls-cardHead{
+                    font: 18px var(--primarySemiBold);
+                    color: #3F9195;
+                    text-transform: capitalize;
+                    margin: 10px 0px;
+                }
+                .cls-cardPara{
+                    font: 14px var(--primaryRegular);
+                    margin: 20px 0;
+                    line-height: 1.5;
+                }
+                .cls-cardBtn{
+                    border: unset;
+                    background: #3F9195;
+                    color: #fff;
+                    padding: 10px 20px;
+                    font: 14px var(--primarySemiBold);
+                    border-radius: 10px;
+                    width: 100%;
+                    text-transform: capitalize;
+                }
+            }
+        }
+        .cls-info{
+            color: #817d7d;
+        }
+    }
+}

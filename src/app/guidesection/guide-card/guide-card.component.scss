@@ -1,0 +1,372 @@
+.cls-guide-option{
+            background:#fff;
+            padding:28px;
+            border-radius:18px;
+            box-shadow:0 10px 30px rgba(0,0,0,.08);
+            margin-bottom:30px;
+        }
+
+        .cls-guide-option h2{
+            margin:0;
+            font-size:34px;
+            font-weight:700;
+            color:#1b1b1b;
+        }
+
+        .cls-toggle{
+            margin-top:30px;
+            display:inline-flex;
+            background:#eef2f7;
+            border-radius:14px;
+            padding:4px;
+        }
+
+        .cls-toggle button{
+
+            width:90px;
+            height:52px;
+
+            border:none;
+            background:transparent;
+
+            border-radius:10px;
+
+            font-size:18px;
+            font-weight:600;
+
+            cursor:pointer;
+            transition:.25s;
+            color:#555;
+        }
+
+        .cls-toggle button.active{
+
+            background:#fff;
+            color:#2563eb;
+
+            box-shadow:0 5px 12px rgba(0,0,0,.12);
+        }
+
+        .cls-toggle button:hover{
+
+            color:#2563eb;
+
+        }
+
+.guide-container {
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+    gap: 25px;
+
+}
+
+.guide-card {
+
+    background: #fff;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+
+    transition: .3s;
+
+    position: relative;
+
+}
+
+.guide-card.selected {
+
+    border: 4px solid #3479ff;
+
+}
+
+.card-header {
+
+    height: 130px;
+
+    background: #434c5d;
+
+    position: relative;
+
+}
+
+.guide-card.selected .card-header {
+
+    background: #3479ff;
+
+}
+
+.bg-circle {
+
+    position: absolute;
+
+    border: 2px solid rgba(255, 255, 255, .15);
+
+    border-radius: 50%;
+
+}
+
+.circle1 {
+
+    width: 85px;
+
+    height: 85px;
+
+    right: 18px;
+
+    top: 15px;
+
+}
+
+.circle2 {
+
+    width: 45px;
+
+    height: 45px;
+
+    left: 15px;
+
+    bottom: 18px;
+
+}
+
+.rating {
+
+    position: absolute;
+
+    left: 18px;
+
+    top: 18px;
+
+    background: #fff;
+
+    padding: 6px 14px;
+
+    border-radius: 30px;
+
+    font-weight: 600;
+
+    z-index: 5;
+
+}
+
+.profile {
+
+    margin-top: -48px;
+
+    margin-left: 25px;
+
+    position: relative;
+
+    width: 100px;
+
+}
+
+.profile img {
+
+    width: 100px;
+
+    height: 100px;
+
+    border-radius: 50%;
+
+    border: 5px solid white;
+
+    object-fit: cover;
+
+}
+
+.tick {
+
+    position: absolute;
+
+    right: 0;
+
+    top: 0;
+
+    width: 32px;
+
+    height: 32px;
+
+    border-radius: 50%;
+
+    background: #28c76f;
+
+    color: white;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    border: 3px solid white;
+
+}
+
+.content {
+
+    padding: 25px;
+
+}
+
+.content h3 {
+
+    margin: 0;
+
+    font-size: 34px;
+
+    font-weight: 700;
+
+}
+
+.experience {
+
+    margin-top: 8px;
+
+    color: #666;
+
+}
+
+.content p {
+
+    margin: 18px 0;
+
+    line-height: 28px;
+
+    color: #555;
+
+    height: 70px;
+
+    overflow: hidden;
+
+}
+
+.title {
+
+    font-weight: 700;
+
+    margin: 18px 0 12px;
+
+}
+
+.chips {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+}
+
+.chips span {
+
+    padding: 6px 12px;
+
+    background: #eef4ff;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+}
+
+ul {
+
+    margin: 10px 0 20px;
+
+    padding-left: 18px;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    row-gap: 10px;
+
+}
+
+li {
+
+    color: #444;
+
+}
+
+.price-box {
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 18px;
+
+    padding: 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+.price-box h2 {
+
+    margin: 8px 0;
+
+    color: #0d2d7a;
+
+}
+
+.price-box h2 span {
+
+    font-size: 16px;
+
+    color: #777;
+
+}
+
+.price-box h3 {
+
+    margin-top: 8px;
+
+    color: #2f55ff;
+
+}
+
+button {
+
+    width: 100%;
+
+    height: 55px;
+
+    border-radius: 15px;
+
+    border: none;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    background: #ececec;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+button.active {
+
+    background: #3479ff;
+
+    color: white;
+
+}

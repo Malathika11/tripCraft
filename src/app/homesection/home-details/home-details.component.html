@@ -1,0 +1,100 @@
+<div class="cls-homeMain" *ngIf="loader">
+    <div class="cls-headerPart">
+        <div class="cls-head">
+            <img class="cls-logoImg" src="{{homeDetails.header.logoImg}}" alt="logo">
+            <p class="cls-logoText">
+                <span class="cls-tripText">{{homeDetails.header.logoText1}}</span>
+                <span class="cls-craftText">{{homeDetails.header.logoText2}}</span>
+            </p>
+        </div>
+        <div class="cls-headBody">
+            <p class="cls-headOne">{{homeDetails.header.bodyTextOne}}</p>
+            <p class="cls-headTwo">{{homeDetails.header.bodyTextTwo}}</p>
+            <p class="cls-headthree">{{homeDetails.header.bodyTextThree}}</p>
+        </div>
+        <div class="cls-headCard">
+            <div class="cls-planMyTrip" *ngFor="let card of homeDetails.header.headCard">
+                <img src="{{card.img}}" alt="{{card.title}}">
+                <h4 class="cls-cardHead">{{card.title}}</h4>
+                <p class="cls-cardPara">{{card.para}}</p>
+                <button class="cls-planMyTrip-btn" type="button" (click)="tripVisaBtn(card.title)">{{card.btnText}}
+                    <span class="cls-btn-arrow cls-2-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="cls-whyChoose">
+        <h5 class="cls-choose">{{homeDetails.whyChoose.chooseHeader}}</h5>
+        <p class="cls-journey">{{homeDetails.whyChoose.choosePara}}</p>
+        <div class="cls-chooseDiv">
+            <div class="cls-chooseCard" *ngFor="let card of homeDetails.whyChoose.cardData">
+                <p class="cls-cardImg">
+                    <span class="{{card.img}}"></span>
+                </p>
+                <p class="cls-cardHead">{{card.head}}</p>
+                <p class="cls-cardPara">{{card.para}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="cls-testimonial-section">
+        <p class="cls-testimonialText">what our travelers say</p>
+        <p class="cls-testimonialPara">Customer Testimonials</p>
+        <div class="cls-carousel-container">
+            <div class="cls-carousel-track" [style.transform]="'translateX(-' + currentIndex * 335 + 'px)'">
+                <div class="cls-card" *ngFor="let item of homeDetails.testimonials; let i = index">
+                    <div class="cls-quote">❝</div>
+                    <p class="cls-message">{{item.message}}</p>
+                    <div class="cls-user-info">
+                        <img src="{{item.personImg}}" alt="person{{i}}">
+                        <div class="cls-personDeails">
+                            <h4 class="cls-personName">{{item.personName}}</h4>
+                            <span class="cls-personPlace">{{item.personPlace}}</span>
+                            <div class="cls-stars">
+                                <span *ngFor="let star of [].constructor(item.star)" class="cls-48-star"> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dots">
+            <span *ngFor="let item of homeDetails.testimonials; let i= index" [class.active]="i===currentIndex"></span>
+        </div>
+    </div>
+    <div class="cls-footer-section">
+        <div class="cls-footer-wave">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path fill="#3F9195"
+                    d="M0,64L80,74.7C160,85,320,107,480,106.7C640,107,800,85,960,74.7C1120,64,1280,64,1360,64L1440,64L1440,120L0,120Z">
+                </path>
+            </svg>
+        </div>
+        <div class="cls-footer-content">
+            <div class="cls-footer-column">
+                <div class="cls-logo">
+                    <img class="cls-logo-icon" src="{{homeDetails.footer.footerFirst.img}}" alt="log">
+                    <h2>{{homeDetails.footer.footerFirst.txt}}</h2>
+                </div>
+                <p class="cls-footer-text">
+                    {{homeDetails.footer.footerFirst.para}}
+                </p>
+                <div class="cls-social-icons">
+                    <a href="#" *ngFor="let socialIcons of homeDetails.footer.footerFirst.icons"><i class="{{socialIcons}}"></i></a>
+                </div>
+            </div>
+            <div class="cls-footer-column" *ngFor="let footerColumn of homeDetails.footer.footerSec">
+                <h3 class="cls-name">{{footerColumn.name}}</h3>
+                <ul>
+                    <li *ngFor="let ulLi of footerColumn.ulValue"><a href="#">{{ulLi}}</a></li>
+                </ul>
+            </div>
+            <div class="cls-footer-column">
+                <h3 class="cls-name">{{homeDetails.footer.footerThree.name}}</h3>
+                <div class="cls-contact-item" *ngFor="let contItem of homeDetails.footer.footerThree.contactItem">
+                    <span class="{{contItem.class}}"></span>
+                    {{contItem.text}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,402 @@
+.cls-requestMain{
+    .cls-planYour-trip{
+        padding: 30px;
+        .cls-planHead{
+            font: 24px var(--primaryBold);
+        }
+        .cls-planPara{
+            font: 14px var(--primaryRegular);
+            margin-top: 10px;
+        }
+        .cls-formContainer{
+            border: 1px solid #ebeaea;
+            border-radius: 15px;
+            padding: 20px;
+            .cls-fromTo{
+                display: flex;
+                gap: 14px;
+                border-bottom: 1px solid #ebeaea;
+                span{
+                    font-size: 28px;
+                }
+                .cls-fromTo-container{
+                    width: 100%;
+                    display: ruby;
+                    .cls-travel{
+                        font: 16px var(--primarySemiBold);
+                        width: 100%;
+                    }
+                    .cls-from{
+                        display: grid;
+                        width: 47%;
+                        position: relative;
+                        padding: 15px 0px 20px;
+                        .cls-label{
+                            font: 13px var(--primaryRegular);
+                            position: absolute;
+                            left: 10px;
+                            top: 0px;
+                            background: #fff;
+                            padding: 5px;
+                        }
+                        .cls-input{
+                            padding: 15px 15px 15px 40px;
+                            border-radius: 10px;
+                            border: 1px solid #e0dfdf;
+                            width: 100%;
+                            &:focus-visible{
+                                outline: unset;
+                            }
+                        }
+                        .cls-icon{
+                            position: absolute;
+                            top: 28px;
+                            font-size: 20px;
+                            left: 12px;
+                        }
+                        .cls-dropValue{
+                            box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 9px -1px, rgba(0, 0, 0, 0.08) 0px 6px 6px -1px;
+                            padding: 5px;
+                            border-radius: 5px;
+                            width: 92%;
+                            position: absolute;
+                            background: #fff;
+                            top: 64px;
+                            left: 2px;
+                            z-index: 2;
+                            a{
+                                display: block;
+                                color: #000;
+                                text-decoration: unset;
+                                padding: 10px;
+                                &:hover{
+                                    background: #3F9195;
+                                    color: #fff;
+                                    .cls-secCode{
+                                        color: #000;
+                                    }
+                                }
+                                p{
+                                    width: 85%;
+                                    margin: 0px;
+                                    display: inline-block;
+                                    .cls-secName{
+                                        font: 15px var(--primarySemiBold);
+                                        display: block;
+                                        padding-bottom: 5px;
+                                    }
+                                    .cls-secAirport{
+                                        font: 12px var(--primaryLight);
+                                    }
+                                }
+                                .cls-secCode{
+                                    font-size: 16px;
+                                    padding: 10px;
+                                    background: #eee;
+                                    float: right;
+                                    border-radius: 3px;
+                                }
+                            }
+                        }
+                    }
+                    .cls-swap{
+                        width: 3%;
+                        display: block;
+                        margin: 0px 10px;
+                        font-size: 24px;
+                        text-align-last: center;
+                        cursor: pointer;
+                    }
+                }
+            }
+            .cls-travelers{
+                border-bottom: 1px solid #ebeaea;
+                padding: 20px 0px;
+                display: flex;
+                gap: 14px;
+                .cls-icon{
+                    font-size: 28px;
+                }
+                .cls-traveler-container{
+                    width: 80%;
+                    .cls-travelHeader{
+                        display: flex;
+                        align-items: center;
+                        span{
+                            padding-left: 30px;
+                            font: 12px var(--primaryRegular);
+                            color: red;
+                            margin-bottom: 0.5rem;
+                        }
+                        .cls-travel{
+                            font: 16px var(--primarySemiBold);
+                        }
+                    }
+                    .cls-details{
+                        display: flex;
+                        justify-content: space-between;
+                        padding-top: 10px;
+                        .cls-person{
+                            display: flex;
+                            width: 25%;
+                            justify-content: space-between;
+                            .cls-personLable{
+                                display: grid;
+                                margin: 0px;
+                                .cls-lableMain{
+                                    font: 12px var(--primarySemiBold);
+                                    text-transform: capitalize;
+                                }
+                                .cls-lableSub{
+                                    font: 10px var(--primaryRegular);
+                                    margin-top: 4px;
+                                }
+                            }
+                            .cls-controls{
+                                width: 50%;
+                                border: 1px solid #ebeaea;
+                                text-align: center;
+                                border-radius: 7px;
+                                display: flex;
+                                justify-content: space-around;
+                                button{
+                                    border: unset;
+                                    background: unset;
+                                }
+                                span{
+                                    align-content: center;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .cls-duration{
+                border-bottom: 1px solid #ebeaea;
+                padding: 20px 0px;
+                display: flex;
+                gap: 14px;
+                .cls-icon{
+                    font-size: 28px;
+                }
+                .cls-duration-container{
+                    width: 80%;
+                    .cls-duration-label{
+                        font: 16px var(--primarySemiBold);
+                    }
+                    .cls-days-date{
+                        display: flex;
+                        justify-content: space-between;
+                        padding-top: 10px;
+                        .cls-date{
+                            width: 65%;
+                            position: relative;
+                            padding: 15px 0px 0px;
+                            .cls-durationHead{
+                                font: 13px var(--primaryRegular);
+                                position: absolute;
+                                left: 10px;
+                                top: 0px;
+                                background: #fff;
+                                padding: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+            .cls-budgetSetup{
+                padding: 20px 0px;
+                display: flex;
+                gap: 14px;
+                .cls-icon{
+                    font-size: 28px;
+                }
+                .cls-budget-container{
+                    width: 100%;
+                    .cls-title{
+                        font: 16px var(--primarySemiBold);
+                    }
+                    .cls-budget-mode{
+                        margin: 15px 0px;
+                        .cls-label{
+                            font: 14px var(--primaryRegular);
+                            margin-right: 40px;
+                        }
+                        button{
+                            font: 14px var(--primaryMedium);
+                            padding: 10px 30px;
+                            border: 1px solid #ccc;
+                            background: unset;
+                            border-radius: 8px;
+                            margin-right: 60px;
+                            &.active{
+                                border: 1px solid #3F9195;
+                                background: #d3f9d385;
+                                color: green;
+                            }
+                            .cls-check{
+                                margin-right: 10px;
+                            }
+                        }
+                    }
+                    .cls-budgetField{
+                        font: 13px var(--primaryRegular);
+                        margin-bottom: 5px;
+                        .cls-label{
+                            margin-bottom: 6px;
+                        }
+                        .cls-input-box{
+                            position: relative;
+                            width: 50%;
+                            .cls-rupee{
+                                position: absolute;
+                                align-self: center;
+                                left: 8px;
+                                top: 8px;
+                                font-size: 18px;
+                            }
+                            .cls-budget-input {
+                                border: 1px solid #dee2e6;
+                                outline: none;
+                                width: 100%;
+                                font-size: 16px;
+                                color: #333;
+                                padding: 10px 10px 10px 20px;
+                                border-radius: 7px;
+                                -moz-appearance: textfield;
+                                &::-webkit-outer-spin-button,
+                                &::-webkit-inner-spin-button {
+                                    -webkit-appearance: none;
+                                    margin: 0;
+                                }
+                            }
+                            .cls-budget-controls {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                position: absolute;
+                                right: 10px;
+                                top: 8px;
+                                align-self: anchor-center;
+                                .cls-budget-button {
+                                    border: none;
+                                    background: transparent;
+                                    font-size: 11px;
+                                    cursor: pointer;
+                                    padding: 0px 0px 0px 4px;
+                                    color: #666;
+                                    transition: color 0.2s;
+                                    &:hover {
+                                        color: #1a73e8;
+                                    }
+                                    &:active {
+                                        transform: scale(0.95);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .cls-breakdown-container{
+                        transform: scaleY(0.95);
+                        transition: all 0.3s ease;
+                        opacity: 0;
+                        margin-top: 20px;
+                        max-height: 0;
+                        overflow: hidden;
+                        width: 100%;
+                        &.show {
+                            opacity: 1;
+                            max-height: 1000px;
+                            transform: scaleY(1);
+                            padding-bottom: 20px;
+                        }
+                        .cls-headInfo{
+                            display: grid;
+                            .cls-breakdown-title{
+                                font: 16px var(--primarySemiBold);
+                            }
+                            .cls-budgetInfo {
+                                font-size: 12px;
+                                padding: 7px 0px;
+                            }
+                        }
+                        .cls-totalPercentage{
+                            float: right;
+                            font-size: 18px;
+                        }
+                        .cls-breakdown-fields {
+                            display: grid;
+                            grid-template-columns: repeat(2, 1fr);
+                            gap: 0px 50px;
+                            .cls-breakdown-field {
+                                display: flex;
+                                flex-direction: column;
+                                label {
+                                    color: #333;
+                                    font: 13px var(--primaryRegular);
+                                    margin: 10px 0px;
+                                    .icon {
+                                        font-size: 16px;
+                                    }
+                                }
+                                .cls-input-group{
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 8px;
+                                    .input-with-symbol{
+                                        position: relative;
+                                        display: flex;
+                                        align-items: center;
+                                        .symbol{
+                                            position: absolute;
+                                            font-size: 14px;
+                                            color: #555;
+                                            &.symbol-right{
+                                                right: 8px;
+                                            }
+                                            &.symbol-left{
+                                                left: 8px;
+                                            }
+                                        }
+                                    }
+                                    .cls-breakdown-input {
+                                        width: 80px;
+                                        padding: 6px 8px;
+                                        border: 1px solid #c4d4f7;
+                                        border-radius: 6px;
+                                    }
+                                    .cls-value-display {
+                                        flex: 1;
+                                        border: 1px solid #e2e6f3;
+                                        border-radius: 6px;
+                                        padding: 6px 8px 6px 20px;
+                                        font-weight: 500;
+                                        color: #2a4dbb;
+                                        width: 160px;
+                                    }
+                                }
+                            }
+                            .cls-error-message {
+                                padding-top: 10px;
+                                color: red;
+                            }
+                        }
+                    }
+                }
+            }
+            .cls-searchBtn{
+                background: #3F9195;
+                padding: 10px;
+                border-radius: 7px;
+                color: #fff;
+                font: 16px var(--primaryMedium);
+                width: 100%;
+                border: unset;
+                .cls-searchIcon{
+                    margin-right: 10px;
+                    font-size: 22px;
+                }
+            }
+        }
+    }
+}

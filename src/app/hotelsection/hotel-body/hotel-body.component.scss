@@ -1,0 +1,851 @@
+.cls-stayPlanner {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.cls-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cls-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #172554;
+    margin: 0;
+}
+
+.cls-subTitle {
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #64748b;
+    font-size: 15px;
+}
+
+.cls-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #94a3b8;
+}
+
+.cls-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cls-switchLabel {
+    font-size: 15px;
+    font-weight: 500;
+    color: #334155;
+}
+
+/* Switch */
+
+.cls-switch {
+    position: relative;
+    width: 52px;
+    height: 28px;
+    display: inline-block;
+}
+
+.cls-switch input {
+    display: none;
+}
+
+.cls-slider {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    background: #dbe4f3;
+    border-radius: 30px;
+    transition: .3s;
+}
+
+.cls-slider::before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 3px;
+    top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: .3s;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .18);
+}
+
+.cls-switch input:checked+.cls-slider {
+    background: #2563eb;
+}
+
+.cls-switch input:checked+.cls-slider::before {
+    transform: translateX(24px);
+}
+
+/* Summary Cards */
+
+.cls-summaryCards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.cls-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e7edf8;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, .05);
+}
+
+.cls-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef4ff;
+    color: #2563eb;
+    font-size: 22px;
+}
+
+.cls-cardHead {
+    margin: 0;
+    font-size: 13px;
+    color: #64748b;
+}
+
+.cls-card h4 {
+    margin-top: 6px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #172554;
+}
+
+.cls-required {
+    color: #ef4444;
+}
+
+.cls-warning {
+    color: #ef4444 !important;
+}
+
+.cls-danger {
+    color: #ef4444 !important;
+}
+
+/* Responsive */
+
+@media(max-width:992px) {
+
+    .cls-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .cls-summaryCards {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* ============================= */
+/* HOTEL CARD */
+/* ============================= */
+
+.cls-hotelList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 24px;
+    margin-top: 25px;
+}
+
+.cls-hotelCard {
+    background: #fff;
+    border: 1px solid #E5EAF4;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: .25s;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+}
+
+.cls-hotelCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .12);
+}
+
+.cls-selected {
+    border: 2px solid #2563EB;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
+}
+
+/* ============================= */
+/* IMAGE */
+/* ============================= */
+
+.cls-imageSection {
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cls-imageSection img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cls-recommended {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    background: #16A34A;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 18px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.cls-favourite {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748B;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, .15);
+}
+
+/* ============================= */
+/* BODY */
+/* ============================= */
+
+.cls-body {
+    padding: 18px;
+}
+
+.cls-hotelName {
+    font-size: 22px;
+    color: #172554;
+    font-weight: 700;
+    margin: 0;
+}
+
+.cls-location {
+    color: #3B82F6;
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+.cls-ratingRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.cls-rating {
+    background: #EEF6FF;
+    color: #2563EB;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.cls-ratingRow span {
+    color: #64748B;
+    font-size: 13px;
+}
+
+.cls-distance {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748B;
+    font-size: 14px;
+}
+
+/* ============================= */
+/* TAGS */
+/* ============================= */
+
+.cls-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.cls-tags span {
+    background: #EEF5FF;
+    color: #2563EB;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ============================= */
+/* PRICE */
+/* ============================= */
+
+.cls-priceSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 18px 18px;
+}
+
+.cls-priceSection h2 {
+    margin: 0;
+    color: #172554;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.cls-priceSection span {
+    color: #64748B;
+    font-size: 14px;
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+.cls-footer {
+    display: flex;
+    border-top: 1px solid #E5EAF4;
+}
+
+.cls-viewBtn,
+.cls-selectBtn {
+    width: 50%;
+    height: 52px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.cls-viewBtn {
+    background: #fff;
+    color: #2563EB;
+    border-right: 1px solid #E5EAF4;
+}
+
+.cls-viewBtn:hover {
+    background: #F8FAFC;
+}
+
+.cls-selectBtn {
+    background: #2563EB;
+    color: #fff;
+}
+
+.cls-selectBtn:hover {
+    background: #1D4ED8;
+}
+
+.cls-selected .cls-selectBtn {
+    background: #16A34A;
+}
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media(max-width:768px) {
+
+    .cls-hotelList {
+        grid-template-columns: 1fr;
+    }
+
+    .cls-imageSection {
+        height: 210px;
+    }
+
+    .cls-hotelName {
+        font-size: 20px;
+    }
+
+    .cls-priceSection h2 {
+        font-size: 28px;
+    }
+
+}
+
+/*====================================
+POPUP OVERLAY
+====================================*/
+
+.cls-popupOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, .45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn .25s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/*====================================
+POPUP
+====================================*/
+
+.cls-popup {
+
+    width: 620px;
+    max-width: 95%;
+
+    background: #fff;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow: 0 25px 70px rgba(0, 0, 0, .22);
+
+    animation: popup .25s ease;
+}
+
+@keyframes popup {
+
+    from {
+
+        transform: translateY(25px) scale(.95);
+        opacity: 0;
+
+    }
+
+    to {
+
+        transform: translateY(0) scale(1);
+        opacity: 1;
+
+    }
+
+}
+
+/*====================================
+HEADER
+====================================*/
+
+.cls-popupHeader {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: 24px 28px;
+
+    border-bottom: 1px solid #edf2f7;
+}
+
+.cls-popupHeader h2 {
+
+    margin: 0;
+
+    color: #172554;
+
+    font-size: 28px;
+
+    font-weight: 700;
+}
+
+.cls-popupHeader p {
+
+    margin-top: 6px;
+
+    color: #64748b;
+
+    font-size: 15px;
+}
+
+.cls-close {
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f1f5f9;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: .25s;
+}
+
+.cls-close:hover {
+
+    background: #ef4444;
+
+    color: #fff;
+}
+
+/*====================================
+HOTEL
+====================================*/
+
+.cls-popupHotel {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 25px 28px;
+}
+
+.cls-popupHotel img {
+
+    width: 120px;
+
+    height: 90px;
+
+    object-fit: cover;
+
+    border-radius: 14px;
+}
+
+.cls-popupHotel h3 {
+
+    margin: 0;
+
+    color: #172554;
+
+    font-size: 22px;
+}
+
+.cls-popupHotel p {
+
+    margin-top: 8px;
+
+    color: #2563eb;
+
+    font-size: 18px;
+
+    font-weight: 700;
+}
+
+.cls-popupHotel span {
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+/*====================================
+NIGHT COUNTER
+====================================*/
+
+.cls-nightSection {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 0 28px;
+
+    padding: 18px 0;
+
+    border-top: 1px solid #edf2f7;
+
+    border-bottom: 1px solid #edf2f7;
+}
+
+.cls-nightHead {
+
+    font-size: 17px;
+
+    color: #172554;
+
+    font-weight: 600;
+}
+
+.cls-counter {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+.cls-counter button {
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+
+    color: #fff;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.cls-counter button:hover {
+
+    transform: scale(1.08);
+
+    background: #1d4ed8;
+}
+
+.cls-counter span {
+
+    width: 45px;
+
+    text-align: center;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    color: #172554;
+}
+
+/*====================================
+REMAINING
+====================================*/
+
+.cls-remaining {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 22px 28px;
+
+    padding: 16px 20px;
+
+    border-radius: 12px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    font-weight: 600;
+}
+
+.cls-remaining strong {
+
+    font-size: 24px;
+}
+
+/*====================================
+SUMMARY
+====================================*/
+
+.cls-summary {
+
+    margin: 0 28px;
+
+    display: flex;
+
+    gap: 18px;
+}
+
+.cls-summary>div {
+
+    flex: 1;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+}
+
+.cls-summary span {
+
+    display: block;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+.cls-summary strong {
+
+    display: block;
+
+    margin-top: 10px;
+
+    color: #172554;
+
+    font-size: 24px;
+
+    font-weight: 700;
+}
+
+/*====================================
+FOOTER
+====================================*/
+
+.cls-popupFooter {
+
+    display: flex;
+
+    gap: 18px;
+
+    padding: 28px;
+}
+
+.cls-cancel {
+
+    flex: 1;
+
+    height: 52px;
+
+    border: 2px solid #2563eb;
+
+    background: #fff;
+
+    color: #2563eb;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.cls-cancel:hover {
+
+    background: #2563eb;
+
+    color: #fff;
+}
+
+.cls-confirm {
+
+    flex: 1;
+
+    height: 52px;
+
+    border: none;
+
+    background: #2563eb;
+
+    color: #fff;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.cls-confirm:hover {
+
+    background: #1d4ed8;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 22px rgba(37, 99, 235, .35);
+}
+
+/*====================================
+RESPONSIVE
+====================================*/
+
+@media(max-width:768px) {
+
+    .cls-popup {
+
+        width: 95%;
+    }
+
+    .cls-popupHotel {
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .cls-nightSection {
+
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+    .cls-summary {
+
+        flex-direction: column;
+    }
+
+    .cls-popupFooter {
+
+        flex-direction: column;
+    }
+
+    .cls-popupHeader h2 {
+
+        font-size: 24px;
+    }
+
+}

@@ -1,0 +1,123 @@
+.cls-filterMain{
+    padding: 15px;
+    .cls-filterHead{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 15px;
+        .cls-header{
+            font: 18px var(--primarySemiBold);
+        }
+        .cls-clear{
+            font: 12px var(--primaryRegular);
+            color: blue;
+            cursor: pointer;
+        }
+    }
+    .cls-filterSec{
+        .cls-filterOptions{
+            margin-bottom: 20px;
+            &.cls-checkBox-container{
+                height: 25vh;
+                overflow: hidden;
+                display: grid;
+                .cls-radioData {
+                    overflow-y: auto;
+                }
+            }
+            .cls-optionHead{
+                font: 14px var(--primaryMedium);
+                margin-bottom: 10px;
+            }
+            .cls-radio-optionData{
+                margin-bottom: 5px;
+                label{
+                    padding-left: 10px;
+                    font: 14px var(--primaryRegular);
+                }
+            }
+            .cls-boxData{
+                .cls-box-optionData{
+                    padding: 10px 0px;
+                    width: 44%;
+                    background: #f2f2f2;
+                    margin: 5px 0px 5px 13px;
+                    text-align: center;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    &.cls-active{
+                        color: #fff;
+                        background: blue;
+                    }
+                    .cls-boxValue{
+                        margin: 0px;
+                        font: 14px var(--primaryRegular);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.cls-priceRange{
+    margin-top:15px;
+}
+
+.cls-rangeHead{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:#6b7280;
+    margin-bottom:12px;
+}
+
+.cls-range{
+    width:100%;
+    appearance:none;
+    height:5px;
+    border-radius:10px;
+    background:#d7dff5;
+    outline:none;
+}
+
+.cls-range::-webkit-slider-thumb{
+    appearance:none;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#2563eb;
+    cursor:pointer;
+}
+
+.cls-range::-moz-range-thumb{
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#2563eb;
+    cursor:pointer;
+}
+
+.cls-priceInput{
+    margin-top:15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+}
+
+.cls-priceInput input{
+    width:90px;
+    height:38px;
+    border:1px solid #d9d9d9;
+    border-radius:8px;
+    text-align:center;
+    font-size:14px;
+    font-weight:600;
+    background:#fff;
+}
+
+.cls-priceInput span{
+    font-size:14px;
+    font-weight:600;
+    color:#555;
+}

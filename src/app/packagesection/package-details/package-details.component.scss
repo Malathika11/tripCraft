@@ -1,0 +1,26 @@
+.cls-packagePage{
+    .cls-packageBody{
+        .cls-bodyHead{
+            background: url('../../../assets/images/package-bg.png')  center top / cover no-repeat;
+            padding: 40px 50px;
+            height: 60vh;
+            position: relative;
+            .cls-header-txt{
+                font: 34px var(--primaryBold);
+                margin-bottom: 10px;
+            }
+            .cls-para{
+                font: 14px var(--primaryRegular);
+            }
+            .cls-requestMain{
+                position: absolute;
+                width: 93%;
+                top: 75%;
+            }
+        }
+        .cls-recommended-package{
+            margin-top: 12%;
+        }
+    }
+}
+

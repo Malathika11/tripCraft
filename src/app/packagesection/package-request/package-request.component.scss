@@ -1,0 +1,79 @@
+.cls-summary{
+    padding: 10px 20px;
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    .cls-summaryHeader{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0px;
+        border-bottom: 1px solid #ECECEC;
+        .cls-summaryHeader-txt{
+            display:flex;
+            align-items:center;
+            gap:15px;
+            .cls-bag{
+                font-size: 28px;
+            }
+            h3{
+                color:#173B8B;
+                font: 18px var(--primaryBold);
+                margin-bottom: 0px;
+            }
+        }
+        .cls-summary-edit{
+            border:1px solid #D9E1EC;
+            background:#fff;
+            border-radius:12px;
+            padding:10px 22px;
+            cursor:pointer;
+            font: 12px var(--primaryRegular);
+            .cls-edit{
+                font-size: 16px;
+                margin-right: 8px;
+            }
+        }
+    }
+    .cls-summaryBody{
+        display:grid;
+        grid-template-columns:repeat(5,1fr);
+        .cls-item{
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding: 15px 3px;
+            position: relative;
+            &::after {
+                content: '';
+                width: 1px;
+                background: #eee;
+                height: 40px;
+                position: absolute;
+                right: 14px;
+            }
+            span{
+                font-size: 30px;
+            }
+            &:last-child{
+                &::after {
+                    content: unset;
+                }
+            }
+            .cls-summary-label{
+                color:#818181;
+                display:block;
+                font: 12px var(--primaryMedium);
+                margin-bottom: 8px;
+            }
+            .cls-label-value{
+                color:#173B8B;
+                font: 14px var(--primaryBold);
+                span{
+                    font: 14px var(--primaryBold);
+                }
+            }
+        }
+    }
+}

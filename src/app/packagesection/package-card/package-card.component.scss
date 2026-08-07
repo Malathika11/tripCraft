@@ -1,0 +1,299 @@
+.cls-packageList{
+    width:95%;
+    margin:40px auto;
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+    .cls-packageCard{
+        background:#fff;
+        border-radius:24px;
+        overflow:hidden;
+        display:grid;
+        grid-template-columns:320px 1fr 280px;
+        box-shadow:0 10px 30px rgba(0,0,0,.08);
+        transition:.25s;
+        &:hover{
+            transform:translateY(-4px);
+            box-shadow:0 18px 40px rgba(0,0,0,.12);
+        }
+        .cls-packageImage{
+            position:relative;
+            overflow:hidden;
+            img{
+                width:100%;
+                height:100%;
+                object-fit:cover;
+                display:block;
+            }
+            .cls-badge{
+                position:absolute;
+                left:18px;
+                top:18px;
+                background:#22C55E;
+                color:#fff;
+                padding:8px 18px;
+                border-radius:30px;
+                font: 12px var(--primaryMedium);
+            }
+            .cls-wishlist{
+                position:absolute;
+                right:18px;
+                top:18px;
+                width:42px;
+                height:42px;
+                border:none;
+                border-radius:50%;
+                background:#fff;
+                cursor:pointer;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                box-shadow:0 5px 15px rgba(0,0,0,.15);
+                .cls-heart{
+                    font-size:18px;
+                    color:#D4D4D4;
+                }
+                .cls-heart-filled{
+                    color:#EF4444;
+                }
+            }
+        }
+        .cls-packageContent{
+            padding:30px;
+            h2{
+                margin:0;
+                font: 28px var(--primaryBold);
+                color:#163B8C;
+            }
+            .cls-topRow{
+                margin-top:18px;
+                display:flex;
+                gap: 20px;
+                .cls-duration{
+                    display:flex;
+                    align-items:center;
+                    gap:8px;
+                    font: 13px var(--primaryRegular)
+                }
+                .cls-topRow-border {
+                    border-left: 1px solid #EDF1F6;
+                }
+                .cls-rating{
+                    display:flex;
+                    align-items:center;
+                    gap:6px;
+                    font: 14px var(--primaryMedium);
+                    border: 1px solid #EDF1F6;
+                    padding: 3px 15px;
+                    border-radius: 20px;
+                    .cls-star{
+                        &.cls-green{
+                            color: #07cd07;
+                        }
+                        &.yellow{
+                            color:#F59E0B;
+                        }
+                    }
+                    small{
+                        color:#6B7280;
+                        font: 11px var(--primaryLight);
+                    }
+                }
+            }
+            .cls-description{
+                margin-top:20px;
+                color:#5B6475;
+                font: 13px var(--primaryRegular);
+                word-spacing: 3px;
+            }
+            .cls-includes{
+                margin-top:28px;
+                display:flex;
+                flex-wrap:wrap;
+                gap:15px;
+                .cls-item{
+                    text-align: center;
+                    padding:10px 16px;
+                    background:#F5F8FD;
+                    border-radius:12px;
+                    span{
+                        font-size:20px;
+                    }
+                    p{
+                        font: 13px var(--primaryBold);
+                        margin: 10px 0px 0px;
+                        color:#173B8B;
+                    }
+                }
+            }
+            .cls-budgetSection{
+                margin-top:20px;
+                border-top: 1px solid #EDF1F6;
+                padding-top: 20px;
+                .cls-budgetHead{
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                    margin-bottom:12px;
+                    font: 14px var(--primaryBold);
+                    span{
+                        &:first-child{
+                            color:#5D6A80;
+                        }
+                        &:last-child{
+                            color:#0F8F7A;
+                        }
+                    }
+                }
+                .cls-progress{
+                    width:100%;
+                    height:10px;
+                    background:#E9EEF7;
+                    border-radius:20px;
+                    overflow:hidden;
+                    .cls-progressFill{
+                        height:100%;
+                        background:linear-gradient(90deg,#13C296,#0F8F7A);
+                        border-radius:20px;
+                        transition:.4s;
+                    }
+                }
+                .cls-budgetFooter{
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                    margin-top:10px;
+                    span{
+                        color:#6B7280;
+                        font: 12px var(--primaryMedium);
+                    }
+                    b{
+                        color:#3F9195;
+                        font: 16px var(--primaryBold);
+                    }
+                }
+            }
+        }
+        .cls-pricePanel{
+            padding:30px 25px;
+            border-left:1px solid #EDF1F6;
+            display:flex;
+            flex-direction:column;
+            background:#FCFDFF;
+            h1{
+                margin:10px 0;
+                color:#163B8C;
+                font: 28px var(--primaryBold);
+            }
+            .cls-priceTitle{
+                margin:0;
+                color:#6B7280;
+                font: 14px var(--primaryMedium);
+            }
+            .cls-budgetInfo{
+                font: 14px var(--primaryMedium);
+                margin-top: 20px;
+                font-size:15px;
+                span{
+                    color:#6B7280;
+                    display: block;
+                    margin-bottom: 10px;
+                    font: 13px var(--primaryRegular);
+                }
+                strong{
+                    color:#163B8C;
+                    font: 16px var(--primaryBold);
+                }
+                .green{
+                    color:#3F9195;
+                }
+            }
+            .cls-viewBtn{
+                width:100%;
+                height:52px;
+                margin-top:30px;
+                border:none;
+                border-radius:12px;
+                background:#3F9195;
+                color:#fff;
+                font: 16px var(--primaryBold);
+                cursor:pointer;
+                transition:.25s;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                gap:10px;
+                &:hover{
+                    background:#0F8F7A;
+                    .cls-arrow-right{
+                        transform:translateX(6px);
+                    }
+                }
+                .cls-arrow-right{
+                    transition:.25s;
+                }
+            }
+        }
+    }
+}
+// @media(max-width:1200px){
+
+//     .cls-packageCard{
+
+//         grid-template-columns:280px 1fr;
+
+//     }
+
+//     .cls-pricePanel{
+
+//         grid-column:1/-1;
+
+//         border-left:none;
+
+//         border-top:1px solid #EDF1F6;
+
+//     }
+
+// }
+
+// @media(max-width:768px){
+
+//     .cls-packageCard{
+
+//         display:block;
+
+//     }
+
+//     .cls-packageImage{
+
+//         height:240px;
+
+//     }
+
+//     .cls-packageContent{
+
+//         padding:20px;
+
+//     }
+
+//     .cls-topRow{
+
+//         flex-direction:column;
+
+//         align-items:flex-start;
+
+//         gap:12px;
+
+//     }
+
+//     .cls-budgetFooter{
+
+//         flex-direction:column;
+
+//         align-items:flex-start;
+
+//         gap:5px;
+
+//     }
+
+// }

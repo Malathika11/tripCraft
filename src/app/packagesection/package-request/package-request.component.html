@@ -1,0 +1,53 @@
+<div class="cls-summary">
+    <div class="cls-summaryHeader">
+        <div class="cls-summaryHeader-txt">
+            <span class="cls-35-bag cls-bag"></span>
+            <h3>Your Trip Summary</h3>
+        </div>
+        <button type="button" class="cls-summary-edit" (click)="goToRequestForm()">
+            <span class="cls-68-edit cls-edit"></span>
+            Edit Search
+        </button>
+    </div>
+    <div class="cls-summaryBody">
+        <div class="cls-item">
+            <span class="cls-58-location"></span>
+            <div>
+                <span class="cls-summary-label">From</span>
+                <h4 class="cls-label-value">{{formDetails.fromCity}}</h4>
+            </div>
+        </div>
+        <div class="cls-item">
+            <span class="cls-58-location"></span>
+            <div>
+                <span class="cls-summary-label">To</span>
+                <h4 class="cls-label-value">{{formDetails.toCity}}</h4>
+            </div>
+        </div>
+        <div class="cls-item">
+            <span class="cls-64-person-2"></span>
+            <div>
+                <span class="cls-summary-label">Travelers</span>
+                <h4 class="cls-label-value">
+                    <span>{{formDetails.adults}} Adults</span>
+                    <span *ngIf="formDetails.children != 0">, {{formDetails.children}} Child</span>
+                    <span *ngIf="formDetails.infants != 0">, {{formDetails.infants}} Infant</span> 
+                </h4>
+            </div>
+        </div>
+        <div class="cls-item">
+            <span class="cls-21-calender"></span>
+            <div>
+                <span class="cls-summary-label">Duration</span>
+                <h4 class="cls-label-value">{{datesAndNights}}</h4>
+            </div>
+        </div>
+        <div class="cls-item">
+            <span class="cls-19-wallet"></span>
+            <div>
+                <span class="cls-summary-label">Total Budget</span>
+                <h4 class="cls-label-value">₹ {{formDetails.budget}}</h4>
+            </div>
+        </div>
+    </div>
+</div>

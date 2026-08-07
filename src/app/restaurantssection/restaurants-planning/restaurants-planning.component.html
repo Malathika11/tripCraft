@@ -1,0 +1,300 @@
+<div class="cls-restaurantPlanning">
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="cls-pageHeader">
+
+        <div>
+
+            <h2>
+                Food & Restaurant Planning
+            </h2>
+
+            <p>
+                Plan your meals and discover the best restaurants near your stay.
+            </p>
+
+        </div>
+
+        <div class="cls-tripCard">
+
+            <span class="cls-24-calendar"></span>
+
+            <div>
+
+                <small>Trip Duration</small>
+
+                <h4>
+
+                    {{trip.duration}}
+
+                </h4>
+
+                <p>
+
+                    {{trip.days}}
+
+                    •
+
+                    {{trip.travelers}}
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= HOTEL DETAILS ================= -->
+
+    <div class="cls-hotelSection">
+
+        <div class="cls-dayBadge">
+
+            DAY {{selectedDay.day}}
+
+        </div>
+
+        <div class="cls-hotelName">
+
+            {{selectedDay.hotel}}
+
+        </div>
+
+        <button class="cls-hotelBtn" (click)="hotelDetails()">
+
+            Hotel Details
+
+        </button>
+
+    </div>
+
+
+
+    <!-- ================= HOTEL CARD ================= -->
+
+    <div class="cls-hotelCard">
+
+        <img [src]="selectedDay.hotelImage" class="cls-hotelImg">
+
+
+
+        <div class="cls-hotelContent">
+
+            <div class="cls-date">
+
+                📅
+
+                {{selectedDay.date}}
+
+            </div>
+
+
+
+            <div class="cls-mealStatus">
+
+                <div class="cls-status breakfast">
+
+                    <span class="cls-20-check-circle"></span>
+
+                    <div>
+
+                        <h5>
+
+                            Breakfast
+
+                        </h5>
+
+                        <p>
+
+                            Complimentary
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="cls-status lunch">
+
+                    <span class="cls-20-close-circle"></span>
+
+                    <div>
+
+                        <h5>
+
+                            Lunch
+
+                        </h5>
+
+                        <p>
+
+                            Not Included
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="cls-status dinner">
+
+                    <span class="cls-20-close-circle"></span>
+
+                    <div>
+
+                        <h5>
+
+                            Dinner
+
+                        </h5>
+
+                        <p>
+
+                            Not Included
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= RECOMMENDED RESTAURANTS ================= -->
+
+    <div class="cls-restaurantsSection">
+
+        <div class="cls-sectionHeader">
+
+            <h3>Recommended Restaurants Near Your Hotel</h3>
+
+            <div class="cls-scrollBtn" (click)="scrollRight()">
+
+                ➜
+
+            </div>
+
+        </div>
+        <div class="cls-restaurantsWrapper" #restaurantContainer>
+
+            <div class="cls-restaurantCard" *ngFor="let restaurant of restaurants"
+                [ngClass]="{'cls-selectedCard':selectedRestaurant?.id==restaurant.id}">
+
+                <!-- Image -->
+
+                <div class="cls-imageSection">
+
+                    <img [src]="restaurant.image">
+
+                    <span class="cls-rating">
+
+                        ⭐ {{restaurant.rating}}
+
+                    </span>
+
+                </div>
+
+
+                <button class="cls-favourite" (click)="toggleFavourite(restaurant)">
+
+                    <span *ngIf="!restaurant.favorite">♡</span>
+
+                    <span *ngIf="restaurant.favorite">❤️</span>
+
+                </button>
+                <!-- Body -->
+
+                <div class="cls-cardBody">
+
+                    <h4>
+
+                        {{restaurant.name}}
+
+                    </h4>
+
+                    <p class="cls-review">
+
+                        {{restaurant.reviews}}
+
+                    </p>
+
+                    <div class="cls-badges">
+
+                        <span>
+
+                            {{restaurant.cuisine}}
+
+                        </span>
+
+                    </div>
+
+                    <div class="cls-infoRow">
+
+                        <span>
+
+                            📍 {{restaurant.distance}}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="cls-infoRow">
+
+                        <span>
+
+                            💰 {{restaurant.price}}
+
+                        </span>
+
+                    </div>
+                    <div class="cls-infoRow">
+
+                        <span>
+
+                            ⏱ {{restaurant.time}}
+
+                        </span>
+
+                    </div>
+                    <div class="cls-btnGroup">
+                        <button class="routeBtn" (click)="viewRoute(restaurant)">
+                            View Route
+                        </button>
+                        <button class="selectBtn" [ngClass]="{'cls-selectedBtn':selectedRestaurant?.id==restaurant.id}" (click)="selectRestaurant(restaurant)">
+                            {{selectedRestaurant?.id==restaurant.id ? 'Selected' : 'Select Restaurant'}}
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="cls-scroll" (click)="scrollLeft()">
+
+            &#10094;
+
+        </button>
+
+    </div>
+
+
+</div>

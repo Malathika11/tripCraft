@@ -1,0 +1,435 @@
+<!-- ========================= -->
+<!-- Trip Stay Planner Header -->
+<!-- ========================= -->
+
+<div class="cls-stayPlanner">
+
+    <!-- Header -->
+    <div class="cls-header">
+
+        <div class="cls-left">
+
+            <h2 class="cls-title">
+                Trip Stay Planner
+            </h2>
+
+            <p class="cls-subTitle">
+                {{trip.city}},
+                <span>{{trip.country}}</span>
+
+                <span class="cls-dot"></span>
+
+                {{trip.duration}}
+
+                <span class="cls-dot"></span>
+
+                {{trip.travelers}}
+            </p>
+
+        </div>
+
+        <div class="cls-right">
+
+            <span class="cls-switchLabel">
+                Use Same Hotel for Entire Trip
+            </span>
+
+            <label class="cls-switch">
+<!-- [(ngModel)]="sameHotel" -->
+                <input type="checkbox"  (change)="toggleSameHotel()">
+
+                <span class="cls-slider"></span>
+
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <!-- Summary Cards -->
+
+    <div class="cls-summaryCards">
+
+        <!-- Duration -->
+
+        <div class="cls-card">
+
+            <div class="cls-icon cls-24-calendar"></div>
+
+            <div>
+
+                <p class="cls-cardHead">
+                    Your Trip Duration
+                </p>
+
+                <h4>
+                    {{trip.duration}}
+                </h4>
+
+            </div>
+
+        </div>
+
+
+        <!-- Planning Status -->
+
+        <div class="cls-card">
+
+            <div class="cls-icon cls-24-warning"></div>
+
+            <div>
+
+                <p class="cls-cardHead">
+                    Stay Planning
+                    <span class="cls-required">
+                        (Required)
+                    </span>
+                </p>
+
+                <h4 class="cls-warning">
+
+                    Select hotels to cover all
+                    {{trip.totalNights}}
+                    nights
+
+                </h4>
+
+            </div>
+
+        </div>
+
+
+        <!-- Covered Nights -->
+
+        <div class="cls-card">
+
+            <div class="cls-icon cls-24-bed"></div>
+
+            <div>
+
+                <p class="cls-cardHead">
+
+                    Nights Covered
+
+                </p>
+
+                <h4 class="cls-danger">
+
+                    {{coveredNights}}
+                    /
+                    {{trip.totalNights}}
+                    Nights
+
+                </h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ===================================== -->
+<!-- Hotel List starts here (Part 3) -->
+<!-- ===================================== -->
+
+<div class="cls-hotelList">
+
+    <div class="cls-hotelCard" *ngFor="let hotel of hotels" [class.cls-selected]="selectedHotel?.id == hotel.id">
+
+        <!-- Image -->
+
+        <div class="cls-imageSection">
+
+            <img [src]="hotel.image" alt="{{hotel.name}}">
+
+            <span class="cls-recommended" *ngIf="hotel.recommended">
+
+                Recommended
+
+            </span>
+
+            <span class="cls-favourite cls-24-heart-outline">
+
+            </span>
+
+        </div>
+
+        <!-- Body -->
+
+        <div class="cls-body">
+
+            <!-- Name -->
+
+            <h3 class="cls-hotelName">
+                {{hotel.name}}
+            </h3>
+
+            <p class="cls-location">
+                {{hotel.location}}
+            </p>
+
+            <!-- Rating -->
+
+            <div class="cls-ratingRow">
+
+                <div class="cls-rating">
+
+                    ⭐ {{hotel.rating}}
+
+                </div>
+
+                <span>
+
+                    ({{hotel.reviewCount}}
+                    Reviews)
+
+                </span>
+
+            </div>
+
+            <!-- Distance -->
+
+            <div class="cls-distance">
+
+                <span class="cls-20-location"></span>
+
+                {{hotel.distance}}
+
+            </div>
+
+            <!-- Features -->
+
+            <div class="cls-tags">
+
+                <span *ngFor="let tag of hotel.tags">
+
+                    {{tag}}
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- Price -->
+
+        <div class="cls-priceSection">
+
+            <h2>
+
+                ₹{{hotel.price | number}}
+
+            </h2>
+
+            <span>
+
+                per night
+
+            </span>
+
+        </div>
+
+        <!-- Footer -->
+
+        <div class="cls-footer">
+
+            <button class="cls-viewBtn" (click)="viewDetails(hotel)">
+
+                View Details
+
+            </button>
+
+            <button class="cls-selectBtn" (click)="openNightPopup(hotel)">
+
+                {{selectedHotel?.id==hotel.id ? 'Selected' : 'Select Hotel'}}
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- ===================================== -->
+<!-- Hotel Selection Popup -->
+<!-- ===================================== -->
+
+<div class="cls-popupOverlay" *ngIf="showPopup">
+
+    <div class="cls-popup">
+
+        <!-- Header -->
+
+        <div class="cls-popupHeader">
+
+            <div>
+
+                <h2>
+                    Select Stay Duration
+                </h2>
+
+                <p>
+                    {{selectedHotel?.name}}
+                </p>
+
+            </div>
+
+            <button class="cls-close" (click)="closePopup()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <!-- Hotel -->
+
+        <div class="cls-popupHotel">
+
+            <img [src]="selectedHotel?.image">
+
+            <div>
+
+                <h3>
+
+                    {{selectedHotel?.name}}
+
+                </h3>
+
+                <p>
+
+                    ₹{{selectedHotel?.price | number}}
+
+                    <span>
+
+                        / night
+
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Nights -->
+
+        <div class="cls-nightSection">
+
+            <div class="cls-nightHead">
+
+                Number of Nights
+
+            </div>
+
+            <div class="cls-counter">
+
+                <button (click)="decreaseNight()">
+
+                    -
+
+                </button>
+
+                <span>
+
+                    {{selectedNight}}
+
+                </span>
+
+                <button (click)="increaseNight()">
+
+                    +
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Remaining -->
+
+        <div class="cls-remaining">
+
+            <div>
+
+                Remaining Nights
+
+            </div>
+
+            <strong>
+
+                {{remainingNight}}
+
+            </strong>
+
+        </div>
+
+        <!-- Summary -->
+
+        <div class="cls-summary">
+
+            <div>
+
+                <span>
+
+                    Price / Night
+
+                </span>
+
+                <strong>
+
+                    ₹{{selectedHotel?.price | number}}
+
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+
+                    Total Amount
+
+                </span>
+
+                <strong>
+
+                    ₹{{totalAmount | number}}
+
+                </strong>
+
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+
+        <div class="cls-popupFooter">
+
+            <button class="cls-cancel" (click)="closePopup()">
+
+                Cancel
+
+            </button>
+
+            <button class="cls-confirm" (click)="confirmHotel()">
+
+                Confirm Selection
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

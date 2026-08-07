@@ -1,0 +1,18 @@
+.cls-head{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 20px;
+    border-bottom: 1px solid #e3e2e2;
+    .cls-logoImg{
+        width: 2%;
+        height: auto;
+    }
+    .cls-logoText{
+        margin: 0px;
+        font: 20px var(--primaryBold);
+        .cls-craftText{
+            color: #3F9195;
+        }
+    }
+}

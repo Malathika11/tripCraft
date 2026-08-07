@@ -1,0 +1,22 @@
+<section class="cls-packageFilter">
+    <div class="cls-filterHeader">
+        <h2>Explore Recommended Packages</h2>
+    </div>
+    <div class="cls-chipContainer">
+        <div class="cls-grid-container">
+            <button *ngFor="let item of categories" (click)="selectCategory(item.txt)" [class.active]="selectedCategory==item.txt">
+                <span class="{{item.icon}} cls-icon"></span>
+                <span class="">{{item.txt}}</span>
+            </button>
+        </div>
+        <div class="cls-sort">
+            <label>Sort by :</label>
+            <select [(ngModel)]="selectedSort" (change)="sortPackages()">
+                <option value="popular">Most Popular</option>
+                <option value="low">Price : Low to High</option>
+                <option value="high">Price : High to Low</option>
+                <option value="rating">Highest Rating</option>
+            </select>
+        </div>
+    </div>
+</section>

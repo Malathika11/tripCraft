@@ -1,0 +1,180 @@
+<div class="cls-requestMain">
+    <app-header></app-header>
+    <div class="cls-planYour-trip">
+        <h3 class="cls-planHead">Plan Your Trip</h3>
+        <p class="cls-planPara">Fill in your trip preferences and we'll find the perfect packages for you.</p>
+        <div class="cls-formContainer" [formGroup]="requestForm">
+            <div class="cls-fromTo" >
+                <span class="cls-26-travel-explore"></span>
+                <div class="cls-fromTo-container">
+                    <h3 class="cls-travel">Travel Route</h3>
+                    <div class="cls-from">
+                        <label class="cls-label">From</label>
+                        <span class="cls-25-departure cls-icon"></span>
+                        <input type="text" class="cls-input" formControlName="fromCity" placeholder="Select departure city" (input)="commonService.inputValidationCheck($event, 'text')" (keyup)="autoselect('fromCity')"/>
+                        <span class="cls-errorMeg" *ngIf="submit && (requestForm.get('fromCityId')?.invalid)">Enter valid departure city</span>
+                        <div class="cls-dropValue" *ngIf="activeField == 'fromCity' && requestForm.get('fromCity')?.value?.length >= 3 && filteredCities.length !=0">
+                            <a href="javascript:;" *ngFor="let drop of filteredCities" (click)="select(drop,'fromCity')">
+                                <p>
+                                    <span class="cls-secName">{{ drop.city_name }}</span>
+                                    <span class="cls-secAirport">{{ drop.airport_name }}</span>
+                                </p>
+                                <span class="cls-secCode">{{ drop.airport_code }}</span>
+                            </a>
+                        </div>
+                        <div class="cls-dropValue" *ngIf="activeField == 'fromCity' && requestForm.get('fromCity')?.value?.length >= 3 && noDataShow">
+                            <a href="javascript:;">
+                                No data found
+                            </a>
+                        </div>
+                    </div>
+                    <span class="cls-swap cls-23-swap" title="Swap sectors" (click)="swapSector()"></span>
+                    <div class="cls-from">
+                        <label class="cls-label">To</label>
+                        <span class="cls-24-arrival cls-icon"></span>
+                        <input type="text" class="cls-input" formControlName="toCity" placeholder="Select distination city" (input)="commonService.inputValidationCheck($event, 'text')" (keyup)="autoselect('toCity')"/>
+                        <span class="cls-errorMeg" *ngIf="submit && (requestForm.get('toCityId')?.invalid)">Enter valid distination city</span>
+                        <div class="cls-dropValue" *ngIf="activeField == 'toCity' && requestForm.get('toCity')?.value?.length >= 3 && filteredCities.length !=0">
+                            <a href="javascript:;" *ngFor="let drop of filteredCities" (click)="select(drop,'toCity')">
+                                <p>
+                                    <span class="cls-secName">{{ drop.city_name }}</span>
+                                    <span class="cls-secAirport">{{ drop.airport_name }}</span>
+                                </p>
+                                <span class="cls-secCode">{{ drop.airport_code }}</span>
+                            </a>
+                        </div>
+                        <div class="cls-dropValue" *ngIf="activeField == 'toCity' && requestForm.get('toCity')?.value?.length >= 3 && noDataShow">
+                            <a href="javascript:;">
+                                No data found
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cls-travelers">
+                <span class="cls-22-single-person cls-icon"></span>
+                <div class="cls-traveler-container">
+                    <div class="cls-travelHeader">
+                        <h3 class="cls-travel">Travelers</h3>
+                        <span *ngIf="requestForm.get('infants')?.value == requestForm.get('adults')?.value"> You can book a maximum of {{ requestForm.get('adults')?.value }} infant(s).</span>
+                    </div>
+                    <div class="cls-details">
+                        <div class="cls-person">
+                            <p class="cls-personLable">
+                                <span class="cls-lableMain">Adults</span>
+                                <span class="cls-lableSub">(12+ yrs)</span>
+                            </p>
+                            <div class="cls-controls">
+                                <button type="button" [ngClass]="{'cls-disable': requestForm.get('adults')?.value == 1}" (click)="requestForm.get('adults')?.value == 1 ? null : updateCount('adults', -1)">−</button>
+                                <span>{{ requestForm.get('adults')?.value }}</span>
+                                <button type="button" [ngClass]="{'cls-disable': requestForm.get('adults')?.value == 5}" (click)="requestForm.get('adults')?.value == 5 ? null : updateCount('adults', 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="cls-person">
+                            <p class="cls-personLable">
+                                <span class="cls-lableMain">children</span>
+                                <span class="cls-lableSub">(2-11 yrs)</span>
+                            </p>
+                            <div class="cls-controls">
+                                <button type="button" [ngClass]="{'cls-disable': requestForm.get('children')?.value == 0}" (click)="requestForm.get('children')?.value == 0 ? null : updateCount('children', -1)">−</button>
+                                <span>{{ requestForm.get('children')?.value }}</span>
+                                <button type="button" [ngClass]="{'cls-disable': requestForm.get('children')?.value == 5}" (click)="requestForm.get('children')?.value == 5 ? null : updateCount('children', 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="cls-person">
+                            <p class="cls-personLable">
+                                <span class="cls-lableMain">infants</span>
+                                <span class="cls-lableSub">(0-2 yrs, on lap)</span>
+                            </p>
+                            <div class="cls-controls">
+                                <button type="button" [ngClass]="{'cls-disable': requestForm.get('infants')?.value == 0}" (click)="requestForm.get('infants')?.value == 0 ? null : updateCount('infants', -1)">−</button>
+                                <span>{{ requestForm.get('infants')?.value }}</span>
+                                <button type="button" [ngClass]="{'cls-disable': requestForm.get('infants')?.value == requestForm.get('adults')?.value}" (click)="requestForm.get('infants')?.value == requestForm.get('adults')?.value ? null : updateCount('infants', 1)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cls-duration">
+                <span class="cls-21-calender cls-icon"></span>
+                <div class="cls-duration-container">
+                    <label class="cls-duration-label">Trip Duration</label>
+                    <div class="cls-days-date">
+                        <div class="cls-date">
+                            <span class="cls-durationHead">Travel Date Range</span>
+                            <input type="text"  id="travelDate" name="daterange" formControlName="daterange"  autocomplete="off" class="form-control" placeholder="Select Travel Date Range">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cls-budgetSetup">
+                <span class="cls-19-wallet cls-icon"></span>
+                <div class="cls-budget-container">
+                    <h3 class="cls-title">Budget Setup</h3>
+                    <div class="cls-budget-mode">
+                        <span class="cls-label">Budget Mode</span>
+                        <button type="button" class="cls-mode-btn" [class.active]="requestForm.get('budgetMode')?.value == 'total'" (click)="setBudgetMode('total')">
+                            <span class="cls-check cls-14-tick-circle" *ngIf="requestForm.get('budgetMode')?.value == 'total'"></span>
+                            Total Budget
+                        </button>
+                        <button type="button" class="cls-mode-btn" [class.active]="requestForm.get('budgetMode')?.value == 'custom'" (click)="setBudgetMode('custom')">
+                            <span class="cls-check cls-14-tick-circle" *ngIf="requestForm.get('budgetMode')?.value == 'custom'"></span>
+                            Custom Budget Allocation
+                        </button>
+                    </div>
+                    <div class="cls-budgetField">
+                        <label class="cls-label"> Total Budget </label>
+                        <div class="cls-input-box">
+                            <span class="cls-rupee">₹</span>
+                            <input type="number" formControlName="budget" placeholder="0" class="cls-budget-input" (input)="commonService.inputValidationCheck($event, 'number',1000000); " />
+                            <div class="cls-budget-controls">
+                                <button class="cls-budget-button" type="button" (click)="increment()">▲</button>
+                                <button class="cls-budget-button" type="button" (click)="decrement()">▼</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cls-breakdown-container" [class.show]="customeFieldEnable">
+                        <div class="cls-headInfo">
+                            <label class="cls-breakdown-title">Custom breakdown</label>
+                            <span class="cls-budgetInfo cls-27-info">Allocate your budget across all categories until the total reaches 100%.</span>
+                        </div>
+                        <span class="cls-totalPercentage">Total: {{requestForm.value.breakdownForm.breakdownTotal}} %</span>
+                        <div class="cls-breakdown-fields" formGroupName="breakdownForm" >
+                            <div class="cls-breakdown-field" *ngFor="let item of breakdownItems">
+                                <label>
+                                    <span class="icon" [ngClass]="item.icon"></span>
+                                    {{ item.label }}
+                                </label>
+                                <div class="cls-input-group">
+                                    <div class="input-with-symbol">
+                                        <input type="text" class="cls-breakdown-input" placeholder="0" [formControlName]="item.controlName" (input)="commonService.inputValidationCheck($event, 'number',100); limitToHundred($event, item.controlName); getBreakdownValue(item.controlName,item.amountControl);validateBreakdown();" min="0" max="100"/>
+                                        <span class="symbol symbol-right">%</span>
+                                    </div>
+                                    <div class="input-with-symbol">
+                                        <span class="symbol symbol-left">$</span>       
+                                        <input type="text" class="cls-value-display" formControlName="{{ item.amountControl }}" readonly/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cls-error-message" *ngIf="breakdownError">
+                                {{ breakdownError }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="cls-searchBtn" (click)="findPackage()">
+                <span class="cls-searchIcon cls-18-search"></span>
+                Find My Perfect Package
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- <ng-container *ngIf="visaStatusCheck && !visibleVerifyVisa">
+    <app-visa-status-check (visaPopupClose)="visaPopupCloseEvent($event)" (verifyVisa)="verifyVisaFun($event)"></app-visa-status-check>
+</ng-container>
+ 
+<ng-container *ngIf="visibleVerifyVisa && !visaStatusCheck">
+    <app-verify-existing-visa (visaPopupClose)="visaPopupCloseEvent($event)" (previousPageLoad)="previousPageLoadEvent($event)"></app-verify-existing-visa>
+</ng-container> -->

@@ -1,0 +1,239 @@
+<div class="budget-card">
+
+    <h2 class="title">Budget Status</h2>
+
+    <div class="budget-total">
+
+        ₹{{budget?.total | number}}
+
+    </div>
+
+    <div class="budget-label">
+
+        Total Budget
+
+    </div>
+
+    <div class="progress-section">
+
+        <div class="progress-header">
+
+            <span>Flight Budget</span>
+
+            <span>{{progress | number:'1.0-0'}}%</span>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div
+                class="progress-fill"
+                [style.width.%]="progress">
+
+            </div>
+
+        </div>
+
+        <div class="progress-footer">
+
+            <span>
+                Used : ₹{{used | number}}
+            </span>
+
+            <span>
+                Limit : ₹{{budget?.flightBudget | number}}
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="summary">
+
+        <div class="row">
+
+            <span>Flight Budget</span>
+
+            <strong>₹{{budget?.flightBudget | number}}</strong>
+
+        </div>
+
+        <div class="row">
+
+            <span>Used</span>
+
+            <strong>₹{{used | number}}</strong>
+
+        </div>
+
+        <div class="row">
+
+            <span>Remaining</span>
+
+            <strong
+                [class.green]="remaining>=0"
+                [class.red]="remaining<0">
+
+                ₹{{remaining | number}}
+
+            </strong>
+
+        </div>
+
+    </div>
+
+    <div class="selected-card">
+
+        <div class="heading">
+
+            Selected Flight
+
+        </div>
+
+        <ng-container *ngIf="selectedFlight">
+
+            <div class="airline">
+
+                {{selectedFlight.airline}}
+
+            </div>
+
+            <div class="flight-no">
+
+                {{selectedFlight.flightNo}}
+
+            </div>
+
+            <div class="price">
+
+                ₹{{selectedFlight.price | number}}
+
+            </div>
+
+        </ng-container>
+
+        <div
+            *ngIf="!selectedFlight"
+            class="placeholder">
+
+            Select a flight
+
+        </div>
+
+    </div>
+
+    <div class="cls-foodBudget">
+        <!-- Header -->
+        <h3 class="cls-title">
+
+            Your Food Plan
+
+        </h3>
+        <!-- Timeline -->
+        <div class="cls-timeLine">
+
+            <div
+                class="cls-planCard"
+                *ngFor="let plan of foodPlan">
+
+                <div class="cls-dot"></div>
+
+                <div class="cls-card">
+
+                    <div class="cls-dayHotel">
+
+                        <span class="cls-day">
+
+                            DAY {{plan.day}}
+
+                        </span>
+
+                        <span class="cls-hotel">
+
+                            {{plan.hotel}}
+
+                        </span>
+
+                    </div>
+
+                    <div class="cls-body">
+
+                        <img
+                            [src]="plan.image">
+
+                        <div class="cls-details">
+
+                            <h4>
+
+                                {{plan.restaurant}}
+
+                            </h4>
+
+                            <span class="cls-meal">
+
+                                {{plan.meal}}
+
+                            </span>
+
+                            <p>
+
+                                {{plan.nights}} Nights
+
+                                •
+
+                                ₹ {{plan.price}}
+
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="cls-edit"
+                            (click)="editRestaurant(plan)">
+
+                            ✎
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Budget -->
+        <div class="cls-budget">
+
+            <span>
+
+                ✔ Great! You are within your food budget.
+
+            </span>
+
+        </div>
+    </div>
+
+    <div
+        class="warning"
+        *ngIf="exceededAmount>0">
+
+        ⚠ Your selected flight exceeds the budget by
+
+        <strong>
+
+            ₹{{exceededAmount | number}}
+
+        </strong>
+
+    </div>
+
+    <button
+        class="continue-btn"
+        [disabled]="!selectedFlight">
+
+        Continue to Guide Selection →
+
+    </button>
+
+</div>

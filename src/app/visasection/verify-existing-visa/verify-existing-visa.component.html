@@ -1,0 +1,89 @@
+<div class="cls-verifyVisa-main">
+    <div class="cls-verifyVisa-container">
+        <div class="cls-header">
+            <span class="cls-backBtn cls-15-arrow-left" (click)="previousPage()"></span>
+            <div class="cls-headerContent">
+                <h2 class="cls-verifyHead">{{verifyJsonData.verifyHead}}</h2>
+                <p class="cls-verifyPara">{{verifyJsonData.verifyPara}}</p>
+            </div>
+            <span class="cls-closeBtn cls-16-close" (click)="continue()"></span>
+        </div>
+        <div class="cls-body">
+            <div class="cls-left">
+                <div class="cls-uploadSection" *ngFor="let uploadData of verifyJsonData.uploadSection">
+                    <div>
+                        <label class="cls-upload-label"> 
+                            {{uploadData.label}} <span class="cls-mandatory" *ngIf="uploadData?.mandatory">*</span> <small *ngIf="uploadData?.subLabel">(optional)</small>
+                        </label>
+                        <div class="cls-uploadCard" *ngIf="uploadData.file">
+                            <div class="cls-fileLeft">
+                                <span class="cls-fileIcon cls-25-file"></span>
+                                <div class="cls-fileDetails">
+                                    <h5>{{uploadData.file.name}}</h5>
+                                    <p>{{uploadData.fileSize}}</p>
+                                </div>
+                            </div>
+                            <div class="cls-fileRight">
+                                <span class="cls-success">
+                                    {{uploadData.progress}}%
+                                </span>
+                                <span class="cls-14-tick-circle cls-tick"></span>
+                                <span class="cls-16-close cls-delete" (click)="removeFile(uploadData,$event)"></span>
+                            </div>
+                            <div class="cls-progressBar">
+                                <span [style.width.%]="uploadData.progress"></span>
+                            </div>
+                        </div>
+                        <div class="cls-dropZone" *ngIf="!uploadData.file" (click)="fileInput.click()" (drop)="drop($event,uploadData)" (dragover)="dragOver($event)">
+                            <input #fileInput hidden type="file" accept=".pdf,.jpg,.jpeg,.png" (change)="fileSelected($event,uploadData)">
+                            <span class="cls-uploadIcon cls-28-upload"></span>
+                            <h4 class="cls-dropTxt">Drag & Drop files here</h4>
+                            <p>
+                                or
+                                <span>click to browse</span>
+                            </p>
+                        </div>
+                        <p class="cls-supportText">
+                            Supported formats:
+                            <b>PDF, JPG, PNG</b>
+                            (Max 10MB)
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="cls-right">
+                <div class="cls-statusHeader">
+                    <h4>{{verifyJsonData.verificationTxt}}</h4>
+                    <span class="cls-badge">
+                        {{verifyJsonData.verificationProcess}}
+                    </span>
+                </div>
+                <div class="cls-statusImage">
+                    <img src="../../../assets/images/verify_existing_visa.png" alt="verify">
+                </div>
+                <div class="cls-statusText">
+                    <p>
+                        {{verifyJsonData.verificationPara}}
+                    </p>
+                </div>
+                <div class="cls-statusList">
+                    <div class="cls-statusItem" *ngFor="let items of verifyJsonData.statusList; let i = index">
+                        <span class="cls-statusTxt">
+                            {{items.text}}
+                        </span>
+                        <i *ngIf="verifyJsonData.uploadSection[i].progress == 100" class="cls-14-tick-circle cls-success"></i>
+                        <i *ngIf="verifyJsonData.uploadSection[i].progress != 100" class="cls-16-close cls-delete"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cls-footer">
+            <button class="cls-submitBtn" [disabled]="!disableSubmit" [ngClass]="{'cls-disable': !disableSubmit}" (click)="submitVerification()">
+                Submit for Verification
+            </button>
+            <button class="cls-continueBtn" (click)="continue()">
+                Continue Planning
+            </button>
+        </div>
+    </div>
+</div>

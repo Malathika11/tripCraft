@@ -1,0 +1,18 @@
+<div class="cls-visaStatus-main">
+    <div class="cls-visa-container">
+        <h3 class="cls-headerText">{{visaSatatusCheckData.headerText}}</h3>
+        <p class="cls-headerPara">{{visaSatatusCheckData.headerPara}}</p>
+        <div class="cls-statusCard">
+            <div class="cls-visaCard" *ngFor="let card of visaSatatusCheckData.cardData">
+                <img src="{{card.img}}" alt="{{card.cardHead}}" class="cls-cardImg">
+                <h4 class="cls-cardHead">{{card.cardHead}}</h4>
+                <p class="cls-cardPara">{{card.cardPara}}</p>
+                <button type="button" class="cls-cardBtn" (click)="visaStatus(card.buttonId)">{{card.buttonTxt}}</button>
+            </div>
+        </div>
+        <p class="cls-info">
+            <span class="cls-icon cls-17-lock"></span>
+            Your information is secure and encrypted
+        </p>
+    </div>
+</div>

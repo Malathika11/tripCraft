@@ -1,0 +1,113 @@
+<div class="cls-guide-option">
+    <h2>Do you want a guide?</h2>
+    <div class="cls-toggle">
+        <button [class.active]="needGuide" (click)="selectGuide(true)">
+            Yes
+        </button>
+        <button [class.active]="!needGuide" (click)="selectGuide(false)">
+            No
+        </button>
+    </div>
+</div>
+<div class="cls-guide-list" *ngIf="needGuide">
+    <div class="guide-container">
+
+        <div class="guide-card" *ngFor="let guide of guides" [class.selected]="selectedGuide?.id === guide.id">
+
+            <div class="card-header">
+
+                <div class="rating">
+                    ⭐ {{guide.rating}}
+                    <span>({{guide.reviews}})</span>
+                </div>
+
+                <div class="bg-circle circle1"></div>
+                <div class="bg-circle circle2"></div>
+
+            </div>
+
+            <div class="profile">
+
+                <img [src]="guide.image">
+
+                <div class="tick" *ngIf="selectedGuide?.id==guide.id">
+                    ✓
+                </div>
+
+            </div>
+
+            <div class="content">
+
+                <h3>{{guide.name}}</h3>
+
+                <div class="experience">
+                    ⏱ {{guide.experience}} Years Experience
+                </div>
+
+                <p>
+                    {{guide.description}}
+                </p>
+
+                <div class="title">
+                    🌐 Languages
+                </div>
+
+                <div class="chips">
+
+                    <span *ngFor="let lang of guide.languages">
+                        {{lang}}
+                    </span>
+
+                </div>
+
+                <div class="title">
+                    💡 Specialities
+                </div>
+
+                <ul>
+
+                    <li *ngFor="let sp of guide.specialities">
+                        {{sp}}
+                    </li>
+
+                </ul>
+
+                <div class="price-box">
+
+                    <div>
+
+                        <small>Pricing</small>
+
+                        <h2>
+                            ₹{{guide.price | number}}
+                            <span>/day</span>
+                        </h2>
+
+                    </div>
+
+                    <div>
+
+                        <small>{{tripDays}} days total</small>
+
+                        <h3>
+                            ₹{{guide.price * tripDays | number}}
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <button (click)="selectGuide(guide)" [class.active]="selectedGuide?.id===guide.id">
+
+                    {{selectedGuide?.id===guide.id ?
+                    '✓ Guide Selected' :
+                    'Select This Guide'}}
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

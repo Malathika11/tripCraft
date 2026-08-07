@@ -1,0 +1,118 @@
+.cls-details{
+    gap: 20px;
+    height: 120vh;
+    overflow: hidden;
+    display: grid;
+    .cls-flightDetails{
+        overflow-y: auto;
+        .cls-flightCard{
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            .cls-flightName-amount{
+                display: flex;
+                justify-content: space-between;
+                padding: 15px;
+                .cls-flightName{
+                    display: flex;
+                    .cls-airlineImg{
+                        padding-right: 15px;
+                        img{
+                            width: 40px;
+                            height: 40px;
+                        }
+                    }
+                    .cls-flight{
+                        display: grid;
+                        .cls-airline{
+                            font: 14px var(--primarySemiBold);
+                        }
+                        .cls-airlineSub{
+                            font: 12px var(--primaryLight);
+                        }
+                    }
+                }
+                .cls-flightAmount{
+                    text-align: end;
+                    .cls-Amount{
+                        font: 18px var(--primarySemiBold);
+                        margin: 0px;
+                    }
+                    .cls-perPerson{
+                        font: 12px var(--primaryLight);
+                    }
+                }
+            }
+            .cls-flightSector{
+                display: flex;
+                justify-content: space-between;
+                .cls-arrivel,.cls-departure{
+                    text-align: center;
+                    p{
+                        margin: 0px;
+                    }
+                    .cls-timing{
+                        font: 18px var(--primaryBold);
+                    }
+                    .cls-sector{
+                        font: 13px var(--primaryLight);
+                    }
+                    .cls-place{
+                        font: 12px var(--primaryLight);
+                    }
+                }
+                .cls-stopsDiv{
+                    width: 35%;
+                    text-align: center;
+                    align-content: center;
+                    .cls-stopCount{
+                        font: 12px var(--primaryRegular);
+                        margin: 10px;
+                    }
+                    .cls-lineIcon{
+                        margin: 0px;
+                        position: relative;
+                        .cls-line{
+                            border: 0.1px solid #ccc;
+                            width: 100%;
+                            display: block;
+                        }
+                        .cls-icon{
+                            position: absolute;
+                            top: -11px;
+                        }
+                    }
+                    .cls-stops{
+                        font: 12px var(--primaryRegular);
+                        color: green;
+                        margin: 10px;
+                    }
+                }
+            }
+            .cls-border{
+                border: 0.1px solid #ecebeb;
+                width: 100%;
+                display: block;
+            }
+            .cls-stopValue{
+                margin: 10px;
+                .cls-stopName{
+                    margin-left: 10px;
+                }
+            }
+            .cls-selectBtn{
+                margin: 20px 0px;
+                width: 100%;
+                border: unset;
+                border-radius: 5px;
+                padding: 10px;
+                font: 14px var(--primarySemiBold);
+                &.cls-selectBtn-active{
+                    background: blue;
+                    color: white;
+                }
+            }
+        }
+    }
+}
