@@ -1,6 +1,8 @@
 # TripCraft
 
-TripCraft is a full-stack travel planning application built using:
+A full-stack travel planning application.
+
+## Technologies
 
 - Angular
 - Node.js
@@ -10,20 +12,18 @@ TripCraft is a full-stack travel planning application built using:
 ## Features
 
 - Flight Sector Search
-- Budget Planner
+- Budget Planning
 - Travel Date Selection
 - Dynamic Forms
 
-## Installation
-
-### Frontend
+## Run Frontend
 
 ```bash
 npm install
 ng serve
 ```
 
-### Backend
+## Run Backend
 
 ```bash
 cd backend
@@ -31,7 +31,7 @@ npm install
 node server.js
 ```
 
-### Database
+## Database
 
 Import:
 
