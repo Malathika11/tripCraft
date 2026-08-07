@@ -6,7 +6,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+require('dotenv').config();
 // Sector Search API
 app.get('/api/sectors/search', (req, res) => {
     console.log(req,res);
