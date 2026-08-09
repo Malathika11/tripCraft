@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private baseUrl = 'http://localhost:3000/api';
+  private baseUrl = 'https://tripcraft-production-a972.up.railway.app/api';
 
   constructor(private http: HttpClient) {}
 
