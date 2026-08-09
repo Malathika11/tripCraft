@@ -9,6 +9,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// const flightRoutes = require('./routes/flight.routes');
+const homeRoutes = require('./routes/home.routes');
+const uploadRoutes=require("./routes/upload.routes");
+const verifyRoutes=require("./routes/verify.routes");
+const packageRoutes = require('./routes/package.routes');
+
+// app.use('/api/flights', flightRoutes);
+app.use('/api/home', homeRoutes);
+app.use("/api/upload",uploadRoutes);
+app.use("/api/verify",verifyRoutes);
+app.use('/api/packages', packageRoutes);
 // Sector Search API
 app.get('/api/sectors/search', (req, res) => {
 
