@@ -44,6 +44,51 @@ app.get('/api/sectors/search', (req, res) => {
     });
 });
 
+const net = require('net');
+
+app.get('/api/test-db-network', (req, res) => {
+    const host = process.env.DB_HOST;
+    const port = Number(process.env.DB_PORT);
+
+    const socket = new net.Socket();
+
+    socket.setTimeout(10000);
+
+    socket.on('connect', () => {
+        socket.destroy();
+
+        res.json({
+            success: true,
+            message: 'Render can reach Aiven MySQL',
+            host: host,
+            port: port
+        });
+    });
+
+    socket.on('timeout', () => {
+        socket.destroy();
+
+        res.status(500).json({
+            success: false,
+            error: 'TCP connection timeout',
+            host: host,
+            port: port
+        });
+    });
+
+    socket.on('error', (err) => {
+        res.status(500).json({
+            success: false,
+            code: err.code,
+            message: err.message,
+            host: host,
+            port: port
+        });
+    });
+
+    socket.connect(port, host);
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
