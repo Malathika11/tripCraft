@@ -14,10 +14,10 @@
         </div>
         <div class="cls-headCard">
             <div class="cls-planMyTrip" *ngFor="let card of homeDetails.header.headCard">
-                <img src="{{card.img}}" alt="{{card.title}}">
+                <img src="{{card.image_path}}" alt="{{card.title}}">
                 <h4 class="cls-cardHead">{{card.title}}</h4>
-                <p class="cls-cardPara">{{card.para}}</p>
-                <button class="cls-planMyTrip-btn" type="button" (click)="tripVisaBtn(card.title)">{{card.btnText}}
+                <p class="cls-cardPara">{{card.description}}</p>
+                <button class="cls-planMyTrip-btn" type="button" (click)="tripVisaBtn(card.title)">{{card.button_text}}
                     <span class="cls-btn-arrow cls-2-arrow-right"></span>
                 </button>
             </div>
@@ -29,10 +29,10 @@
         <div class="cls-chooseDiv">
             <div class="cls-chooseCard" *ngFor="let card of homeDetails.whyChoose.cardData">
                 <p class="cls-cardImg">
-                    <span class="{{card.img}}"></span>
+                    <span class="{{card.icon_class}}"></span>
                 </p>
-                <p class="cls-cardHead">{{card.head}}</p>
-                <p class="cls-cardPara">{{card.para}}</p>
+                <p class="cls-cardHead">{{card.heading}}</p>
+                <p class="cls-cardPara">{{card.description}}</p>
             </div>
         </div>
     </div>
@@ -45,10 +45,10 @@
                     <div class="cls-quote">❝</div>
                     <p class="cls-message">{{item.message}}</p>
                     <div class="cls-user-info">
-                        <img src="{{item.personImg}}" alt="person{{i}}">
+                        <img src="{{item.person_image}}" alt="person{{i}}">
                         <div class="cls-personDeails">
-                            <h4 class="cls-personName">{{item.personName}}</h4>
-                            <span class="cls-personPlace">{{item.personPlace}}</span>
+                            <h4 class="cls-personName">{{item.person_name}}</h4>
+                            <span class="cls-personPlace">{{item.person_place}}</span>
                             <div class="cls-stars">
                                 <span *ngFor="let star of [].constructor(item.star)" class="cls-48-star"> </span>
                             </div>
