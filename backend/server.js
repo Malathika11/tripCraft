@@ -6,18 +6,17 @@ const db = require('./db');
 
 const app = express();
 
-app.get('/api/test-route', (req, res) => {
-    res.json({
-        success: true,
-        message: 'NEW SERVER CODE IS RUNNING'
-    });
-});
+
+console.log('🔥 SERVER VERSION: HOME-API-TEST');
+console.log('🔥 SERVER FILE:', __filename);
+
+
 app.use(cors());
 app.use(express.json());
 
-// const homeRoutes = require('./routes/home.routes');
+const homeRoutes = require('./routes/home.routes');
 
-// app.use('/api/home', homeRoutes);
+app.use('/api/home', homeRoutes);
 // Sector Search API
 app.get('/api/sectors/search', (req, res) => {
 
