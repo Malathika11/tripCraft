@@ -17,6 +17,11 @@ app.use(express.json());
 const homeRoutes = require('./routes/home.routes');
 
 app.use('/api/home', homeRoutes);
+
+const packageRoutes = require('./routes/package.routes');
+
+app.use('/api/packages', packageRoutes);
+
 // Sector Search API
 app.get('/api/sectors/search', (req, res) => {
 

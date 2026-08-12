@@ -5,15 +5,17 @@
         display:flex;
         justify-content:space-between;
         align-items:center;
-        margin-bottom:20px;
+        margin-bottom:10px;
         h2{
             font: 24px var(--primaryBold);
-            color:#183A8A;
+            color:#3F9195;
         }
     }
     .cls-chipContainer{
         display:flex;
         justify-content: space-between;
+        float: right;
+        margin-bottom: 25px;
         .cls-grid-container{
             display:flex;
             gap:15px;

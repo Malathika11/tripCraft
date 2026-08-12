@@ -5,12 +5,21 @@
             <h1 class="cls-header-txt">Your Perfect Packages</h1>
             <p class="cls-para"> Handpicked travel packages based on your preferences. </p>
             <div class="cls-requestMain">
-                <app-package-request></app-package-request>
+                <app-package-request [formDetails]="requestData"></app-package-request>
             </div>
         </div>
         <div class="cls-recommended-package">
-            <app-package-filter></app-package-filter>
-            <app-package-card></app-package-card>
+            <app-package-filter [filteredPackages]="packageList"></app-package-filter>
+            <app-package-card *ngIf="!showContent" [filteredPackages]="packageList" [totalBudget]="requestData?.budget"></app-package-card>
+            <div *ngIf="showContent" class="cls-noData">
+                <img class="cls-noDataImg" src="{{contentDetails.img}}" alt="{{contentDetails.imgAlt}}">
+                <h4 class="cls-noData-title">{{contentDetails.title}}</h4>
+                <p class="cls-noData-message">{{contentDetails.msg}}</p>
+                <button type="button" class="cls-noData-edit" *ngFor="let btn of contentDetails?.buttons" (click)="handleContentAction(btn.action)" >
+                    <span class="cls-68-edit cls-edit"></span>
+                    {{ btn.label }}
+                </button>
+            </div>
         </div>
     </div>
 </div>

@@ -2,12 +2,6 @@
     <div class="cls-packageCard" *ngFor="let package of filteredPackages">
         <div class="cls-packageImage">
             <img [src]="package.image">
-            <span class="cls-badge">
-                {{package.badge}}
-            </span>
-            <button class="cls-wishlist" (click)="toggleWishlist(package)">
-                <span class="cls-heart" [ngClass]="{ 'cls-heart-outline':!package.favourite, 'cls-heart-filled':package.favourite }"></span>
-            </button>
         </div>
         <div class="cls-packageContent">
             <h2> {{package.title}} </h2>
@@ -37,15 +31,15 @@
             <div class="cls-budgetSection">
                 <div class="cls-budgetHead">
                     <span> Budget Utilization </span>
-                    <span> {{package.currentProgress}}% </span>
+                    <span> {{package.current_progress}}% </span>
                 </div>
                 <div class="cls-progress">
-                    <div class="cls-progressFill" [style.width.%]="package?.currentProgress"> </div>
+                    <div class="cls-progressFill" [style.width.%]="package?.current_progress"> </div>
                 </div>
                 <div class="cls-budgetFooter">
                     <span> Remaining Budget </span>
                     <b>
-                        {{package.amountLabel}} {{package.remaining | number}}
+                        {{package.amount_label}} {{package.remaining | number}}
                     </b>
                 </div>
             </div>
@@ -55,18 +49,18 @@
                 Package Price
             </p>
             <h1>
-                {{package.amountLabel}} {{package.price | number}}
+                {{package.amount_label}} {{package.price | number}}
             </h1>
             <div class="cls-budgetInfo">
                 <span>Total Budget</span>
                 <strong>
-                    {{package.amountLabel}} {{package.totalBudget | number}}
+                    {{package.amount_label}} {{totalBudget | number}}
                 </strong>
             </div>
             <div class="cls-budgetInfo">
                 <span>Remaining Budget</span>
                 <strong class="green">
-                    {{package.amountLabel}} {{package.remaining | number}}
+                    {{package.amount_label}} {{package.remaining | number}}
                 </strong>
             </div>
             <button class="cls-viewBtn" (click)="viewPackage(package)">

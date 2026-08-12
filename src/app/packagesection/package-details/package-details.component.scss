@@ -3,7 +3,7 @@
         .cls-bodyHead{
             background: url('../../../assets/images/package-bg.png')  center top / cover no-repeat;
             padding: 40px 50px;
-            height: 60vh;
+            height: 40vh;
             position: relative;
             .cls-header-txt{
                 font: 34px var(--primaryBold);
@@ -19,7 +19,37 @@
             }
         }
         .cls-recommended-package{
-            margin-top: 12%;
+            margin-top: 10%;
+            .cls-noData{
+                margin: 7% auto;
+                text-align: center;
+                border: 1px dashed #eee;
+                width: 60%;
+                padding: 30px;
+                border-radius: 10px;
+                .cls-noDataImg{
+                    width: 40%;
+                    border-radius: 10px;
+                }
+                .cls-noData-title{
+                    margin-top: 20px;
+                    color: #3F9195;
+                    font: 22px var(--primaryBold);
+                }
+                .cls-noData-message{
+                    font: 15px var(--primaryRegular);
+                    width: 65%;
+                    justify-self: center;
+                    line-height: 2;
+                }
+                .cls-noData-edit{
+                    padding: 10px 20px;
+                    border: unset;
+                    background: #3F9195;
+                    color: #fff;
+                    border-radius: 10px;
+                }
+            }
         }
     }
 }

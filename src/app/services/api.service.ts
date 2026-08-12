@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
+  // private baseUrl = 'http://localhost:3000/api';
   private baseUrl = 'https://tripcraft-production-a972.up.railway.app/api';
 
   constructor(private http: HttpClient) {}
@@ -61,5 +62,11 @@ export class ApiService {
       `${this.baseUrl}/sectors/search?term=${searchText}`
     );
 
+  }
+
+  getPackageDetails(requestData: any) {
+    return this.http.post<any>(
+      `${this.baseUrl}/packages/search`, requestData
+    );
   }
 }

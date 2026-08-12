@@ -12,7 +12,6 @@ export class CommonService {
         alphanumeric: /^[A-Za-z0-9_]+$/,
     };
 
-
     public inputValidationCheck(event: any, type: any, maxValue?: number): boolean {
         const pattern = this.patterns[type];
         const value = event.target.value;
@@ -31,6 +30,15 @@ export class CommonService {
         }
 
         return true;
+    }
+
+    public durationCalculate(formValue:any){
+        const startDate = new Date(formValue.startDate); 
+        const endDate = new Date(formValue.endDate);
+
+        const diffTime = endDate.getTime() - startDate.getTime();
+        const diffDays  = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays + ' Days / ' +  (diffDays - 1) + ' Nights';
     }
     
 }
