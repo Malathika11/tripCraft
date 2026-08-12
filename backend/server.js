@@ -34,9 +34,9 @@ app.get('/api/sectors/search', (req, res) => {
     const sql = `
         SELECT *
         FROM sectors
-        WHERE city_name LIKE ?
-        OR airport_name LIKE ?
-        OR airport_code LIKE ?
+        WHERE city LIKE ?
+        OR airport LIKE ?
+        OR code LIKE ?
         LIMIT 10
     `;
 
