@@ -19,12 +19,12 @@ export class PackageCardComponent implements OnInit {
   ngOnInit(): void {
     this.loader = true;
     setTimeout(() => {
-      this.budgetUtilization();
-    }, 1000);
+      this.budgetUtilization('ngon');
+    }, 2000);
   }
 
-  public budgetUtilization(){
-    console.log(this.filteredPackages,'estttttttttttttttttt');
+  public budgetUtilization(type:any){
+    console.log(this.filteredPackages,type,'estttttttttttttttttt');
     if(this.filteredPackages){
       this.filteredPackages.map((data:any) => {
         data.remaining = this.totalBudget - data.price;
