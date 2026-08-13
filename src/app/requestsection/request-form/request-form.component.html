@@ -16,10 +16,10 @@
                         <div class="cls-dropValue" *ngIf="activeField == 'fromCity' && requestForm.get('fromCity')?.value?.length >= 3 && filteredCities.length !=0">
                             <a href="javascript:;" *ngFor="let drop of filteredCities" (click)="select(drop,'fromCity')">
                                 <p>
-                                    <span class="cls-secName">{{ drop.city_name }}</span>
-                                    <span class="cls-secAirport">{{ drop.airport_name }}</span>
+                                    <span class="cls-secName">{{ drop.city }}</span>
+                                    <span class="cls-secAirport">{{ drop.airport }}</span>
                                 </p>
-                                <span class="cls-secCode">{{ drop.airport_code }}</span>
+                                <span class="cls-secCode">{{ drop.code }}</span>
                             </a>
                         </div>
                         <div class="cls-dropValue" *ngIf="activeField == 'fromCity' && requestForm.get('fromCity')?.value?.length >= 3 && noDataShow">
@@ -37,10 +37,10 @@
                         <div class="cls-dropValue" *ngIf="activeField == 'toCity' && requestForm.get('toCity')?.value?.length >= 3 && filteredCities.length !=0">
                             <a href="javascript:;" *ngFor="let drop of filteredCities" (click)="select(drop,'toCity')">
                                 <p>
-                                    <span class="cls-secName">{{ drop.city_name }}</span>
-                                    <span class="cls-secAirport">{{ drop.airport_name }}</span>
+                                    <span class="cls-secName">{{ drop.city }}</span>
+                                    <span class="cls-secAirport">{{ drop.airport }}</span>
                                 </p>
-                                <span class="cls-secCode">{{ drop.airport_code }}</span>
+                                <span class="cls-secCode">{{ drop.code }}</span>
                             </a>
                         </div>
                         <div class="cls-dropValue" *ngIf="activeField == 'toCity' && requestForm.get('toCity')?.value?.length >= 3 && noDataShow">
