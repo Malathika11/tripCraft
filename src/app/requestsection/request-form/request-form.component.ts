@@ -182,7 +182,7 @@ export class RequestFormComponent implements OnInit {
 
   select(value: any, name: string) {
     this.requestForm.get(name)?.setValue(value?.city);
-    this.requestForm.get(name + 'Id')?.setValue(value?.airport);
+    this.requestForm.get(name + 'Id')?.setValue(value?.code);
     this.filteredCities = [];
     this.activeField = '';
     this.noDataShow = false;
