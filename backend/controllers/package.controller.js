@@ -155,7 +155,7 @@ const getPackages = (req, res) => {
 
                         ORDER BY pd.popularity DESC
 
-                        LIMIT 3
+                        LIMIT 10
                     `;
 
             db.query(packageSql, [sector, userDays, userBudget], (packageError, results) => {

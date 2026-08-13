@@ -24,8 +24,8 @@ export class PackageCardComponent implements OnInit {
   }
 
   public budgetUtilization(){
+    console.log(this.filteredPackages,'estttttttttttttttttt');
     if(this.filteredPackages){
-      console.log(this.filteredPackages,'estttttttttttttttttt');
       this.filteredPackages.map((data:any) => {
         data.remaining = this.totalBudget - data.price;
         data.current_progress = Math.round((data.price / this.totalBudget ) * 100);
