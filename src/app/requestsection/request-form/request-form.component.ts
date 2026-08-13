@@ -76,7 +76,7 @@ export class RequestFormComponent implements OnInit {
       adults: [1,Validators.required],
       children: [0],
       infants: [0],
-      daterange: [''],
+      daterange: ['',Validators.required],
       startDate: [''],
       endDate: [''],
       totalDays: [0],
@@ -181,8 +181,8 @@ export class RequestFormComponent implements OnInit {
   }
 
   select(value: any, name: string) {
-    this.requestForm.get(name)?.setValue(value?.city_name);
-    this.requestForm.get(name + 'Id')?.setValue(value?.airport_code);
+    this.requestForm.get(name)?.setValue(value?.city);
+    this.requestForm.get(name + 'Id')?.setValue(value?.airport);
     this.filteredCities = [];
     this.activeField = '';
     this.noDataShow = false;
@@ -284,15 +284,16 @@ export class RequestFormComponent implements OnInit {
   // }
 
   public findPackage(){
-    console.log(this.requestForm);   
+    this.submit = true;
     let fields = ['flight','hotel','food','transport','visa','visitingPlaces']
+    console.log(this.requestForm);   
     if(this.requestForm.value.budgetMode == "custom"){
       if(this.requestForm.value.breakdownForm.breakdownTotal != 100){
         this.toast.info('Please complete the custom breakdown until the total reaches 100%.');
         return;
       }
       fields.map((data:any)=>{
-        if(this.requestForm.value.breakdownForm[data] == 0){
+        if(this.requestForm.value.breakdownForm[data] == 0 || this.requestForm.value.breakdownForm[data] == null){
           this.toast.info('Please fill all fields.');
           return;
         }

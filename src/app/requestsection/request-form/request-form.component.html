@@ -103,6 +103,7 @@
                         <div class="cls-date">
                             <span class="cls-durationHead">Travel Date Range</span>
                             <input type="text"  id="travelDate" name="daterange" formControlName="daterange"  autocomplete="off" class="form-control" placeholder="Select Travel Date Range">
+                            <span class="cls-errorMeg" *ngIf="submit && (requestForm.get('daterange')?.invalid)">Select date range</span>
                         </div>
                     </div>
                 </div>
@@ -127,6 +128,7 @@
                         <div class="cls-input-box">
                             <span class="cls-rupee">₹</span>
                             <input type="number" formControlName="budget" placeholder="0" class="cls-budget-input" (input)="commonService.inputValidationCheck($event, 'number',1000000); " />
+                            <span class="cls-errorMeg" *ngIf="submit && (requestForm.get('budget')?.invalid)">Kindly enter the budget</span>
                             <div class="cls-budget-controls">
                                 <button class="cls-budget-button" type="button" (click)="increment()">▲</button>
                                 <button class="cls-budget-button" type="button" (click)="decrement()">▼</button>
