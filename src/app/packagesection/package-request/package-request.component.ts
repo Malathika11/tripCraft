@@ -16,7 +16,16 @@ export class PackageRequestComponent implements OnInit {
   constructor(public router: Router, public commonService: CommonService) { }
 
   ngOnInit(): void {
-    this.datesAndNights =  this.commonService.durationCalculate(this.formDetails);
+    console.log(this.formDetails);
+    
+    const startDate = new Date(this.formDetails.startDate); 
+    const endDate = new Date(this.formDetails.endDate);
+
+    const diffTime = endDate.getTime() - startDate.getTime();
+    const diffDays  = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+    console.log(startDate,endDate,diffTime,diffDays);
+    
+    this.datesAndNights =   diffDays + ' Days / ' +  (diffDays - 1) + ' Nights';
     console.log(history.state, this.formDetails,this.datesAndNights);
   }
 

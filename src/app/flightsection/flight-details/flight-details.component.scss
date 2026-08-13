@@ -1,27 +1,53 @@
 .cls-flight-main{
-    .cls-flightHead{
-        display: flex;
-        justify-content: space-between;
-        .cls-flightCount{
-            font: 15px var(--primaryRegular);
-            .cls-count{
-                font-weight: 700;
+    .cls-flight-details{
+        margin: 0 30px 12px;
+        .cls-flightHead{
+            border-radius: 10px;
+            padding: 20px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .cls-sector-details{
+                h1{
+                    margin: 0 0 3px;
+                    font: 24px var(--primaryBold);
+                }
+                p{
+                    color: #5e6b82;
+                    font-size: 14px;
+                }
+            }
+            .cls-sector-type{
+                display: flex;
+                background: #f2f4f8;
+                padding: 3px;
+                border-radius: 9px;
+                button{
+                    border: none;
+                    background: transparent;
+                    padding: 10px 22px;
+                    border-radius: 7px;
+                    cursor: pointer;
+                    font: 14px var(--primaryMedium);
+                    &.active{
+                        background: #fff;
+                        color: #1457d9;
+                        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+                    }
+                }
             }
         }
-        .cls-sectors{
-            font: 14px var(--primaryLight);
-        }
-    }
-    .cls-flight-body{
-        display: flex;
-        justify-content: space-between;
-        .cls-flight-container, .cls-budget-container{
-            width: 20%;
-            box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
-        }
-        .cls-flightCard-container{
-            width: 55%;
-            box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+        .cls-flight-body{
+            display: flex;
+            justify-content: space-between;
+            .cls-flight-container, .cls-budget-container{
+                width: 20%;
+                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+            }
+            .cls-flightCard-container{
+                width: 55%;
+                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+            }
         }
     }
 }

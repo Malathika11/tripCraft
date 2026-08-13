@@ -5,12 +5,14 @@ import { FlightsectionRoutingModule } from './flightsection-routing.module';
 import { FlightDetailsComponent } from './flight-details/flight-details.component';
 import { FlightCardComponent } from './flight-card/flight-card.component';
 import { SharedModule } from '../shared/shared.module';
+import { FlightFilterComponent } from './flight-filter/flight-filter.component';
 
 
 @NgModule({
   declarations: [
     FlightDetailsComponent,
-    FlightCardComponent
+    FlightCardComponent,
+    FlightFilterComponent
   ],
   imports: [
     CommonModule,

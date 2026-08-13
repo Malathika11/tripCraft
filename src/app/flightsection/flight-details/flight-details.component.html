@@ -1,24 +1,33 @@
 <div class="cls-flight-main">
     <app-header></app-header>
-    <div class="cls-flightHead">
-        <p class="cls-flightCount">
-            <span class="cls-count">5</span> flights found
-        </p>
-        <p class="cls-sectors">
-            <span>Delhi</span>
-            ->
-            <span>Dubai</span>
-        </p>
-    </div>
-    <div class="cls-flight-body">
-        <div class="cls-flight-container">
-            <app-filter></app-filter>
+    <div class="cls-flight-details">
+        <div class="cls-flightHead">
+            <div class="cls-sector-details">
+                <h1>Flight Selection</h1>
+                <p>
+                    <span>{{cityValue.fromCity}} -> {{cityValue.toCity}}</span> •
+                    {{ tripType === 'roundTrip' ? 'Round Trip' : 'One Way' }}
+                </p>
+            </div>
+            <div class="cls-sector-type">
+                <button [class.active]="tripType === 'oneWay'" (click)="changeTripType('oneWay')">
+                    One Way
+                </button>
+                <button [class.active]="tripType === 'roundTrip'" (click)="changeTripType('roundTrip')">
+                    Round Trip
+                </button>
+            </div>
         </div>
-        <div class="cls-flightCard-container">
-            <app-flight-card></app-flight-card>
-        </div>
-        <div class="cls-budget-container">
-            <app-budget-status></app-budget-status>
+        <div class="cls-flight-body">
+            <div class="cls-flight-container">
+                <app-filter></app-filter>
+            </div>
+            <div class="cls-flightCard-container">
+                <app-flight-card></app-flight-card>
+            </div>
+            <div class="cls-budget-container">
+                <app-budget-status></app-budget-status>
+            </div>
         </div>
     </div>
 </div>

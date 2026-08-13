@@ -10,7 +10,7 @@
         </div>
         <div class="cls-recommended-package">
             <app-package-filter [filteredPackages]="packageList"></app-package-filter>
-            <app-package-card *ngIf="!showContent" [filteredPackages]="packageList" [totalBudget]="requestData?.budget"></app-package-card>
+            <app-package-card *ngIf="!showContent" [filteredPackages]="packageList" [formDetails]="requestData"></app-package-card>
             <div *ngIf="showContent" class="cls-noData">
                 <img class="cls-noDataImg" src="{{contentDetails.img}}" alt="{{contentDetails.imgAlt}}">
                 <h4 class="cls-noData-title">{{contentDetails.title}}</h4>

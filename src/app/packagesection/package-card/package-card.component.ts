@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -10,11 +11,11 @@ export class PackageCardComponent implements OnInit {
 
   @Input() public filteredPackages:any;
 
-  @Input() public totalBudget:any;
+  @Input() public formDetails:any;
 
   public loader:boolean = false;
 
-  constructor(public apiService: ApiService) { }
+  constructor(public apiService: ApiService, public router:Router) { }
 
   ngOnInit(): void {
     this.loader = true;
@@ -27,8 +28,8 @@ export class PackageCardComponent implements OnInit {
     console.log(this.filteredPackages,type,'estttttttttttttttttt');
     if(this.filteredPackages){
       this.filteredPackages.map((data:any) => {
-        data.remaining = this.totalBudget - data.price;
-        data.current_progress = Math.round((data.price / this.totalBudget ) * 100);
+        data.remaining = this.formDetails?.budget - data.price;
+        data.current_progress = Math.round((data.price / this.formDetails?.budget ) * 100);
       });
       console.log(this.filteredPackages);
       this.loader = false;
@@ -37,11 +38,12 @@ export class PackageCardComponent implements OnInit {
 
   public viewPackage(item: any) {
     console.log(item);
-    // later
-
-    // this.router.navigate(['/package-details'],{
-    //    state:item
-    // });
+    this.router.navigate(['/flight'],{
+      state: {
+        formValue: this.formDetails,
+        cardDetails: item
+      }
+    }); 
   }
 
 }

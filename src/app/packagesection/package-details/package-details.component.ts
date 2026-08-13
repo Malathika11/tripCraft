@@ -14,8 +14,8 @@ export class PackageDetailsComponent implements OnInit {
   public sampleformDetails: any = {
     "fromCity": "Chennai, India",
     "fromCityId": "MAA",
-    "toCity": "Paris, France",
-    "toCityId": "PAR",
+    "toCity": "Zurich, Switzerland",
+    "toCityId": "ZRH",
     "adults": 1,
     "children": 0,
     "infants": 0,
@@ -26,19 +26,19 @@ export class PackageDetailsComponent implements OnInit {
     "budgetMode": "total",
     "budget": 100000,
     "breakdownForm": {
-        "flight": 0,
-        "amountflight": 0,
-        "hotel": 0,
-        "amounthotel": 0,
-        "food": 0,
-        "amountfood": 0,
-        "transport": 0,
-        "amounttransport": 0,
-        "visa": 0,
-        "amountvisa": 0,
-        "visitingPlaces": 0,
-        "amountvisitingPlaces": 0,
-        "breakdownTotal": 0
+      "flight": 0,
+      "amountflight": 0,
+      "hotel": 0,
+      "amounthotel": 0,
+      "food": 0,
+      "amountfood": 0,
+      "transport": 0,
+      "amounttransport": 0,
+      "visa": 0,
+      "amountvisa": 0,
+      "visitingPlaces": 0,
+      "amountvisitingPlaces": 0,
+      "breakdownTotal": 0
     }
   }
 
@@ -48,14 +48,13 @@ export class PackageDetailsComponent implements OnInit {
 
   public contentDetails: any;
 
-  constructor(public apiService: ApiService, public router: Router) { }
-
-  ngOnInit(): void {
-
+  constructor(public apiService: ApiService, public router: Router) { 
     this.requestData = history.state?.formValue ? history.state.formValue : this.sampleformDetails;
 
     console.log('Home Page Request:', this.requestData);
+  }
 
+  ngOnInit(): void {
     if (this.requestData) {
       this.getPackages(this.requestData);
     }
