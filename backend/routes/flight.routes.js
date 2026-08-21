@@ -1,10 +1,11 @@
 const express = require('express');
+
 const router = express.Router();
 
-const flight = require('../data/flight');
+const {
+    searchFlights
+} = require('../controllers/flight.controller');
 
-router.get('/', (req, res) => {
-  res.json(flight);
-});
+router.post('/search', searchFlights);
 
 module.exports = router;

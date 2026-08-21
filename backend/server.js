@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
-const db = require('./db');
+const { db } = require('./db');
 
 const app = express();
 
@@ -21,6 +21,14 @@ app.use('/api/home', homeRoutes);
 const packageRoutes = require('./routes/package.routes');
 
 app.use('/api/packages', packageRoutes);
+
+const flightRoutes = require('./routes/flight.routes');
+
+app.use('/api/flights', flightRoutes);
+
+const guideRoutes = require('./routes/guide.routes');
+
+app.use('/api/guides', guideRoutes);
 
 // Sector Search API
 app.get('/api/sectors/search', (req, res) => {

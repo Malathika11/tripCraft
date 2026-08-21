@@ -69,4 +69,16 @@ export class ApiService {
       `${this.baseUrl}/packages/search`, requestData
     );
   }
+
+  searchFlights(data: any) {
+    return this.http.post( 
+      `${this.baseUrl}/flights/search`, data 
+    );
+  }
+
+  public searchGuide(data:any){
+    return this.http.post(
+      `${this.baseUrl}/guides/search`, data
+    );
+  }
 }

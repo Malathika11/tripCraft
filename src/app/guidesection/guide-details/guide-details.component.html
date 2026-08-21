@@ -1,11 +1,18 @@
-<div class="cls-guide-main">
+<div class="cls-guideMain">
     <app-header></app-header>
-    <div class="cls-guide-body">
-        <div class="cls-guide-card">
-            <app-guide-card></app-guide-card>
+    <div class="cls-guideHead">
+        <h1 class="cls-headerText">Guide Selection</h1>
+        <p class="cls-sectorDays">
+            <span class="cls-sectorValue">{{formValues.toCity.split(',')[0].trim()}}</span> •
+            <span class="cls-daysCount"> {{formValues.totalDays}} days</span>
+        </p>
+    </div>
+    <div class="cls-guideBody" *ngIf="!loader">
+        <div class="cls-guideCard">
+            <app-guide-card [tripDays]="formValues.totalDays" [guideResponseValue]="guideResponse"></app-guide-card>
         </div>
-        <div class="cls-guide-budget">
-            <app-budget-status></app-budget-status>
+        <div class="cls-guideBudget">
+            <app-budget-status [budgetDetails]="budgetStatusDetails" [cardData]="packageValue" [packageDetails]="formValues"></app-budget-status>
         </div>
     </div>
 </div>

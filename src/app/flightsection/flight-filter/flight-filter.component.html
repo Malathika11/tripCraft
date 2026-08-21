@@ -1,1 +1,53 @@
-<p>flight-filter works!</p>
+<div class="cls-filterMain" *ngIf="loader">
+    <div class="cls-filterHead">
+        <span class="cls-header"> Filters </span>
+        <span class="cls-clear" (click)="clearFilters()"> Clear All </span>
+    </div>
+    <div class="cls-filterSec" [formGroup]="filterForm">
+        <ng-container *ngFor=" let filterData of filterValues?.filters ">
+            <div class="cls-filterOptions" [ngClass]="{ 'cls-checkBox-container': filterData.type === 'checkbox' }">
+                <p class="cls-optionHead"> {{ filterData.head }} </p>
+                <ng-container *ngIf=" filterData.type === 'radio' ">
+                    <div class="cls-radioData">
+                        <div class="cls-radio-optionData" *ngFor=" let option of filterData.options ">
+                            <input type="radio" [name]="filterData.formControl" [id]=" getOptionId( filterData, option )" [value]="option.id" [formControlName]="filterData.formControl" (change)=" optionChanged( option, filterData ) ">
+                            <label [for]=" getOptionId( filterData, option ) "> {{ option.value }} </label>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf=" filterData.type === 'checkbox' ">
+                    <div class="cls-radioData">
+                        <div class="cls-radio-optionData" *ngFor=" let option of filterData.options ">
+                            <input type="checkbox" [id]=" getOptionId(filterData, option ) " [checked]=" option.select === true " (change)=" checkboxSelect( option, filterData, $event )">
+                            <label [for]=" getOptionId( filterData, option ) "> {{ option.value }} </label>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf=" filterData.type === 'boxData' ">
+                    <div class="cls-boxData row">
+                        <ng-container *ngFor=" let option of filterData.options ">
+                            <div class="cls-box-optionData" [ngClass]="{ 'cls-active': option.select === true }" (click)=" optionChanged( option, filterData ) ">
+                                <span class=" cls-iconValue {{ option.icon }} "> </span>
+                                <p class="cls-boxValue"> {{ option.value }}</p>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="filterData.type === 'pricerange' ">
+                    <div class="cls-priceRange" [formGroupName]=" filterData.formControl ">
+                        <div class="cls-rangeHead">
+                            <span> {{ filterValues.currency || '₹' }} {{ minValue | number }} </span>
+                            <span> {{ filterValues.currency || '₹' }} {{ maxLimit | number }}+ </span>
+                        </div>
+                        <input type="range" class="cls-range" [min]="filterValues.minValue" [max]="filterValues.maxLimit" [step]="filterValues.step || 500 " formControlName="min" (input)=" rangeChanged( filterData.formControl ) ">
+                        <div class="cls-priceInput">
+                            <input type="text" [value]="(filterValues.currency || '₹') + ' ' + (minValue | number) " readonly>
+                            <span> to </span>
+                            <input type="text" [value]=" (filterValues.currency || '₹') + ' ' + (maxLimit | number) + '+' " readonly>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+    </div>
+</div>

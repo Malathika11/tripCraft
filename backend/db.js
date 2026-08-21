@@ -6,20 +6,33 @@ const db = mysql.createConnection({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+
   ssl: {
     rejectUnauthorized: false
   },
+
   connectTimeout: 30000
 });
 
 db.connect((err) => {
+
   if (err) {
+
     console.error('❌ Database connection failed');
     console.error('Code:', err.code);
     console.error('Message:', err.message);
+
   } else {
+
     console.log('✅ MySQL Connected');
+
   }
+
 });
 
-module.exports = db;
+const promiseDb = db.promise();
+
+module.exports = {
+  db,
+  promiseDb
+};

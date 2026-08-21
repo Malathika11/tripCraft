@@ -1,239 +1,78 @@
-<div class="budget-card">
-
-    <h2 class="title">Budget Status</h2>
-
-    <div class="budget-total">
-
-        ₹{{budget?.total | number}}
-
-    </div>
-
-    <div class="budget-label">
-
-        Total Budget
-
-    </div>
-
-    <div class="progress-section">
-
-        <div class="progress-header">
-
-            <span>Flight Budget</span>
-
-            <span>{{progress | number:'1.0-0'}}%</span>
-
+<div class="cls-budgetCard">
+    <div class="cls-budgetHeader">
+        <h3>Budget Status</h3>
+        <div class="cls-totalBudget">
+            ₹{{ cardData.price | number }}
         </div>
-
-        <div class="progress-bar">
-
-            <div
-                class="progress-fill"
-                [style.width.%]="progress">
-
+        <span>Total Package Budget</span>
+    </div>
+    <div class="cls-budgetProgress">
+        <div class="cls-progressHeader">
+            <span>{{budgetDetails.pageName}} Budget</span>
+            <span>{{ budgetPercentage }}%</span>
+        </div>
+        <div class="cls-progressBar">
+            <div class="cls-progressFill" [style.width.%]="budgetPercentage" [class.overBudget]="usedBudget > budgetDetails.limit"> </div>
+        </div>
+        <div class="cls-progressAmount">
+            <span>Used: ₹{{ usedBudget | number }}</span>
+            <span>Limit: ₹{{ budgetDetails.limit | number }}</span>
+        </div>
+    </div>
+    <div class="cls-budgetDetails">
+        <div class="cls-budgetRow">
+            <div>
+                <span class="cls-icon guideIcon">↗</span>
+                <span class="cls-budgetText">Guide Budget</span>
             </div>
-
+            <span class="cls-amount">₹{{ budgetDetails.limit | number }}</span>
         </div>
-
-        <div class="progress-footer">
-
-            <span>
-                Used : ₹{{used | number}}
+        <div class="cls-budgetRow">
+            <div>
+                <span class="cls-icon cls-19-wallet"></span>
+                <span class="cls-budgetText">Used</span>
+            </div>
+            <span class="cls-amount">₹{{ usedBudget | number }}</span>
+        </div>
+        <div class="cls-budgetRow">
+            <div>
+                <span class="cls-icon cls-46-amount" ></span>
+                <span class="cls-budgetText">Remaining</span>
+            </div>
+            <span class="cls-remainingAmount" [class.green]="remainingBudget == 0" [class.red]="remainingBudget < 0">
+                ₹{{ remainingBudget | number }}
             </span>
-
-            <span>
-                Limit : ₹{{budget?.flightBudget | number}}
-            </span>
-
         </div>
-
     </div>
-
-    <div class="summary">
-
-        <div class="row">
-
-            <span>Flight Budget</span>
-
-            <strong>₹{{budget?.flightBudget | number}}</strong>
-
-        </div>
-
-        <div class="row">
-
-            <span>Used</span>
-
-            <strong>₹{{used | number}}</strong>
-
-        </div>
-
-        <div class="row">
-
-            <span>Remaining</span>
-
-            <strong
-                [class.green]="remaining>=0"
-                [class.red]="remaining<0">
-
-                ₹{{remaining | number}}
-
-            </strong>
-
-        </div>
-
-    </div>
-
-    <div class="selected-card">
-
-        <div class="heading">
-
-            Selected Flight
-
-        </div>
-
-        <ng-container *ngIf="selectedFlight">
-
-            <div class="airline">
-
-                {{selectedFlight.airline}}
-
-            </div>
-
-            <div class="flight-no">
-
-                {{selectedFlight.flightNo}}
-
-            </div>
-
-            <div class="price">
-
-                ₹{{selectedFlight.price | number}}
-
-            </div>
-
-        </ng-container>
-
-        <div
-            *ngIf="!selectedFlight"
-            class="placeholder">
-
-            Select a flight
-
-        </div>
-
-    </div>
-
-    <div class="cls-foodBudget">
-        <!-- Header -->
-        <h3 class="cls-title">
-
-            Your Food Plan
-
-        </h3>
-        <!-- Timeline -->
-        <div class="cls-timeLine">
-
-            <div
-                class="cls-planCard"
-                *ngFor="let plan of foodPlan">
-
-                <div class="cls-dot"></div>
-
-                <div class="cls-card">
-
-                    <div class="cls-dayHotel">
-
-                        <span class="cls-day">
-
-                            DAY {{plan.day}}
-
-                        </span>
-
-                        <span class="cls-hotel">
-
-                            {{plan.hotel}}
-
-                        </span>
-
-                    </div>
-
-                    <div class="cls-body">
-
-                        <img
-                            [src]="plan.image">
-
-                        <div class="cls-details">
-
-                            <h4>
-
-                                {{plan.restaurant}}
-
-                            </h4>
-
-                            <span class="cls-meal">
-
-                                {{plan.meal}}
-
-                            </span>
-
-                            <p>
-
-                                {{plan.nights}} Nights
-
-                                •
-
-                                ₹ {{plan.price}}
-
-                            </p>
-
-                        </div>
-
-                        <button
-                            class="cls-edit"
-                            (click)="editRestaurant(plan)">
-
-                            ✎
-
-                        </button>
-
-                    </div>
-
+    <div class="cls-divider"></div>
+    <div class="cls-selectedGuide">
+        <div class="cls-selectContainer" *ngIf="selectedGuide; else noGuide">
+            <h5 class="cls-selectHeader">
+                <span class="{{selectedValues.icon}}"></span>
+                {{selectedValues?.name}}
+            </h5>
+            <div class="cls-labelValue" *ngFor="let loopData of selectedValues?.details">
+                <div class="cls-label">{{loopData.lable}}:</div>
+                <div class="cls-value">
+                    <span *ngIf="loopData?.amount">{{cardData?.amount_label}}</span>
+                    {{loopData.value}}
                 </div>
-
             </div>
-
+            <div class="cls-divider"></div>
+            <div class="cls-totalCost">
+                <span class="cls-label">Total Cost:</span>
+                <span class="cls-count">{{cardData?.amount_label}} {{selectedValues?.totalCost | number}}</span>
+            </div>
         </div>
-        <!-- Budget -->
-        <div class="cls-budget">
-
-            <span>
-
-                ✔ Great! You are within your food budget.
-
-            </span>
-
-        </div>
+        <ng-template #noGuide>
+            <div class="cls-noGuide">
+                <div class="cls-noGuideIcon cls-42-person-add"></div>
+                <span>No guide selected</span>
+            </div>
+        </ng-template>
     </div>
-
-    <div
-        class="warning"
-        *ngIf="exceededAmount>0">
-
-        ⚠ Your selected flight exceeds the budget by
-
-        <strong>
-
-            ₹{{exceededAmount | number}}
-
-        </strong>
-
-    </div>
-
-    <button
-        class="continue-btn"
-        [disabled]="!selectedFlight">
-
-        Continue to Guide Selection →
-
+    <div class="cls-divider"></div>
+    <button class="cls-selectGuideBtn" (click)="continue()" [disabled]="!selectedGuide">
+        {{ selectedGuide ? 'Guide Selected' : 'Select a Guide' }}
     </button>
-
 </div>

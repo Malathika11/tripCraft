@@ -12,34 +12,39 @@ export class PackageDetailsComponent implements OnInit {
   public requestData: any;
 
   public sampleformDetails: any = {
-    "fromCity": "Chennai, India",
-    "fromCityId": "MAA",
-    "toCity": "Zurich, Switzerland",
-    "toCityId": "ZRH",
-    "adults": 1,
-    "children": 0,
-    "infants": 0,
-    "daterange": "10 Sep 2026 - 16 Sep 2026",
-    "startDate": "2026-09-10",
-    "endDate": "2026-09-16",
-    "totalDays": 7,
-    "budgetMode": "total",
-    "budget": 100000,
-    "breakdownForm": {
-      "flight": 0,
-      "amountflight": 0,
-      "hotel": 0,
-      "amounthotel": 0,
-      "food": 0,
-      "amountfood": 0,
-      "transport": 0,
-      "amounttransport": 0,
-      "visa": 0,
-      "amountvisa": 0,
-      "visitingPlaces": 0,
-      "amountvisitingPlaces": 0,
-      "breakdownTotal": 0
-    }
+    "requestFormValue": {
+      "fromCity": "Chennai, India",
+      "fromCityId": "MAA",
+      "toCity": "Paris, France",
+      "toCityId": "PAR",
+      "adults": 1,
+      "children": 0,
+      "infants": 0,
+      "daterange": "15 Sep 2026 - 20 Sep 2026",
+      "startDate": "2026-09-15",
+      "endDate": "2026-09-20",
+      "totalDays": 6,
+      "budgetMode": "total",
+      "budget": 300000,
+      "breakdownForm": {
+        "flight": 0,
+        "amountflight": 0,
+        "guide": 0,
+        "amountguide": 0,
+        "hotel": 0,
+        "amounthotel": 0,
+        "food": 0,
+        "amountfood": 0,
+        "transport": 0,
+        "amounttransport": 0,
+        "visa": 0,
+        "amountvisa": 0,
+        "visitingPlaces": 0,
+        "amountvisitingPlaces": 0,
+        "breakdownTotal": 0
+      }
+    },
+    "navigationId": 3
   }
 
   public packageList: any;
@@ -48,8 +53,10 @@ export class PackageDetailsComponent implements OnInit {
 
   public contentDetails: any;
 
-  constructor(public apiService: ApiService, public router: Router) { 
-    this.requestData = history.state?.formValue ? history.state.formValue : this.sampleformDetails;
+  constructor(public apiService: ApiService, public router: Router) {
+    console.log('history package', history.state);
+
+    this.requestData = history.state?.requestFormValue ? history.state.requestFormValue : this.sampleformDetails;
 
     console.log('Home Page Request:', this.requestData);
   }
@@ -108,10 +115,10 @@ export class PackageDetailsComponent implements OnInit {
     }
   }
 
-  public goToRequestForm(editField:any) {
+  public goToRequestForm(editField: any) {
     this.router.navigate(['/requestForm'], {
       state: {
-        formValue: this.requestData,
+        requestFormValue: this.requestData,
         backto: true,
         editField: editField
       }

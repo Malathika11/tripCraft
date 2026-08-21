@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { SharedDataService } from 'src/app/services/shared-data.service';
 // import { Budget } from '../../models/budget.model';
 // import { Flight } from '../../models/flight.model';
 
@@ -7,110 +8,58 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
   templateUrl: './budget-status.component.html',
   styleUrls: ['./budget-status.component.scss']
 })
-export class BudgetStatusComponent implements OnChanges {
+export class BudgetStatusComponent implements OnInit {
 
-  @Input() budget!: any;
+  public selectedGuide: any = null;
+  
+  public usedBudget: number = 0;
 
-  @Input() selectedFlight!: any;
+  @Input() public packageDetails:any;
 
-  used = 0;
+  @Input() public budgetDetails:any;
 
-  remaining = 0;
+  @Input() public cardData:any;
 
-  progress = 0;
+  @Input() public selectedValues:any;
 
-  exceededAmount = 0;
+  public budgetPercentage:any = 0;
 
+  constructor(public sharedData: SharedDataService) { }
+
+  ngOnInit(): void {
+    console.log(this.packageDetails);
+  }
+  
   ngOnChanges(changes: SimpleChanges): void {
-    this.calculateBudget();
+    console.log(changes);
+    this.sharedData.data$.subscribe(data => {
+      console.log('datadatadatadata', data);
+      
+      if (data && data.selectHoleValue != '') {
+        console.log(data);
+        this.selectedGuide = data.selectHoleValue;
+        this.selectedValues = data.selectDetails;
+        this.usedBudget = this.selectedGuide.perDayPrice * this.selectedValues.tripDays;
+        console.log(this.usedBudget, this.budgetDetails.limit, this.budgetPercentage);
+        console.log(this.usedBudget / this.budgetDetails.limit ,(this.usedBudget / this.budgetDetails.limit ) * 100);
+        
+        this.budgetPercentage = Math.round((this.usedBudget / this.budgetDetails.limit ) * 100);   
+      }
+
+      if(data.selectHoleValue == ''){
+        this.selectedGuide = '';
+        this.usedBudget = 0;
+        this.budgetPercentage = 0;
+      }
+    });
   }
 
-  calculateBudget(): void {
-
-    this.used = this.selectedFlight ? this.selectedFlight.price : 0;
-
-    this.remaining = this.budget.flightBudget - this.used;
-
-    this.progress = this.budget.flightBudget
-      ? (this.used / this.budget.flightBudget) * 100
-      : 0;
-
-    this.progress = Math.min(this.progress, 100);
-
-    this.exceededAmount = this.used > this.budget.flightBudget
-      ? this.used - this.budget.flightBudget
-      : 0;
-
+  public get remainingBudget(): number {
+    return this.budgetDetails.limit - this.usedBudget;
   }
 
-  foodPlan = [
-
-  {
-
-    day:'1 - 2',
-
-    hotel:'Le Meridien Etoile',
-
-    restaurant:'Bistrot de l\'Étoile',
-
-    meal:'Dinner',
-
-    nights:2,
-
-    price:'3200',
-
-    image:'assets/restaurants/res1.jpg'
-
-  },
-
-  {
-
-    day:'3 - 4',
-
-    hotel:'Hotel des Arts Montmartre',
-
-    restaurant:'Le Consulat Café',
-
-    meal:'Dinner',
-
-    nights:2,
-
-    price:'2800',
-
-    image:'assets/restaurants/res2.jpg'
-
-  },
-
-  {
-
-    day:'5 - 6',
-
-    hotel:'Novotel Paris Centre',
-
-    restaurant:'Café Du Trocadéro',
-
-    meal:'Dinner',
-
-    nights:2,
-
-    price:'6450',
-
-    image:'assets/restaurants/res3.jpg'
+  public continue(){
 
   }
-
-];
-
-editRestaurant(item:any){
-
-console.log(item);
-
-}
-
-continue(){
-
-console.log("Continue");
-
-}
 
 }

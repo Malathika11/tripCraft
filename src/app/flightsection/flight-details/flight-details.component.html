@@ -1,4 +1,4 @@
-<div class="cls-flight-main">
+<div class="cls-flight-main" >
     <app-header></app-header>
     <div class="cls-flight-details">
         <div class="cls-flightHead">
@@ -9,24 +9,33 @@
                     {{ tripType === 'roundTrip' ? 'Round Trip' : 'One Way' }}
                 </p>
             </div>
-            <div class="cls-sector-type">
-                <button [class.active]="tripType === 'oneWay'" (click)="changeTripType('oneWay')">
-                    One Way
-                </button>
-                <button [class.active]="tripType === 'roundTrip'" (click)="changeTripType('roundTrip')">
-                    Round Trip
-                </button>
-            </div>
         </div>
-        <div class="cls-flight-body">
+        <div class="cls-flight-body" *ngIf="!loader">
             <div class="cls-flight-container">
-                <app-filter></app-filter>
+                <app-flight-filter [tripTypeValue]="tripType" [formData]="filterApplyData" [filterValues]="filterData"(filterChange)="filterChanged($event)"></app-flight-filter>
             </div>
             <div class="cls-flightCard-container">
-                <app-flight-card></app-flight-card>
+                <div class="cls-sector-type">
+                    <button [class.active]="tripType === 'oneWay'" (click)="changeTripType('oneWay')">
+                        One Way
+                    </button>
+                    <button [class.active]="tripType === 'roundTrip'" (click)="changeTripType('roundTrip')">
+                        Round Trip
+                    </button>
+                </div>
+                <div class="cls-countSec">
+                    <div class="cls-count">
+                        <span>{{flightDetailsData?.length}} </span>
+                        <span>flights found</span>
+                    </div>
+                    <div class="cls-sector">
+                        <span>{{cityValue.fromCity}} -> {{cityValue.toCity}}</span>
+                    </div>
+                </div>
+                <app-flight-card [tripTypeValue]="tripType" [flightDetails]="flightDetailsData" (selectFlightDetails)="selectFlightFun($event)"></app-flight-card>
             </div>
             <div class="cls-budget-container">
-                <app-budget-status></app-budget-status>
+                <app-flight-budget-status [packageDetails]="formPackageDetails" [budgetValue]="budgetStatus" [selectedValues]="selectedFlights"></app-flight-budget-status>
             </div>
         </div>
     </div>

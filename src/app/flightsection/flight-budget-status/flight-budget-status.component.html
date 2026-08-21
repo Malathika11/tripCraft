@@ -1,0 +1,68 @@
+<div class="cls-budgetCard" *ngIf="!loader">
+    <div class="cls-budgetHead">
+        <h2 class="cls-title">Budget Status</h2>
+        <span class="cls-icon cls-35-bag"></span>
+    </div>
+    <div class="cls-budgetTotal"> 
+        <p class="cls-totalAmount">{{budgetValue?.amountLabel}} {{packageDetails?.cardDetails?.price | number}}</p>
+        <p class="cls-budgetLabel"> Total Package Budget </p>
+    </div>
+    <div class="cls-progressSection">
+        <div class="cls-progressHeader">
+            <span>{{budgetValue?.pageName}} Budget</span>
+            <span>{{progress | number:'1.0-0'}}%</span>
+        </div>
+        <div class="cls-progressBar">
+            <div class="cls-progressFill" [style.background-color]="progress > 100 ? 'red' : 'green'" [style.width.%]="progress"> </div>
+        </div>
+        <div class="cls-progressFooter">
+            <span> Used : {{budgetValue?.amountLabel}} {{budgetValue?.usedAmount | number}} </span>
+            <span> Limit : {{budgetValue?.amountLabel}} {{budgetValue?.limit | number}} </span>
+        </div>
+    </div>
+    <div class="cls-budgetSummary">
+        <div class="cls-budgetRow">
+            <span><span class="{{budgetValue?.icon}} cls-icon"></span> {{budgetValue?.pageName}} Budget</span>
+            <span class="cls-amount">{{budgetValue?.amountLabel}} {{budgetValue?.limit | number}}</span>
+        </div>
+        <div class="cls-budgetRow">
+            <span><span class="cls-19-wallet cls-icon"></span> Used</span>
+            <span class="cls-amount">{{budgetValue?.amountLabel}} {{budgetValue?.usedAmount | number}}</span>
+        </div>
+        <div class="cls-budgetRow">
+            <span><span class="cls-46-amount cls-icon"></span> Remaining</span>
+            <span  class="cls-amount" [class.green]="budgetValue?.remainingAmount == 0" [class.red]="budgetValue?.remainingAmount < 0"> {{budgetValue?.amountLabel}} {{budgetValue?.remainingAmount | number}} </span>
+        </div>
+    </div>
+    <div class="cls-border"></div>
+    <div class="cls-selectedCard">
+        <div class="cls-heading"> Selected {{budgetValue?.pageName}} </div>
+        <ng-container *ngFor="let card of budgetValue?.selectOption">
+            <div class="cls-cardDetails" [ngClass]="{ 'cls-cardSelected': selectedValues?.[card.index] }">
+                <h5 class="cls-cardHeader">
+                    <span class="cls-cardIcon {{ card?.icon }}"></span>
+                    <span class="cls-cardLabel"> {{ card?.label }} </span>
+                </h5>
+                <ng-container *ngIf="selectedValues?.[card.index] as selectedData">
+                    <div class="cls-flightDetail">
+                        <span class="cls-flightName"> {{ selectedData?.name }} </span>
+                        <span class="cls-flightSubName"> {{ selectedData?.subName }} </span>
+                    </div>
+                    <div class="cls-flightAmount">
+                        <span class="cls-amountType"> {{ selectedData?.amountType }} </span>
+                        <span class="cls-amount"> {{ selectedData?.amount | number }} </span>
+                    </div>
+                </ng-container>
+                <div class="cls-cardError" *ngIf="!selectedValues?.currentValue?.[card.index] && !selectedValues?.[card.index]">
+                    {{ card?.errorValue }}
+                    <span>----</span>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div class="cls-warning" *ngIf="budgetValue.remainingAmount < 0">
+        ⚠ Your selected flight exceeds the budget by
+        <strong> {{budgetValue?.amountLabel}} {{budgetValue.remainingAmount | number}} </strong>
+    </div>
+    <button class="cls-continueBtn" [ngClass]="{ 'cls-disable': budgetValue.remainingAmount > 0 && selectedValues.oneWay == null && selectedValues.roundTrip == null }" (click)="continue()"> Continue to Guide Selection → </button>
+</div>

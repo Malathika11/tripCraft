@@ -40,8 +40,8 @@ export class PackageCardComponent implements OnInit {
     console.log(item);
     this.router.navigate(['/flight'],{
       state: {
-        formValue: this.formDetails,
-        cardDetails: item
+        requestFormValue: this.formDetails,
+        packageCardDetails: item
       }
     }); 
   }

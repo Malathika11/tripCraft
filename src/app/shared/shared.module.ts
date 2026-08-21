@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { BudgetStatusComponent } from './budget-status/budget-status.component';
 import { FilterComponent } from './filter/filter.component';
 import { BudgetExceededComponent } from './budget-exceeded/budget-exceeded.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { BudgetExceededComponent } from './budget-exceeded/budget-exceeded.compo
   ],
   imports: [
     CommonModule,
-    SharedRoutingModule
+    SharedRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,

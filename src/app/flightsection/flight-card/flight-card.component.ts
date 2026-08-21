@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-flight-card',
@@ -7,114 +7,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FlightCardComponent implements OnInit {
 
-  public flightDetailsData:any;
+  @Input() public flightDetails: any[] = [];
 
-  public selected:boolean = false;
+  @Input() public tripTypeValue: any = 'oneWay';
+
+  @Output() public selectFlightDetails = new EventEmitter<any>();
+
+  public loader:boolean = true;
 
   constructor() { }
 
   ngOnInit(): void {
-  this.flightDetailsData = [
-      {
-        icon : '../../../assets/image/logo.webp',
-        name : 'Emirates',
-        subName : 'EK 511 . Boeing 777',
-        amountType : '$',
-        amount : '18,500',
-        arrivelTime : '08:30',
-        arrivelSector : 'DEL',
-        arrivelPlace : 'Indira Gandhi International',
-        stopCount : '3h 15m',
-        stopType : 'Direct',
-        departureTime : '14:45',
-        departureSector : 'DXB',
-        departurePlace : 'Dubai International',
-        stopName : 'Stop in Mumbai (BOM) for 1h 30m'
-      },
-      {
-        icon : '../../../assets/image/logo.webp',
-        name : 'Emirates',
-        subName : 'EK 511 . Boeing 777',
-        amountType : '$',
-        amount : '18,500',
-        arrivelTime : '08:30',
-        arrivelSector : 'DEL',
-        arrivelPlace : 'Indira Gandhi International',
-        stopCount : '3h 15m',
-        stopType : 'Direct',
-        departureTime : '14:45',
-        departureSector : 'DXB',
-        departurePlace : 'Dubai International',
-        stopName : 'Stop in Mumbai (BOM) for 1h 30m'
-      },
-      {
-        icon : '../../../assets/image/logo.webp',
-        name : 'Emirates',
-        subName : 'EK 511 . Boeing 777',
-        amountType : '$',
-        amount : '18,500',
-        arrivelTime : '08:30',
-        arrivelSector : 'DEL',
-        arrivelPlace : 'Indira Gandhi International',
-        stopCount : '3h 15m',
-        stopType : 'Direct',
-        departureTime : '14:45',
-        departureSector : 'DXB',
-        departurePlace : 'Dubai International',
-        stopName : 'Stop in Mumbai (BOM) for 1h 30m'
-      },
-      {
-        icon : '../../../assets/image/logo.webp',
-        name : 'Emirates',
-        subName : 'EK 511 . Boeing 777',
-        amountType : '$',
-        amount : '18,500',
-        arrivelTime : '08:30',
-        arrivelSector : 'DEL',
-        arrivelPlace : 'Indira Gandhi International',
-        stopCount : '3h 15m',
-        stopType : 'Direct',
-        departureTime : '14:45',
-        departureSector : 'DXB',
-        departurePlace : 'Dubai International',
-        stopName : 'Stop in Mumbai (BOM) for 1h 30m'
-      },
-      {
-        icon : '../../../assets/image/logo.webp',
-        name : 'Emirates',
-        subName : 'EK 511 . Boeing 777',
-        amountType : '$',
-        amount : '18,500',
-        arrivelTime : '08:30',
-        arrivelSector : 'DEL',
-        arrivelPlace : 'Indira Gandhi International',
-        stopCount : '3h 15m',
-        stopType : 'Direct',
-        departureTime : '14:45',
-        departureSector : 'DXB',
-        departurePlace : 'Dubai International',
-        stopName : 'Stop in Mumbai (BOM) for 1h 30m'
-      },
-      {
-        icon : '../../../assets/image/logo.webp',
-        name : 'Emirates',
-        subName : 'EK 511 . Boeing 777',
-        amountType : '$',
-        amount : '18,500',
-        arrivelTime : '08:30',
-        arrivelSector : 'DEL',
-        arrivelPlace : 'Indira Gandhi International',
-        stopCount : '3h 15m',
-        stopType : 'Direct',
-        departureTime : '14:45',
-        departureSector : 'DXB',
-        departurePlace : 'Dubai International',
-        stopName : 'Stop in Mumbai (BOM) for 1h 30m'
-      }
-    ]
-  }
-  public flightSelect(){
-    this.selected = !this.selected;
+    console.log(this.flightDetails,this.tripTypeValue);
+    
   }
 
+  ngOnChanges( changes: SimpleChanges ): void {
+    if ( changes['flightDetails']?.currentValue && changes['tripTypeValue']?.currentValue ) {
+      this.loader = false;
+    }
+  }
+
+  public flightSelect( selectedFlight: any ): void {
+    if (selectedFlight.selected) {
+      selectedFlight.selected = false;
+      this.emitSelectedFlight(null);
+      return;
+    }
+    this.flightDetails.forEach( (flight: any) => {
+      flight.selected = false;
+    });
+    selectedFlight.selected = true;
+    this.emitSelectedFlight( selectedFlight );
+  }
+
+  private emitSelectedFlight( selectedFlight: any): void {
+    this.selectFlightDetails.emit({
+      type: this.tripTypeValue,
+      flight: selectedFlight
+    });
+  }
 }

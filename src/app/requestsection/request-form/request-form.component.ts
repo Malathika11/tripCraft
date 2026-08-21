@@ -54,11 +54,12 @@ export class RequestFormComponent implements OnInit {
 
   public breakdownItems = [
     { label: 'Flight', controlName: 'flight', amountControl: 'amountflight', icon: 'icon-flight' },
+    { label: 'Guide', controlName: 'guide', amountControl: 'amountguide', icon: 'icon-guide' },
+    { label: 'Transport', controlName: 'transport', amountControl: 'amounttransport', icon: 'icon-transport' },
     { label: 'Hotel', controlName: 'hotel', amountControl: 'amounthotel', icon: 'icon-hotel' },
     { label: 'Food', controlName: 'food', amountControl: 'amountfood', icon: 'icon-food' },
-    { label: 'Transport', controlName: 'transport', amountControl: 'amounttransport', icon: 'icon-transport' },
+    { label: 'Visiting Places', controlName: 'visitingPlaces', amountControl: 'amountvisitingPlaces', icon: 'icon-location' },
     { label: 'Visa', controlName: 'visa', amountControl: 'amountvisa', icon: 'icon-visa' },
-    { label: 'Visiting Places', controlName: 'visitingPlaces', amountControl: 'amountvisitingPlaces', icon: 'icon-location' }
   ];
 
   public breakdownError: string = '';
@@ -85,6 +86,8 @@ export class RequestFormComponent implements OnInit {
       breakdownForm: this.fb.group({
         flight: [0],
         amountflight: [0],
+        guide: [0],
+        amountguide: [0],
         hotel: [0],
         amounthotel: [0],
         food: [0],
@@ -302,7 +305,7 @@ export class RequestFormComponent implements OnInit {
     if(this.requestForm.valid){
       this.router.navigate(['/package'],{
         state: {
-          formValue:this.requestForm.value
+          requestFormValue:this.requestForm.value
         }
       }); 
     }

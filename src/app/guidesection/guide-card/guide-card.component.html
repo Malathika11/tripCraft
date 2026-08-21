@@ -1,113 +1,83 @@
-<div class="cls-guide-option">
+<div class="cls-guideOption">
     <h2>Do you want a guide?</h2>
     <div class="cls-toggle">
-        <button [class.active]="needGuide" (click)="selectGuide(true)">
+        <button [class.active]="needGuide" (click)="toggle(true)">
             Yes
         </button>
-        <button [class.active]="!needGuide" (click)="selectGuide(false)">
+        <button [class.active]="!needGuide" (click)="toggle(false)">
             No
         </button>
     </div>
 </div>
-<div class="cls-guide-list" *ngIf="needGuide">
-    <div class="guide-container">
-
-        <div class="guide-card" *ngFor="let guide of guides" [class.selected]="selectedGuide?.id === guide.id">
-
-            <div class="card-header">
-
-                <div class="rating">
-                    ⭐ {{guide.rating}}
-                    <span>({{guide.reviews}})</span>
+<div class="cls-guideList" *ngIf="needGuide">
+    <div class="cls-guideCount">
+        <div class="cls-countText">Available Guides</div>
+        <div class="cls-countValue">
+            <span>{{guides.length}}</span> guides available
+        </div>
+    </div>
+    <div class="cls-guideContainer">
+        <div class="cls-guideCard" *ngFor="let guide of guides" [class.selected]="selectedGuide?.id === guide.id">
+            <div class="cls-cardHeader">
+                <div class="cls-rating">
+                    <span class="cls-48-star cls-star"></span>
+                     {{guide.rating}}
+                    <span class="cls-review">({{guide.reviews}})</span>
                 </div>
-
                 <div class="bg-circle circle1"></div>
                 <div class="bg-circle circle2"></div>
-
             </div>
-
-            <div class="profile">
-
+            <div class="cls-profile">
                 <img [src]="guide.image">
-
-                <div class="tick" *ngIf="selectedGuide?.id==guide.id">
+                <div class="cls-tick" *ngIf="selectedGuide?.id==guide.id">
                     ✓
                 </div>
-
             </div>
-
-            <div class="content">
-
-                <h3>{{guide.name}}</h3>
-
-                <div class="experience">
-                    ⏱ {{guide.experience}} Years Experience
+            <div class="cls-content">
+                <h3 class="cls-guideName">{{guide.name}}</h3>
+                <div class="cls-guideExperience">
+                    <span class="cls-45-star-medal"></span>
+                    {{guide.experience}} Years Experience
                 </div>
-
-                <p>
-                    {{guide.description}}
-                </p>
-
-                <div class="title">
-                    🌐 Languages
+                <p class="cls-guideDescription"> {{guide.description}} </p>
+                <div class="cls-title">
+                    <span class="cls-44-language"></span> Languages
                 </div>
-
-                <div class="chips">
-
-                    <span *ngFor="let lang of guide.languages">
-                        {{lang}}
-                    </span>
-
+                <div class="cls-chips">
+                    <span *ngFor="let lang of guide.languages"> {{lang}} </span>
                 </div>
-
-                <div class="title">
-                    💡 Specialities
+                <div class="cls-title">
+                    <span class="cls-43-bulb"></span> Specialities
                 </div>
-
                 <ul>
-
                     <li *ngFor="let sp of guide.specialities">
                         {{sp}}
                     </li>
-
                 </ul>
-
-                <div class="price-box">
-
+                <div class="cls-priceBox">
                     <div>
-
-                        <small>Pricing</small>
-
-                        <h2>
-                            ₹{{guide.price | number}}
+                        <p class="cls-pricing">
+                            <span class="cls-46-amount cls-icon"></span>
+                            Pricing
+                        </p>
+                        <h2 class="cls-perPrice">
+                            ₹{{guide.perDayPrice | number}}
                             <span>/day</span>
                         </h2>
-
                     </div>
-
                     <div>
-
-                        <small>{{tripDays}} days total</small>
-
-                        <h3>
-                            ₹{{guide.price * tripDays | number}}
+                        <p class="cls-daysCount">{{tripDays}} days total</p>
+                        <h3 class="cls-holePrice">
+                            ₹{{guide.perDayPrice * tripDays | number}}
                         </h3>
-
                     </div>
 
                 </div>
-
-                <button (click)="selectGuide(guide)" [class.active]="selectedGuide?.id===guide.id">
-
-                    {{selectedGuide?.id===guide.id ?
-                    '✓ Guide Selected' :
-                    'Select This Guide'}}
-
+                <button class="cls-guideBtn" (click)="selectGuide(guide)" [class.active]="selectedGuide?.id===guide.id">
+                    <span class="cls-36-tick cls-icon" *ngIf="selectedGuide?.id===guide.id"></span>
+                    {{selectedGuide?.id===guide.id ? 'Guide Selected' : 'Select This Guide'}}
                 </button>
-
             </div>
-
         </div>
-
     </div>
 </div>

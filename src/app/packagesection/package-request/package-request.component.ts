@@ -32,7 +32,7 @@ export class PackageRequestComponent implements OnInit {
   public goToRequestForm(){
     this.router.navigate(['/requestForm'],{
       state: {
-        formValue: this.formDetails,
+        requestFormValue: this.formDetails,
         backto: true
       }
     }); 

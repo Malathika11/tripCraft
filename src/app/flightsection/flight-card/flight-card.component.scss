@@ -1,116 +1,131 @@
-.cls-details{
+.cls-flightDetails{
     gap: 20px;
-    height: 120vh;
-    overflow: hidden;
     display: grid;
-    .cls-flightDetails{
-        overflow-y: auto;
-        .cls-flightCard{
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            .cls-flightName-amount{
+    padding: 20px;
+    height: 90vh;
+    overflow-y: auto;
+    .cls-flightCard{
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 0px 20px;
+        margin-bottom: 20px;
+        .cls-flightName-amount{
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            .cls-flightName{
                 display: flex;
-                justify-content: space-between;
-                padding: 15px;
-                .cls-flightName{
-                    display: flex;
-                    .cls-airlineImg{
-                        padding-right: 15px;
-                        img{
-                            width: 40px;
-                            height: 40px;
-                        }
-                    }
-                    .cls-flight{
-                        display: grid;
-                        .cls-airline{
-                            font: 14px var(--primarySemiBold);
-                        }
-                        .cls-airlineSub{
-                            font: 12px var(--primaryLight);
-                        }
+                .cls-airlineImg{
+                    padding-right: 15px;
+                    img{
+                        width: 35px;
+                        height: 35px;
                     }
                 }
-                .cls-flightAmount{
-                    text-align: end;
-                    .cls-Amount{
-                        font: 18px var(--primarySemiBold);
-                        margin: 0px;
+                .cls-flight{
+                    display: grid;
+                    .cls-airline{
+                        font: 14px var(--primaryBold);
                     }
-                    .cls-perPerson{
-                        font: 12px var(--primaryLight);
+                    .cls-airlineSub{
+                        font: 11px var(--primaryRegular);
+                        color: #7a7a7a;
+                        margin-top: 3px;
                     }
                 }
             }
-            .cls-flightSector{
-                display: flex;
-                justify-content: space-between;
-                .cls-arrivel,.cls-departure{
-                    text-align: center;
-                    p{
-                        margin: 0px;
-                    }
-                    .cls-timing{
-                        font: 18px var(--primaryBold);
-                    }
-                    .cls-sector{
-                        font: 13px var(--primaryLight);
-                    }
-                    .cls-place{
-                        font: 12px var(--primaryLight);
+            .cls-flightAmount{
+                text-align: end;
+                .cls-Amount{
+                    margin: 0px;
+                    span{
+                        font: 16px var(--primarySemiBold);
                     }
                 }
-                .cls-stopsDiv{
-                    width: 35%;
-                    text-align: center;
-                    align-content: center;
-                    .cls-stopCount{
-                        font: 12px var(--primaryRegular);
-                        margin: 10px;
-                    }
-                    .cls-lineIcon{
-                        margin: 0px;
-                        position: relative;
-                        .cls-line{
-                            border: 0.1px solid #ccc;
-                            width: 100%;
-                            display: block;
-                        }
-                        .cls-icon{
-                            position: absolute;
-                            top: -11px;
-                        }
-                    }
-                    .cls-stops{
-                        font: 12px var(--primaryRegular);
-                        color: green;
-                        margin: 10px;
-                    }
+                .cls-perPerson{
+                    font: 11px var(--primaryRegular);
+                    color: #7a7a7a;
                 }
             }
-            .cls-border{
-                border: 0.1px solid #ecebeb;
-                width: 100%;
-                display: block;
-            }
-            .cls-stopValue{
-                margin: 10px;
-                .cls-stopName{
-                    margin-left: 10px;
+        }
+        .cls-flightSector{
+            display: flex;
+            justify-content: space-between;
+            .cls-arrivel,.cls-departure{
+                text-align: center;
+                p{
+                    margin: 0px;
+                }
+                .cls-timing{
+                    font: 18px var(--primaryBold);
+                }
+                .cls-sector{
+                    font: 12px var(--primaryRegular);
+                    color: #7a7a7a;
+                }
+                .cls-place{
+                    font: 11px var(--primaryRegular);
+                    color: #7a7a7a;
                 }
             }
-            .cls-selectBtn{
-                margin: 20px 0px;
-                width: 100%;
-                border: unset;
-                border-radius: 5px;
-                padding: 10px;
-                font: 14px var(--primarySemiBold);
-                &.cls-selectBtn-active{
-                    background: blue;
-                    color: white;
+            .cls-stopsDiv{
+                width: 35%;
+                text-align: center;
+                align-content: center;
+                .cls-stopCount{
+                    font: 12px var(--primaryRegular);
+                    margin: 10px;
+                }
+                .cls-lineIcon{
+                    margin: 0px;
+                    position: relative;
+                    .cls-line{
+                        border: 0.1px solid #ccc;
+                        width: 100%;
+                        display: block;
+                    }
+                    .cls-icon{
+                        position: absolute;
+                        top: -11px;
+                        background: #fff;
+                        padding: 3px;
+                        left: 85px;
+                    }
+                }
+                .cls-stops{
+                    font: 12px var(--primaryBold);
+                    color: green;
+                    margin: 10px;
+                }
+            }
+        }
+        .cls-border{
+            border: 0.1px solid #ecebeb;
+            width: 100%;
+            display: block;
+        }
+        .cls-stopValue{
+            margin: 10px;
+            .cls-stopName{
+                margin-left: 10px;
+                font: 12px var(--primaryRegular);
+                vertical-align: bottom;
+            }
+        }
+        .cls-selectBtn{
+            margin: 10px 0px 20px;
+            width: 100%;
+            border: unset;
+            border-radius: 5px;
+            padding: 10px;
+            font: 14px var(--primarySemiBold);
+            &.cls-selectBtn-active{
+                background: blue;
+                color: white;
+                span{
+                    font-size: 20px;
+                    vertical-align: sub;
+                    margin-right: 3px;
                 }
             }
         }

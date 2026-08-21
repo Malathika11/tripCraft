@@ -1,13 +1,34 @@
-.cls-guide-main{
-    .cls-guide-body{
-        display: flex;
-        justify-content: space-between;
-        padding: 40px;
-        .cls-guide-card{
-            width: 70%;
+.cls-guideMain{
+    .cls-guideHead{
+        padding: 20px 40px 0px;
+        .cls-headerText{
+            font: 28px var(--primaryBold);
         }
-        .cls-guide-budget{
-            width: 25%;
+        .cls-sectorDays{
+            span{
+                font: 14px var(--primaryRegular);
+            }
+        }
+    }
+    .cls-guideBody{
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 340px;
+        gap: 30px;
+        align-items: start;
+        padding: 10px 40px;
+        .cls-guideCard{
+            min-width: 0;
+            padding: 28px;
+        }
+        .cls-guideCard, .cls-guideBudget{
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        }
+        .cls-guideBudget{
+            position: sticky;
+            top: 20px;
+            align-self: start;
+            padding: 25px;
         }
     }
 }
