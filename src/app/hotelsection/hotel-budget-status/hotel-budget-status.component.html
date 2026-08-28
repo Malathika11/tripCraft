@@ -1,0 +1,88 @@
+<div class="cls-budgetCard">
+    <div class="cls-budgetHeader">
+        <h3>Budget Status</h3>
+        <div class="cls-totalBudget">
+            ₹{{ cardData.price | number }}
+        </div>
+        <span>Total Package Budget</span>
+    </div>
+    <div class="cls-budgetProgress">
+        <div class="cls-progressHeader">
+            <span>{{budgetDetails.pageName}} Budget</span>
+            <span>{{ budgetPercentage }}%</span>
+        </div>
+        <div class="cls-progressBar">
+            <div class="cls-progressFill" [style.width.%]="budgetPercentage" [class.overBudget]="usedBudget > budgetDetails.limit"> </div>
+        </div>
+        <div class="cls-progressAmount">
+            <span>Used: ₹{{ usedBudget | number }}</span>
+            <span>Limit: ₹{{ budgetDetails.limit | number }}</span>
+        </div>
+    </div>
+    <div class="cls-budgetDetails">
+        <div class="cls-budgetRow">
+            <div>
+                <span class="cls-icon HotelIcon">↗</span>
+                <span class="cls-budgetText">{{budgetDetails.pageName}} Budget</span>
+            </div>
+            <span class="cls-amount">₹{{ budgetDetails.limit | number }}</span>
+        </div>
+        <div class="cls-budgetRow">
+            <div>
+                <span class="cls-icon cls-19-wallet"></span>
+                <span class="cls-budgetText">Used</span>
+            </div>
+            <span class="cls-amount">₹{{ usedBudget | number }}</span>
+        </div>
+        <div class="cls-budgetRow">
+            <div>
+                <span class="cls-icon cls-46-amount" ></span>
+                <span class="cls-budgetText">Remaining</span>
+            </div>
+            <span class="cls-remainingAmount" [class.green]="remainingBudget == 0" [class.red]="remainingBudget < 0">
+                ₹{{ remainingBudget | number }}
+            </span>
+        </div>
+    </div>
+    <div class="cls-divider"></div>
+    <div class="cls-selectedHotel">
+        <div class="cls-selectContainer" *ngIf="selectedHotel.length != 0">
+            <h5 class="cls-selectHead">Selected Hotel</h5>
+            <div class="cls-selectDetails" *ngFor="let hotelValue of selectedHotel; let i = index">
+                <div class="cls-hotelImg">
+                    <img [src]="hotelValue.image" [alt]="hotelValue.hotelName" />
+                </div>
+                <div class="cls-hotelDetails">
+                    <h3 class="cls-hotelName">{{hotelValue.hotelName}}</h3>
+                    <p class="cls-roomName">{{hotelValue.roomName}}</p>
+                    <div class="cls-nightDetails">
+                        <span>{{hotelValue.nights}}</span>
+                        Nights 
+                        (Day {{hotelValue.days.start}} - {{hotelValue.days.end}})
+                    </div>
+                    <div class="cls-priceandRemove">
+                        <div class="cls-priceDetails">
+                            <p class="cls-totalPrice">₹ {{hotelValue.totalPrice}}</p>
+                            <div class="cls-amountCount">
+                                <span class="cls-perDay">₹ {{hotelValue.pricePerNight}}</span>
+                                <span class="cls-nights"> x {{hotelValue.nights}} nights</span>
+                            </div>
+                        </div>
+                        <div class="cls-remove" (click)="remove(i, hotelValue)"> <span class="cls-16-close"></span> Remove</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cls-noHotel" *ngIf="selectedHotel.length == 0">
+            <div class="cls-noHotelIcon cls-49-bed"></div>
+            <span>No {{budgetDetails.pageName}} selected</span>
+        </div>
+    </div>
+    <div class="cls-divider"></div>
+    <button class="cls-selectHotelBtn" (click)="continue()" [disabled]="!selectedHotel">
+        {{ selectedHotel ? 'Hotel Selected' : 'Select a Hotel' }}
+    </button>
+</div>
+<ng-container *ngIf="submit && budgetPercentage > 100">
+    <app-budget-exceeded [budgetExceed]="exceedDetails" (cancel)="closeBudgetPopup()" (continueAnyway)="selectHotelAnyway()"></app-budget-exceeded>
+</ng-container>

@@ -23,7 +23,7 @@
         <div class="cls-budgetRow">
             <div>
                 <span class="cls-icon guideIcon">↗</span>
-                <span class="cls-budgetText">Guide Budget</span>
+                <span class="cls-budgetText">{{budgetDetails.pageName}} Budget</span>
             </div>
             <span class="cls-amount">₹{{ budgetDetails.limit | number }}</span>
         </div>
@@ -67,7 +67,7 @@
         <ng-template #noGuide>
             <div class="cls-noGuide">
                 <div class="cls-noGuideIcon cls-42-person-add"></div>
-                <span>No guide selected</span>
+                <span>No {{budgetDetails.pageName}} selected</span>
             </div>
         </ng-template>
     </div>

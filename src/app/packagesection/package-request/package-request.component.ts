@@ -26,13 +26,12 @@ export class PackageRequestComponent implements OnInit {
     console.log(startDate,endDate,diffTime,diffDays);
     
     this.datesAndNights =   diffDays + ' Days / ' +  (diffDays - 1) + ' Nights';
-    console.log(history.state, this.formDetails,this.datesAndNights);
+    console.log(this.formDetails,this.datesAndNights);
   }
 
   public goToRequestForm(){
     this.router.navigate(['/requestForm'],{
       state: {
-        requestFormValue: this.formDetails,
         backto: true
       }
     }); 

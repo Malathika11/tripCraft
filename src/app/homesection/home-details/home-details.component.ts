@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import { TripStateService } from 'src/app/services/trip-state.service';
 
 @Component({
   selector: 'app-home-details',
@@ -15,9 +16,10 @@ export class HomeDetailsComponent implements OnInit {
 
   public loader: boolean = false;
 
-  constructor(public apiService: ApiService, public router: Router) { }
+  constructor(public apiService: ApiService, public router: Router, public tripState: TripStateService) { }
 
   ngOnInit(): void {
+    this.tripState.clear();
     this.apiService.get('home').subscribe(res => {
       console.log(res);
       this.homeDetails = res;

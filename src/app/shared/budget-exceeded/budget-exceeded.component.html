@@ -1,1 +1,36 @@
-<p>budget-exceeded works!</p>
+<div class="cls-overlay">
+    <div class="cls-budgetPopup">
+        <div class="cls-warningIcon">
+            <span class="cls-27-info"></span>
+        </div>
+        <div class="cls-popupHeader">
+            <h2>Budget Exceeded</h2>
+            <p> {{budgetExceed.budgetPara}} </p>
+        </div>
+        <div class="cls-budgetDetails">
+            <div class="cls-budgetRow">
+                <span>{{budgetExceed.pageName}} Budget:</span>
+                <strong> ₹{{ budgetExceed.budget | number }} </strong>
+            </div>
+            <div class="cls-budgetRow">
+                <span>Total Stay Cost:</span>
+                <strong> ₹{{ budgetExceed.totalCost | number }} </strong>
+            </div>
+            <div class="cls-budgetRow cls-exceedsRow">
+                <span>Exceeds by:</span>
+                <strong> ₹{{ budgetExceed.exceed | number }} </strong>
+            </div>
+        </div>
+        <div class="cls-budgetImpact">
+            <div class="cls-impactTitle">
+                <span class="cls-27-info"></span>
+                Budget Impact
+            </div>
+            <p> {{budgetExceed.impactMeg}} </p>
+        </div>
+        <div class="cls-popupActions">
+            <button type="button" class="cls-cancelBtn" (click)="onCancel()"> Cancel </button>
+            <button type="button" class="cls-continueBtn" (click)="onContinue()"> Continue Anyway </button>
+        </div>
+    </div>
+</div>

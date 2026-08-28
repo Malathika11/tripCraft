@@ -81,4 +81,10 @@ export class ApiService {
       `${this.baseUrl}/guides/search`, data
     );
   }
+
+  public searchHotel(data:any){
+    return this.http.post(
+      `${this.baseUrl}/hotels/search`, data
+    );
+  }
 }

@@ -6,6 +6,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ApiService } from 'src/app/services/api.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Router } from '@angular/router';
+import { TripStateService } from 'src/app/services/trip-state.service';
 declare var $: any;
 declare var moment: any;
 
@@ -55,9 +56,9 @@ export class RequestFormComponent implements OnInit {
   public breakdownItems = [
     { label: 'Flight', controlName: 'flight', amountControl: 'amountflight', icon: 'icon-flight' },
     { label: 'Guide', controlName: 'guide', amountControl: 'amountguide', icon: 'icon-guide' },
-    { label: 'Transport', controlName: 'transport', amountControl: 'amounttransport', icon: 'icon-transport' },
+    // { label: 'Transport', controlName: 'transport', amountControl: 'amounttransport', icon: 'icon-transport' },
     { label: 'Hotel', controlName: 'hotel', amountControl: 'amounthotel', icon: 'icon-hotel' },
-    { label: 'Food', controlName: 'food', amountControl: 'amountfood', icon: 'icon-food' },
+    // { label: 'Food', controlName: 'food', amountControl: 'amountfood', icon: 'icon-food' },
     { label: 'Visiting Places', controlName: 'visitingPlaces', amountControl: 'amountvisitingPlaces', icon: 'icon-location' },
     { label: 'Visa', controlName: 'visa', amountControl: 'amountvisa', icon: 'icon-visa' },
   ];
@@ -68,7 +69,7 @@ export class RequestFormComponent implements OnInit {
 
   // public visibleVerifyVisa:boolean = false;
 
-  constructor(private fb: FormBuilder, public commonService: CommonService, public apiSevice: ApiService, private toast: ToastService, public router: Router) { 
+  constructor(private fb: FormBuilder, public commonService: CommonService, public apiSevice: ApiService, private toast: ToastService, public router: Router, public tripState: TripStateService) { 
     this.requestForm = this.fb.group({
       fromCity: ['',Validators.required],
       fromCityId: ['',Validators.required],
@@ -90,10 +91,10 @@ export class RequestFormComponent implements OnInit {
         amountguide: [0],
         hotel: [0],
         amounthotel: [0],
-        food: [0],
-        amountfood: [0],
-        transport: [0],
-        amounttransport: [0],
+        // food: [0],
+        // amountfood: [0],
+        // transport: [0],
+        // amounttransport: [0],
         visa: [0],
         amountvisa: [0],
         visitingPlaces: [0],
@@ -103,10 +104,9 @@ export class RequestFormComponent implements OnInit {
     });
 
     if(history.state?.backto){
-      console.log(history.state.formValue);
-      
-      this.requestForm.setValue(history.state.formValue);
-      this.requestForm.get('breakdownForm')?.setValue(history.state.formValue?.breakdownForm)
+      let formValue =  this.tripState.get<any>('requestFormValue') || {};
+      this.requestForm.setValue(formValue);
+      this.requestForm.get('breakdownForm')?.setValue(formValue?.breakdownForm)
       this.setBudgetMode(this.requestForm.value.budgetMode);
     }
     // if(!localStorage.getItem('visaStatus')){
@@ -303,11 +303,9 @@ export class RequestFormComponent implements OnInit {
       })
     }
     if(this.requestForm.valid){
-      this.router.navigate(['/package'],{
-        state: {
-          requestFormValue:this.requestForm.value
-        }
-      }); 
+      const formData = this.requestForm.value;
+      this.tripState.set('requestFormValue', formData);
+      this.router.navigate(['/package']); 
     }
   }
 }

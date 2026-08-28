@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
+import { TripStateService } from 'src/app/services/trip-state.service';
 // import { Budget } from '../../models/budget.model';
 // import { Flight } from '../../models/flight.model';
 
@@ -20,11 +22,11 @@ export class BudgetStatusComponent implements OnInit {
 
   @Input() public cardData:any;
 
-  @Input() public selectedValues:any;
+  public selectedValues:any;
 
   public budgetPercentage:any = 0;
 
-  constructor(public sharedData: SharedDataService) { }
+  constructor(public sharedData: SharedDataService, public router: Router, public tripState:TripStateService) { }
 
   ngOnInit(): void {
     console.log(this.packageDetails);
@@ -35,9 +37,9 @@ export class BudgetStatusComponent implements OnInit {
     this.sharedData.data$.subscribe(data => {
       console.log('datadatadatadata', data);
       
-      if (data && data.selectHoleValue != '') {
+      if (data && data?.selectHoleValue != '') {
         console.log(data);
-        this.selectedGuide = data.selectHoleValue;
+        this.selectedGuide = data?.selectHoleValue;
         this.selectedValues = data.selectDetails;
         this.usedBudget = this.selectedGuide.perDayPrice * this.selectedValues.tripDays;
         console.log(this.usedBudget, this.budgetDetails.limit, this.budgetPercentage);
@@ -46,7 +48,7 @@ export class BudgetStatusComponent implements OnInit {
         this.budgetPercentage = Math.round((this.usedBudget / this.budgetDetails.limit ) * 100);   
       }
 
-      if(data.selectHoleValue == ''){
+      if(data?.selectHoleValue == ''){
         this.selectedGuide = '';
         this.usedBudget = 0;
         this.budgetPercentage = 0;
@@ -59,7 +61,8 @@ export class BudgetStatusComponent implements OnInit {
   }
 
   public continue(){
-
+    this.tripState.set(this.budgetDetails?.routerLabel, this.selectedValues);
+    this.router.navigate([this.budgetDetails?.routerURL]);
   }
 
 }

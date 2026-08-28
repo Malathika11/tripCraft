@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import { TripStateService } from 'src/app/services/trip-state.service';
 
 @Component({
   selector: 'app-package-details',
@@ -11,57 +12,16 @@ export class PackageDetailsComponent implements OnInit {
 
   public requestData: any;
 
-  public sampleformDetails: any = {
-    "requestFormValue": {
-      "fromCity": "Chennai, India",
-      "fromCityId": "MAA",
-      "toCity": "Paris, France",
-      "toCityId": "PAR",
-      "adults": 1,
-      "children": 0,
-      "infants": 0,
-      "daterange": "15 Sep 2026 - 20 Sep 2026",
-      "startDate": "2026-09-15",
-      "endDate": "2026-09-20",
-      "totalDays": 6,
-      "budgetMode": "total",
-      "budget": 300000,
-      "breakdownForm": {
-        "flight": 0,
-        "amountflight": 0,
-        "guide": 0,
-        "amountguide": 0,
-        "hotel": 0,
-        "amounthotel": 0,
-        "food": 0,
-        "amountfood": 0,
-        "transport": 0,
-        "amounttransport": 0,
-        "visa": 0,
-        "amountvisa": 0,
-        "visitingPlaces": 0,
-        "amountvisitingPlaces": 0,
-        "breakdownTotal": 0
-      }
-    },
-    "navigationId": 3
-  }
-
   public packageList: any;
 
   public showContent: boolean = false;
 
   public contentDetails: any;
 
-  constructor(public apiService: ApiService, public router: Router) {
-    console.log('history package', history.state);
-
-    this.requestData = history.state?.requestFormValue ? history.state.requestFormValue : this.sampleformDetails;
-
-    console.log('Home Page Request:', this.requestData);
-  }
+  constructor(public apiService: ApiService, public router: Router,public tripState: TripStateService) {}
 
   ngOnInit(): void {
+    this.requestData =  this.tripState.get<any>('requestFormValue') || {};
     if (this.requestData) {
       this.getPackages(this.requestData);
     }
@@ -118,7 +78,6 @@ export class PackageDetailsComponent implements OnInit {
   public goToRequestForm(editField: any) {
     this.router.navigate(['/requestForm'], {
       state: {
-        requestFormValue: this.requestData,
         backto: true,
         editField: editField
       }

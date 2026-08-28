@@ -242,7 +242,7 @@ const getPackages = (req, res) => {
                             minimumPrice: minimumPrice != null ? Number(minimumPrice) : null
                         },
                         sentence: {
-                            img: '../../../assets/images/package_budget',
+                            img: '../../../assets/images/package_budget.png',
                             imgAlt: 'Change Budget',
                             title: `Packages for ${userDays} days are available from ₹${Number(minimumPrice).toLocaleString('en-IN')}.`,
                             msg: 'Your selected budget is not enough for the available packages. Would you like to adjust your budget or travel duration?',

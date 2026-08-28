@@ -7,14 +7,15 @@ import { BudgetStatusComponent } from './budget-status/budget-status.component';
 import { FilterComponent } from './filter/filter.component';
 import { BudgetExceededComponent } from './budget-exceeded/budget-exceeded.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { PopupComponent } from './popup/popup.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     BudgetStatusComponent,
     FilterComponent,
-    BudgetExceededComponent
+    BudgetExceededComponent,
+    PopupComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     BudgetStatusComponent,
     FilterComponent,
-    BudgetExceededComponent
+    BudgetExceededComponent,
+    PopupComponent
   ]
 })
 export class SharedModule { }

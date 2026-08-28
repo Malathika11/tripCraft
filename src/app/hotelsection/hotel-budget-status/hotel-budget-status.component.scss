@@ -100,44 +100,78 @@
         background: #e5e7eb;
         margin: 20px 0;
     }
-    .cls-selectedGuide {
+    .cls-selectedHotel {
         .cls-selectContainer{
             background: rgb(239 246 255);
             padding: 15px;
             border-radius: 10px;
-            .cls-selectHeader{
+            .cls-selectHead{
                 font: 14px var(--primaryBold);
-                color: blue;
                 margin-bottom: 15px;
-                span{
-                    margin-right: 5px;
-                }
             }
-            .cls-labelValue{
+            .cls-selectDetails{
                 display: flex;
                 justify-content: space-between;
-                margin: 10px 0px;
-                .cls-label, .cls-value{
-                    font: 12px var(--primaryRegular);
+                &:not(:last-child) {
+                    border-bottom: 1px solid #ddd;
+                    padding-bottom: 15px;
+                    margin-bottom: 15px;
                 }
-            }
-            .cls-totalCost{
-                display: flex;
-                justify-content: space-between;
-                .cls-label{
-                    font: 13px var(--primaryRegular);
-                    color: blue;
+                .cls-hotelImg{
+                    width: 25%;
+                    height: 10%;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
                 }
-                .cls-count{
-                    font: 14px var(--primaryBold);
-                    color: blue;
+                .cls-hotelDetails{
+                    width: 70%;
+                    .cls-hotelName{
+                        font: 13px var(--primaryBold);
+                    }
+                    .cls-roomName{
+                        margin-bottom: 6px;
+                    }
+                    .cls-nightDetails, .cls-roomName{
+                        font: 11px var(--primaryRegular);
+                    }
+                    .cls-priceandRemove{
+                        justify-content: space-between;
+                        display: flex;
+                        gap: 2%;
+                        position: relative;
+                        .cls-priceDetails{
+                            .cls-totalPrice{
+                                font: 14px var(--primaryBold);
+                                margin: 10px 0px 5px;
+                            }
+                            .cls-amountCount span{
+                                font: 11px var(--primaryRegular);
+                            }
+                        }
+                        .cls-remove{
+                            font: 12px var(--primaryRegular);
+                            position: absolute;
+                            right: 0;
+                            bottom: 10px;
+                            display: flex;
+                            align-items: center;
+                            gap: 2px;
+                            cursor: pointer;
+                            border: 1px solid #ddd;
+                            padding: 5px;
+                            border-radius: 8px;
+                        }
+                    }
                 }
             }
         }
-        .cls-noGuide {
+        .cls-noHotel {
             text-align: center;
             color: #9ca3af;
-            .cls-noGuideIcon {
+            .cls-noHotelIcon {
                 margin-bottom: 8px;
                 font-size: 20px;
                 color: #adb5c1;
@@ -147,7 +181,7 @@
             }
         }
     }
-    .cls-selectGuideBtn {
+    .cls-selectHotelBtn {
         width: 100%;
         height: 40px;
         border: 0;
@@ -163,29 +197,3 @@
         }
     }
 }
-.cls-guideIcon {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
-    background: #eff6ff;
-    border-radius: 50%;
-    color: #2563eb;
-}
-
-.cls-guideInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    strong {
-        font-size: 13px;
-        color: #374151;
-    }
-    span {
-        font-size: 11px;
-        color: #9ca3af;
-    }
-}
-

@@ -30,6 +30,10 @@ const guideRoutes = require('./routes/guide.routes');
 
 app.use('/api/guides', guideRoutes);
 
+const hotelRoutes = require('./routes/hotel.routes');
+
+app.use( '/api/hotels', hotelRoutes);
+
 // Sector Search API
 app.get('/api/sectors/search', (req, res) => {
 

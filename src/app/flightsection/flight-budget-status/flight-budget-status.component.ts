@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { TripStateService } from 'src/app/services/trip-state.service';
 
 @Component({
   selector: 'app-flight-budget-status',
@@ -14,13 +15,18 @@ export class FlightBudgetStatusComponent implements OnChanges {
 
   @Input() public budgetValue:any;
 
-  @Input() public packageDetails:any;
+  public packageDetails:any ={
+    requestFormValue: {},
+    packageCardDetails: {}
+  }
 
   public loader: boolean = true;
 
-  constructor( public router: Router){ }
+  constructor( public router: Router, public tripState: TripStateService){ }
   
   ngOnChanges(changes: SimpleChanges): void {
+    this.packageDetails.requestFormValue =  this.tripState.get<any>('requestFormValue') || {};
+    this.packageDetails.packageCardDetails = this.tripState.get<any>('packageCardDetails') || {}
     console.log(changes);
     
     if (changes['selectedValues'] && this.budgetValue?.pageName == "Flights" ) {
@@ -51,13 +57,8 @@ export class FlightBudgetStatusComponent implements OnChanges {
   public continue(){
     console.log(this.selectedValues);
     if(this.selectedValues.oneWay != null && this.selectedValues.roundTrip != null){
-      this.router.navigate(['/guide'], {
-        state: {
-          requestFormValue: this.packageDetails?.requestFormValue,
-          packageCardDetails: this.packageDetails?.packageCardDetails,
-          flightDeails: this.selectedValues
-        }
-      });
+      this.tripState.set('flightDeails', this.selectedValues);
+      this.router.navigate(['/guide']);
     }
 
   }

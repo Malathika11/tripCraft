@@ -7,7 +7,7 @@ const {
 
 const getFlights = async (fromCityId, toCityId, amount) => {
 
-    const [rows] = await promiseDb.query(`
+    let query = `
         SELECT
             f.id,
             f.flight_number,
@@ -30,13 +30,21 @@ const getFlights = async (fromCityId, toCityId, amount) => {
             ON a.id = f.airline_id
         WHERE f.from_city_id = ?
         AND f.to_city_id = ?
-        AND f.price <= ?
-        ORDER BY f.price ASC
-    `, [
+    `;
+
+    const params = [
         fromCityId,
-        toCityId,
-        amount
-    ]);
+        toCityId
+    ];
+
+    if (amount > 0) {
+        query += ` AND f.price <= ?`;
+        params.push(amount);
+    }
+
+    query += ` ORDER BY f.price ASC`;
+
+    const [rows] = await promiseDb.query(query, params);
 
     return rows;
 };
@@ -231,15 +239,15 @@ const searchFlights = async (req, res) => {
             });
         }
 
-        if (!amount || Number(amount) <= 0) {
-            return res.status(400).json({
-                success: false,
-                message: 'amount is required and must be greater than 0'
-            });
-        }
-
-        const flightAmount = Number(amount);
-        const tripTotalBudget = Number(totalBudget);
+        // if (!amount || Number(amount) <= 0) {
+        //     return res.status(400).json({
+        //         success: false,
+        //         message: 'amount is required and must be greater than 0'
+        //     });
+        // }
+        
+        const flightAmount = Number(amount) || 0;
+        const tripTotalBudget = Number(totalBudget) || 0;
 
         const outboundRows = await getFlights(
             fromCityId,
@@ -257,7 +265,9 @@ const searchFlights = async (req, res) => {
             return res.status(404).json({
                 success: false,
                 status: 'NO_FLIGHT_FOUND',
-                message: `No flights found within ₹${flightAmount}`,
+                message: flightAmount > 0
+                    ? `No flights found within ₹${flightAmount}`
+                    : 'No flights found for this sector',
                 amount: flightAmount,
                 totalBudget: tripTotalBudget
             });
@@ -291,7 +301,7 @@ const searchFlights = async (req, res) => {
             },
 
             budgetStatus: {
-                totalBudget: tripTotalBudget, // 👈 request totalBudget
+                totalBudget: tripTotalBudget,
                 limit: 0,
                 barLabel: 'Flight Budget',
                 pageName: 'Flights',

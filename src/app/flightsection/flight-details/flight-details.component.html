@@ -35,8 +35,12 @@
                 <app-flight-card [tripTypeValue]="tripType" [flightDetails]="flightDetailsData" (selectFlightDetails)="selectFlightFun($event)"></app-flight-card>
             </div>
             <div class="cls-budget-container">
-                <app-flight-budget-status [packageDetails]="formPackageDetails" [budgetValue]="budgetStatus" [selectedValues]="selectedFlights"></app-flight-budget-status>
+                <app-flight-budget-status [budgetValue]="budgetStatus" [selectedValues]="selectedFlights"></app-flight-budget-status>
             </div>
         </div>
     </div>
 </div>
+
+<ng-container *ngIf="showPopup">
+    <app-popup [details]="popupDetails" (emitPopupDetails)="emitPopupDetailsFun($event)"></app-popup>
+</ng-container>

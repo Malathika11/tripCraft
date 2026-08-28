@@ -1,0 +1,47 @@
+<div class="cls-modalBackdrop">
+    <div class="cls-hotelModal" role="dialog" aria-modal="true">
+        <div class="cls-popupHeader">
+            <div class="cls-hotelIcon cls-49-bed"></div>
+            <button class="cls-closeBtn cls-16-close" type="button" aria-label="Close" (click)="closeModal()"> </button>
+        </div>
+        <div class="cls-hotelDetails">
+            <h2 class="cls-quest"> How many nights for this hotel? </h2>
+            <p class="cls-para"> Select the number of nights you want to stay at </p>
+            <h3 class="cls-hotelName"> {{ selectHotelDetails?.hotelName }} </h3>
+            <div class="cls-price">
+                <strong> ₹{{ selectHotelDetails?.pricing?.pricePerNight | number }} </strong>
+                <span> per night </span>
+            </div>
+        </div>
+        <div class="cls-selectionSection">
+            <label> Select Nights </label>
+            <div class="cls-nightRow">
+                <div class="cls-counter">
+                    <button type="button" class="cls-counterBtn" [disabled]="nights <= 1" (click)="decreaseNights()"> − </button>
+                    <div class="cls-counterValue"> {{ nights }} </div>
+                    <button type="button" class="cls-counterBtn" [disabled]="nights >= availableNights" (click)="increaseNights()"> + </button>
+                </div>
+                <span class="cls-dayLabel">
+                    Nights (Day {{ daysCount.start }} - {{ daysCount.end }})
+                </span>
+            </div>
+        </div>
+        <div class="cls-remainingBox" *ngIf="remainingNights > 0">
+            <div class="cls-calendarIcon cls-21-calender"> </div>
+            <span>
+                Remaining nights to plan:
+                <strong> {{ remainingNights }} Nights </strong>
+                <small> (Day {{ daysCount.end + 1 }} - {{ noOfDays }}) </small>
+            </span>
+        </div>
+        <div class="cls-divider"></div>
+        <div class="cls-totalRow">
+            <span> Total for {{ nights }} {{ nights === 1 ? 'night' : 'nights' }} </span>
+            <strong> ₹{{ totalPrice | number }} </strong>
+        </div>
+        <div class="cls-actions">
+            <button type="button" class="btn cls-btnCancel" (click)="closeModal()"> Cancel </button>
+            <button type="button" class="btn cls-btnConfirm" [disabled]=" nights <= 0 || availableNights <= 0 " (click)="confirmSelection()"> Confirm Selection </button>
+        </div>
+    </div>
+</div>

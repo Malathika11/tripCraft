@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-budget-exceeded',
@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BudgetExceededComponent implements OnInit {
 
+  @Input() public budgetExceed:any;
+
+  @Output() cancel = new EventEmitter<void>();
+
+  @Output() continueAnyway = new EventEmitter<void>();
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
+  public onCancel() {
+    this.cancel.emit();
+  }
+
+  public onContinue() {
+    this.continueAnyway.emit();
+  }
+  
 }

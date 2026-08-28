@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import { TripStateService } from 'src/app/services/trip-state.service';
 
 @Component({
   selector: 'app-package-card',
@@ -15,7 +16,7 @@ export class PackageCardComponent implements OnInit {
 
   public loader:boolean = false;
 
-  constructor(public apiService: ApiService, public router:Router) { }
+  constructor(public apiService: ApiService, public router:Router, public tripState: TripStateService) { }
 
   ngOnInit(): void {
     this.loader = true;
@@ -38,12 +39,8 @@ export class PackageCardComponent implements OnInit {
 
   public viewPackage(item: any) {
     console.log(item);
-    this.router.navigate(['/flight'],{
-      state: {
-        requestFormValue: this.formDetails,
-        packageCardDetails: item
-      }
-    }); 
+    this.tripState.set('packageCardDetails', item);
+    this.router.navigate(['/flight']); 
   }
 
 }

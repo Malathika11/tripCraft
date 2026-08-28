@@ -1,14 +1,23 @@
-<div class="cls-hotel-main">
+<div class="cls-hotelMain">
     <app-header></app-header>
-    <div class="cls-hotel-body">
-        <div class="cls-hotel-container">
-            <app-filter></app-filter>
+    <div class="cls-hotelHead">
+        <div class="cls-sectorDetails">
+            <h1>Hotel Selection</h1>
+            <p>
+                <span>{{requestFormValue.toCity.split(',')[0].trim()}}</span> •
+                {{requestFormValue.totalDays}} Nights
+            </p>
         </div>
-        <div class="cls-hotelCard-container">
-            <app-hotel-body></app-hotel-body>
+    </div>
+    <div class="cls-hotelBody">
+        <div class="cls-filterContainer">
+            <app-filter [filterValues]="filterData"(filterChange)="filterChanged($event)"></app-filter>
         </div>
-        <div class="cls-budget-container">
-            <app-budget-status></app-budget-status>
+        <div class="cls-cardContainer">
+            <app-hotel-body [hotelDetails]="hotelValues" ></app-hotel-body>
+        </div>
+        <div class="cls-budgetContainer">
+            <app-hotel-budget-status [packageDetails]="requestFormValue" (hotelRemoved)="hotelRemovedFun($event)"></app-hotel-budget-status>
         </div>
     </div>
 </div>
