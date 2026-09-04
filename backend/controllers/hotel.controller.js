@@ -601,13 +601,8 @@ exports.getHotels = (req, res) => {
                         hotelValues
 
                     }
-
                 });
-
             });
-
         });
-
     });
-
 };
