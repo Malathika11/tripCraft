@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  // private baseUrl = 'http://localhost:3000/api';
-  private baseUrl = 'https://tripcraft-production-a972.up.railway.app/api';
+  private baseUrl = 'http://localhost:3000/api';
+  // private baseUrl = 'https://tripcraft-production-a972.up.railway.app/api';
 
   constructor(private http: HttpClient) {}
 
@@ -86,5 +86,17 @@ export class ApiService {
     return this.http.post(
       `${this.baseUrl}/hotels/search`, data
     );
+  }
+
+  public searchTransport(data:any){
+    return this.http.post(
+      `${this.baseUrl}/transport/search`, data
+    )
+  }
+
+  public searchPlace(data:any){
+    return this.http.post(
+      `${this.baseUrl}/visiting-places/search`, data
+    )
   }
 }

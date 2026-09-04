@@ -38,6 +38,9 @@
         }
         .cls-cardContainer {
             width: 50%;
+            &.cls-noValuesFound{
+                margin: 0 auto;
+            }
         }
     }
 }

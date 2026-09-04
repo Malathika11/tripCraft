@@ -1,4 +1,7 @@
 <div class="cls-flightDetails" *ngIf="!loader">
+    <ng-container *ngIf="flightDetails.length == 0">
+        <app-nodatafound [noDataPara]="noDataMessage"></app-nodatafound>
+    </ng-container>
     <div class="cls-flightCard" *ngFor="let airlineCard of flightDetails">
         <div class="cls-flightName-amount">
             <div class="cls-flightName">
@@ -20,9 +23,9 @@
         </div>
         <div class="cls-flightSector">
             <div class="cls-arrivel">
-                <p class="cls-timing"> {{ airlineCard.arrivelTime }} </p>
-                <p class="cls-sector"> {{ airlineCard.arrivelSector }} </p>
-                <p class="cls-place"> {{ airlineCard.arrivelPlace }} </p>
+                <p class="cls-timing"> {{ airlineCard.departureTime }} </p>
+                <p class="cls-sector"> {{ airlineCard.departureSector }} </p>
+                <p class="cls-place"> {{ airlineCard.departurePlace }} </p>
             </div>
             <div class="cls-stopsDiv">
                 <p class="cls-stopCount"> {{ airlineCard.stopCount }} </p>
@@ -30,22 +33,33 @@
                     <span class="cls-line"> </span>
                     <span class="cls-icon" [ngClass]=" tripTypeValue === 'oneWay' ? 'cls-25-departure' : 'cls-24-arrival' "> </span>
                 </p>
-                <p class="cls-stops" [style.color]=" airlineCard.color "> {{ airlineCard.stopType }} </p>
+                <p class="cls-stops" [ngClass]="{ 'cls-tooltip': airlineCard.stopType !== 'Direct' }" [style.color]="airlineCard.color">
+                    {{ airlineCard.stopType }}
+                    <span class="cls-tooltiptext" *ngIf="airlineCard.stopType !== 'Direct'" >
+                        <span class="cls-41-clock"></span>
+                        <span class="cls-stopName"> {{ airlineCard.stopName }} </span>
+                    </span>
+                </p>
             </div>
             <div class="cls-departure">
-                <p class="cls-timing"> {{ airlineCard.departureTime }} </p>
-                <p class="cls-sector"> {{ airlineCard.departureSector }} </p>
-                <p class="cls-place"> {{ airlineCard.departurePlace }} </p>
+                <p class="cls-timing"> {{ airlineCard.arrivelTime }} </p>
+                <p class="cls-sector"> {{ airlineCard.arrivelSector }} </p>
+                <p class="cls-place"> {{ airlineCard.arrivelPlace }} </p>
             </div>
         </div>
-        <ng-container *ngIf=" airlineCard.stopType !== 'Direct' ">
-            <span class="cls-border"> </span>
-            <p class="cls-stopValue">
-                <span class="cls-41-clock"> </span>
-                <span class="cls-stopName"> {{ airlineCard.stopName }} </span>
-            </p>
-            <span class="cls-border"> </span>
-        </ng-container>
+        <div class="cls-border"></div>
+        <div class="cls-passengerCount">
+            <div class="cls-passengerDetails">
+                <span>{{ formValue.adults }} adult{{ formValue.adults > 1 ? 's' : '' }}</span>
+                <span *ngIf="formValue.children != 0">, {{ formValue.children }} child{{ formValue.children > 1 ? 'ren' : '' }}</span>
+                <span *ngIf="formValue.infants != 0">, {{ formValue.infants }} infant{{ formValue.infants > 1 ? 's' : '' }}</span>
+                <span> x {{ airlineCard.amountType }} {{ airlineCard.amount | number }}</span>
+            </div>
+            <div class="cls-passengerAmount">
+                <span>{{ airlineCard.amountType }} {{ totalFlightPrice(airlineCard) | number }}</span>
+            </div>
+        </div>
+        <div class="cls-border"></div>
         <button type="button" class="cls-selectBtn" [ngClass]="{ 'cls-selectBtn-active': airlineCard.selected }" (click)=" flightSelect(airlineCard) ">
             <span class="cls-36-tick" *ngIf=" airlineCard.selected "> </span>
             {{ airlineCard.selected ? 'Selected' : 'Select Flight' }}

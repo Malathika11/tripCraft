@@ -1,0 +1,138 @@
+.cls-costCard {
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    .cls-cardHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #e9e9e9;
+        h2 {
+            margin: 0;
+            font: 15px var(--primaryMedium);
+        }
+        .cls-editAll {
+            border: 1px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
+            padding: 8px 11px;
+            cursor: pointer;
+            font: 13px var(--primaryRegular);
+            span{
+                margin-right: 5px;
+            }
+        }
+    }
+    .cls-costItem {
+        position: relative;
+        display: flex;
+        gap: 13px;
+        padding: 20px 0;
+        border-bottom: 1px solid #eeeeee;
+        &.flight .cls-costIcon {
+            background: #edf4ff;
+            color: #2865b2;
+            .percentage {
+                color: #2460ac;
+            }
+        }
+        &.transport .cls-costIcon {
+            background: #eaf7ed;
+            color: #318149;
+            .percentage {
+                color: #318149;
+            }
+        }
+        &.hotel .cls-costIcon {
+            background: #f2eafa;
+            color: #8754ae;
+            .percentage{
+                color: #8754ae;
+            }
+        }
+        &.visiting .cls-costIcon {
+            background: #fff2df;
+            color: #d67c1c;
+            .percentage{
+                color: #d67c1c;
+            }
+        }
+        .cls-costIcon {
+            width: 43px;
+            height: 43px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+        .cls-costInfo {
+            flex: 1;
+            .cls-costTitleRow {
+                display: flex;
+                justify-content: space-between;
+                gap: 8px;
+                strong {
+                    font: 14px var(--primaryBold);
+                }
+                .cls-amount {
+                    color: #162039;
+                }
+            }
+            .cls-descriptionPercentage{
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                justify-content: space-between;
+                margin: 6px 0px 3px;
+                p {
+                    margin: 0;
+                    font: 12px var(--primaryRegular);
+                    color: #737b88;
+                }
+                .cls-percentage {
+                    font: 12px var(--primaryBold);
+                }
+            }
+            .cls-editLink {
+                padding: 0;
+                border: 0;
+                background: transparent;
+                color: #ae7e1e;
+                font: 12px var(--primaryMedium);
+                cursor: pointer;
+            }
+        }
+        
+    }
+    .cls-plannedCost {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 0 17px;
+        align-items: center;
+        span{
+            font: 14px var(--primaryRegular);
+        }
+        strong {
+            font: 19px var(--primaryBold);
+        }
+    }
+    .cls-infoMessage {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #f0f6ff;
+        border: 1px solid #dbe9ff;
+        border-radius: 10px;
+        padding: 10px;
+        span {
+            font-size: 15px;
+        }
+        p {
+            margin: 0;
+            font: 12px var(--primaryRegular);
+            color: #53627a;
+        }
+    }
+}

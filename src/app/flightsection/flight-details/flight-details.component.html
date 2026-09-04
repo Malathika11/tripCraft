@@ -29,10 +29,10 @@
                         <span>flights found</span>
                     </div>
                     <div class="cls-sector">
-                        <span>{{cityValue.fromCity}} -> {{cityValue.toCity}}</span>
+                        <span>{{flightDetailsData[0].departurePlace.split(',')[0].trim()}} -> {{flightDetailsData[0].arrivelPlace.split(',')[0].trim()}}</span>
                     </div>
                 </div>
-                <app-flight-card [tripTypeValue]="tripType" [flightDetails]="flightDetailsData" (selectFlightDetails)="selectFlightFun($event)"></app-flight-card>
+                <app-flight-card [tripTypeValue]="tripType" [formValue]="requestFormValue" [flightDetails]="flightDetailsData" (selectFlightDetails)="selectFlightFun($event)"></app-flight-card>
             </div>
             <div class="cls-budget-container">
                 <app-flight-budget-status [budgetValue]="budgetStatus" [selectedValues]="selectedFlights"></app-flight-budget-status>

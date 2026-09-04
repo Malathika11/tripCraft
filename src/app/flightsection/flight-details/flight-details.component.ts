@@ -43,29 +43,70 @@ export class FlightDetailsComponent implements OnInit {
 
   public packageCardDetails:any;
 
+  public percentage:any = {
+    flight: 0,
+    hotel: 0,
+    visitingPlaces: 0,
+    guide: 0
+  };
+
   constructor(public apiService: ApiService, public tripState: TripStateService) { }
 
   ngOnInit(): void {
     this.requestFormValue =  this.tripState.get<any>('requestFormValue') || {};
     this.packageCardDetails = this.tripState.get<any>('packageCardDetails') || {}
     if (this.requestFormValue.budgetMode === 'total') {
-      this.showPopup = true;
-      this.popupDetails = {
-        popupIcon: 'cls-19-wallet',
-        header: 'Would you like us to manage your package budget?',
-        description: ' We’ll equally split your selected package amount across Flight, Guide, Hotel and Local Visit. ',
-        packageAmount: this.packageCardDetails.price,
-        actions: [
-          {
-            label: ' No, I’ll manage on my own ',
-            index: 'no'
-          },
-          {
-            label: 'Yes, manage my budget',
-            index: 'yes'
-          }
-        ]
-      }
+      this.splitAmount();
+    }
+  }
+
+  public splitAmount(){
+    this.percentage.flight = Math.round(this.packageCardDetails.price * 0.40);
+    this.percentage.hotel = Math.round(this.packageCardDetails.price * 0.35);
+    this.percentage.visitingPlaces = Math.round(this.packageCardDetails.price * 0.15);
+    this.percentage.guide = Math.round(this.packageCardDetails.price * 0.10);
+    this.showPopup = true;
+    this.popupDetails = {
+      popupIcon: 'cls-19-wallet',
+      header: 'Manage your package budget?',
+      description: ' We’ll split your package amount across Flight, Guide, Hotel and Local Visit, weighted by typical trip costs. ',
+      packageAmount: this.packageCardDetails.price,
+      actions: [
+        {
+          label: ' No, I’ll manage on my own ',
+          index: 'no'
+        },
+        {
+          label: 'Yes, use this split',
+          index: 'yes'
+        }
+      ],
+      suggestedSplit: [
+        {
+          icon: 'cls-61-flight',
+          name: 'Flight',
+          percentage: '40%',
+          amount: this.percentage.flight,
+        },
+        {
+          icon: 'cls-22-single-person',
+          name: 'Guide',
+          percentage: '10%',
+          amount: this.percentage.guide,
+        },
+        {
+          icon: 'cls-51-hotel',
+          name: 'Hotel',
+          percentage: '35%',
+          amount: this.percentage.hotel,
+        },
+        {
+          icon: 'cls-58-location',
+          name: 'Local visit',
+          percentage: '15%',
+          amount: this.percentage.visitingPlaces,
+        }
+      ]
     }
   }
 
@@ -106,15 +147,17 @@ export class FlightDetailsComponent implements OnInit {
     if (!totalBudget) {
       return;
     }
-
-    const fields = ['flight', 'guide', 'hotel', 'food', 'transport', 'visa', 'visitingPlaces'];
-    const amountFields = ['amountflight', 'amountguide', 'amounthotel', 'amountfood', 'amounttransport', 'amountvisa', 'amountvisitingPlaces'];
-    const percentage = 100 / fields.length;
-
+    let percentageValue:any = {
+      flight: 40,
+      hotel: 35,
+      visitingPlaces: 15,
+      guide: 10
+    }
+    const fields = ['flight', 'guide', 'hotel', 'visitingPlaces'];
+    const amountFields = ['amountflight', 'amountguide', 'amounthotel', 'amountvisitingPlaces'];
     fields.forEach((field, index) => {
-      const amount = (totalBudget * percentage) / 100;
-      this.requestFormValue.breakdownForm[field] = percentage;
-      this.requestFormValue.breakdownForm[amountFields[index]] = Number(amount.toFixed(2));
+      this.requestFormValue.breakdownForm[field] = percentageValue[field];
+      this.requestFormValue.breakdownForm[amountFields[index]] = Number(this.percentage[field].toFixed(2));
     });
     this.requestFormValue.breakdownForm.breakdownTotal = totalBudget;
   }
@@ -122,6 +165,8 @@ export class FlightDetailsComponent implements OnInit {
   public changeTripType(type: any) {
     this.tripType = type;
     if (!this.filterValue || !this.filterValue[type]) {
+      console.log(this.flightResponse.filterData,type);
+      
       this.filterData = this.flightResponse.filterData[type];
       this.budgetStatus = this.flightResponse.budgetStatus;
       this.flightDetailsData = this.flightResponse.flightDetails[type];

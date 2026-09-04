@@ -14,6 +14,8 @@ export class PopupComponent implements OnInit {
   constructor() { }
   
   ngOnInit(): void {
+    console.log(this.details);
+    
   }
 
   public buttonClick(index:any){

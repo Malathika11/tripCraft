@@ -8,6 +8,8 @@ import { FilterComponent } from './filter/filter.component';
 import { BudgetExceededComponent } from './budget-exceeded/budget-exceeded.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PopupComponent } from './popup/popup.component';
+import { NodatafoundComponent } from './nodatafound/nodatafound.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { PopupComponent } from './popup/popup.component';
     BudgetStatusComponent,
     FilterComponent,
     BudgetExceededComponent,
-    PopupComponent
+    PopupComponent,
+    NodatafoundComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +31,9 @@ import { PopupComponent } from './popup/popup.component';
     BudgetStatusComponent,
     FilterComponent,
     BudgetExceededComponent,
-    PopupComponent
+    PopupComponent,
+    NodatafoundComponent,
+    LoginComponent
   ]
 })
 export class SharedModule { }

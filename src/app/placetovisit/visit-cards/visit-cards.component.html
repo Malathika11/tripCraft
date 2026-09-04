@@ -1,0 +1,129 @@
+<div class="cls-visitCards">
+    <h3 class="cls-tripHeader">
+        Trip Itinerary
+        <span> ( Click a day to set it as Rest Day ) </span>
+    </h3>
+    <div class="cls-dayHeader">
+        <ng-container *ngFor="let day of tripDays">
+            <button type="button" class="cls-sepDayInfo"  [ngClass]="{'cls-restSelected': isRestDay(day.dayNumber)}" (click)="chooseHeaderDay(day)"  [class.cls-full]="isDayFull(day)"  [disabled]="isDayFull(day)">
+                <span class="cls-dayLabel">Day {{ day.dayNumber }}</span>
+                <span class="cls-dayDate">{{ day.date | date:'dd MMM' }}</span>
+                <span class="cls-activityCount" *ngIf="!isRestDay(day.dayNumber) && itinerary[day.dayNumber] && itinerary[day.dayNumber].length > 0">
+                    {{ itinerary[day.dayNumber]?.length }} 
+                    {{ itinerary[day.dayNumber]?.length === 1 ? 'activity' : 'activities' }}
+                </span>
+                <span class="cls-restDay" *ngIf="isRestDay(day.dayNumber)">Rest Day</span>
+            </button>
+        </ng-container>
+    </div>
+    <div class="cls-placeSection" *ngFor="let section of visitDetails">
+        <div class="cls-sectionHeader">
+            <div class="cls-sectionTitle">
+                <div class="cls-sectionIcon">
+                    <span [ngClass]="section.icon"></span>
+                </div>
+                <div>
+                    <h2>{{ section.heading }}</h2>
+                    <p>{{ section.count }}</p>
+                </div>
+            </div>
+            <div class="cls-sectionArrows">
+                <button type="button" class="cls-20-arrow-down cls-leftArrow" (click)="scrollLeft()" [disabled]="isLeftDisabled"></button>
+                <button type="button" class="cls-20-arrow-down cls-rightArrow" (click)="scrollRight()" [disabled]="isRightDisabled"> </button>
+            </div>
+        </div>
+        <div class="cls-cardWrapper" #cardWrapper>
+            <div class="cls-placeCard" *ngFor="let place of section.places" [class.selected]="isSelected(place)" (click)="selectPlace(place)">
+                <div class="cls-discount" *ngIf="place.discount"> {{ place.discount }} </div>
+                <div class="cls-image">
+                    <img [src]="place.image" [alt]="place.name">
+                    <div class="cls-rating">
+                        <span class="cls-48-star"></span>
+                        <b>{{ place.rating }}</b>
+                        <small> ({{ place.reviews }}) </small>
+                    </div>
+                    <div class="cls-placeName"> {{ place.name }} </div>
+                </div>
+                <div class="cls-cardContent">
+                    <div class="cls-basicDetails">
+                        <div>
+                            <span class="cls-41-clock"></span>
+                            {{ place.duration }}
+                        </div>
+                        <div>
+                            <span class="cls-58-location"></span>
+                            {{ place.location }}
+                        </div>
+                    </div>
+                    <div class="cls-tags">
+                        <span *ngFor="let tag of place.tags"> {{ tag }} </span>
+                    </div>
+                    <div class="cls-price">
+                        <span *ngIf="place.oldPrice" class="cls-oldPrice"> ₹{{ place.oldPrice }} </span>
+                        <strong> ₹{{ place.price | number }} </strong>
+                        <small> / person </small>
+                    </div>
+                </div>
+                <div class="cls-selected cls-36-tick" *ngIf="isSelected(place)"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cls-popupBlur" *ngIf="showDayStrip">
+    <div class="cls-daysSelectPopup">
+        <div class="cls-popupHeader">
+            <div class="cls-placeDetails">
+                <img src="{{singlePlaceSelect.image}}" alt="{{singlePlaceSelect.name}}">
+                <div class="cls-hotelDetails">
+                    <h6 class="cls-placeName">{{singlePlaceSelect.name}}</h6>
+                    <div class="cls-timeAndLocation">
+                        <span class="cls-time">{{singlePlaceSelect.duration}}</span> • 
+                        <span class="cls-location">{{singlePlaceSelect.location}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="cls-closeBtn" (click)="cancel()"><span class="cls-16-close"></span></div>
+        </div>
+        <div class="cls-quest">
+            <h4 class="cls-visit">When would you like to visit?</h4>
+            <p class="cls-daysAndPlace">Choose a day from your {{formValue.totalDays}}-day {{formValue.toCity.split(',')[0].trim()}} trip.</p>
+        </div>
+        <div class="cls-daysInfo">
+            <ng-container *ngFor="let day of tripDays">
+                <button type="button" class="cls-sepDayInfo"  [ngClass]="{'cls-selected': selectedDay == day.dayNumber, 'cls-restSelected': isRestDay(day.dayNumber)}" (click)="chooseDay(day)"  [class.cls-full]="isDayFull(day)"  [disabled]="isDayFull(day) || isRestDay(day.dayNumber)">
+                    <span class="cls-dayLabel">Day {{ day.dayNumber }}</span>
+                    <span class="cls-dayDate">{{ day.date | date:'dd MMM' }}</span>
+                    <span class="cls-fullTag" *ngIf="isDayFull(day)">Full</span>
+                    <span class="cls-restDay" *ngIf="isRestDay(day.dayNumber)">Rest Day</span>
+                </button>
+            </ng-container>
+        </div>
+        <p class="cls-information" *ngIf="selectedDay && placesOnSelectedDay > 0 && !itinerary[selectedDay][0]?.restFlag">
+            <span class="cls-icon cls-41-clock"></span>
+            {{ placesOnSelectedDay }} place{{ placesOnSelectedDay > 1 ? 's' : '' }} already planned on Day {{ selectedDay }}
+        </p>
+        <div class="cls-buttons">
+            <button type="button" class="cls-close" (click)="cancel()">Cancel</button>
+            <button type="button" class="cls-add" (click)="add()" [disabled]="!selectedDay">Add 
+                <span *ngIf="selectedDay">to Day {{selectedDay}}</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="cls-popupBlur" *ngIf="restDayPopupShow">
+    <div class="cls-restDayPopup">
+        <div class="cls-headImage">
+            <span class="cls-53-teacup"></span>
+        </div>
+        <div class="cls-information">
+            <h6 class="cls-headerText">{{!removeRestDay ? 'Set' : 'Remove'}} Day {{selectedDay}} as Rest Day</h6>
+            <p>This day will be marked as a Rest Day.</p>
+        </div>
+        <div class="cls-buttons">
+            <button type="button" class="cls-cancel" (click)="restCancel()">Cancel</button>
+            <button type="button" class="cls-rest" (click)="restDay()">{{!removeRestDay ? 'Set' : 'Remove'}} as Rest Day</button>
+        </div>
+    </div>
+</div>

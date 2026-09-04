@@ -16,8 +16,14 @@ const getFlights = async (fromCityId, toCityId, amount) => {
             f.from_city,
             f.to_city_id,
             f.to_city,
-            TIME_FORMAT(f.departure_time, '%H:%i') AS departure_time,
-            TIME_FORMAT(f.arrival_time, '%H:%i') AS arrival_time,
+            TIME_FORMAT(
+                f.departure_time,
+                '%H:%i'
+            ) AS departure_time,
+            TIME_FORMAT(
+                f.arrival_time,
+                '%H:%i'
+            ) AS arrival_time,
             f.duration,
             f.stop_type,
             f.stop_name,
@@ -44,7 +50,7 @@ const getFlights = async (fromCityId, toCityId, amount) => {
 
     query += ` ORDER BY f.price ASC`;
 
-    const [rows] = await promiseDb.query(query, params);
+    const [rows] = await promiseDb.query( query, params );
 
     return rows;
 };
@@ -54,82 +60,45 @@ const buildFilterData = (flights) => {
     if (!flights.length) {
 
         return {
-            oneWay: {
-                minValue: 0,
-                maxLimit: 0,
-
-                filters: [
-                    {
-                        head: 'Stops',
-                        type: 'radio',
-                        formControl: 'stops',
-                        options: [
-                            {
-                                id: 'all',
-                                value: 'All'
-                            }
-                        ]
-                    },
-                    {
-                        head: 'Departure Time',
-                        type: 'boxData',
-                        formControl: 'departureTime',
-                        options: flightFilterDefaults.departureTime
-                    },
-                    {
-                        head: 'Airlines',
-                        type: 'checkbox',
-                        formControl: 'airlines',
-                        options: []
-                    },
-                    {
-                        head: 'Price Range',
-                        type: 'pricerange',
-                        formControl: 'priceRange'
-                    }
-                ]
-            },
-            roundTrip: {
-                minValue: 0,
-                maxLimit: 0,
-
-                filters: [
-                    {
-                        head: 'Stops',
-                        type: 'radio',
-                        formControl: 'stops',
-                        options: [
-                            {
-                                id: 'all',
-                                value: 'All'
-                            }
-                        ]
-                    },
-                    {
-                        head: 'Departure Time',
-                        type: 'boxData',
-                        formControl: 'departureTime',
-                        options: flightFilterDefaults.departureTime
-                    },
-                    {
-                        head: 'Airlines',
-                        type: 'checkbox',
-                        formControl: 'airlines',
-                        options: []
-                    },
-                    {
-                        head: 'Price Range',
-                        type: 'pricerange',
-                        formControl: 'priceRange'
-                    }
-                ]
-            }
+            minValue: 0,
+            maxLimit: 0,
+            filters: [
+                {
+                    head: 'Stops',
+                    type: 'radio',
+                    formControl: 'stops',
+                    options: [
+                        {
+                            id: 'all',
+                            value: 'All'
+                        }
+                    ]
+                },
+                {
+                    head: 'Departure Time',
+                    type: 'boxData',
+                    formControl: 'departureTime',
+                    options: flightFilterDefaults.departureTime
+                },
+                {
+                    head: 'Airlines',
+                    type: 'checkbox',
+                    formControl: 'airlines',
+                    options: []
+                },
+                {
+                    head: 'Price Range',
+                    type: 'pricerange',
+                    formControl: 'priceRange'
+                }
+            ]
         };
     }
     const airlineMap = new Map();
     flights.forEach(flight => {
         if (!airlineMap.has(flight.airline_code)) {
-            airlineMap.set( flight.airline_code,
+            airlineMap.set(
+                flight.airline_code,
                 {
                     id: flight.airline_code.toLowerCase(),
                     value: flight.airline_name
@@ -137,7 +106,7 @@ const buildFilterData = (flights) => {
             );
         }
     });
-    const airlineOptions = [...airlineMap.values()];
+    const airlineOptions = [ ...airlineMap.values() ];
 
     const stopOrder = [
         'Direct',
@@ -146,7 +115,11 @@ const buildFilterData = (flights) => {
     ];
 
     const availableStops = [
-        ...new Set( flights.map( flight => flight.stop_type ) )
+        ...new Set(
+            flights.map(
+                flight => flight.stop_type
+            )
+        )
     ];
 
     const stopOptions = [
@@ -164,11 +137,11 @@ const buildFilterData = (flights) => {
             });
         }
     });
-    const prices = flights.map(
-        flight => Number(flight.price)
-    );
-    const minValue = Math.min(...prices);
-    const maxLimit = Math.max(...prices);
+
+    const prices = flights.map( flight => Number(flight.price) );
+    const minValue = Math.min( ...prices );
+    const maxLimit = Math.max( ...prices );
+    
     return {
         minValue,
         maxLimit,
@@ -239,65 +212,40 @@ const searchFlights = async (req, res) => {
             });
         }
 
-        // if (!amount || Number(amount) <= 0) {
-        //     return res.status(400).json({
-        //         success: false,
-        //         message: 'amount is required and must be greater than 0'
-        //     });
-        // }
-        
         const flightAmount = Number(amount) || 0;
         const tripTotalBudget = Number(totalBudget) || 0;
-
-        const outboundRows = await getFlights(
-            fromCityId,
-            toCityId,
-            flightAmount
-        );
-
-        const returnRows = await getFlights(
-            toCityId,
-            fromCityId,
-            flightAmount
-        );
-
-        if (!outboundRows.length && !returnRows.length) {
+        const oneWayRows = await getFlights( fromCityId, toCityId, flightAmount );
+        const roundTripRows = await getFlights( toCityId, fromCityId, flightAmount );
+        if ( !oneWayRows.length && !roundTripRows.length ) {
             return res.status(404).json({
                 success: false,
                 status: 'NO_FLIGHT_FOUND',
-                message: flightAmount > 0
-                    ? `No flights found within ₹${flightAmount}`
-                    : 'No flights found for this sector',
+                message: flightAmount > 0 ? `No flights found within ₹${flightAmount}` : 'No flights found for this sector',
                 amount: flightAmount,
                 totalBudget: tripTotalBudget
             });
         }
-
-        const outBound = outboundRows.map(formatFlight);
-        const returnFlights = returnRows.map(formatFlight);
-
-        const outboundFilter = buildFilterData(outboundRows);
-        const returnFilter = buildFilterData(returnRows);
-
+        const oneWayFlights = oneWayRows.map( formatFlight );
+        const roundTripFlights = roundTripRows.map( formatFlight );
+        const oneWayFilter = buildFilterData( oneWayRows );
+        const roundTripFilter = buildFilterData( roundTripRows );
+        
         return res.json({
             success: true,
-
             tripType: 'roundTrip',
-
             sector: {
                 from: {
-                    city: outboundRows[0]?.from_city || '',
+                    city: oneWayRows[0]?.from_city || '',
                     code: fromCityId
                 },
                 to: {
-                    city: outboundRows[0]?.to_city || '',
+                    city: oneWayRows[0]?.to_city || '',
                     code: toCityId
                 }
             },
-
             filterData: {
-                oneWay: outboundFilter,
-                roundTrip: returnFilter
+                oneWay: oneWayFilter,
+                roundTrip: roundTripFilter
             },
 
             budgetStatus: {
@@ -310,7 +258,6 @@ const searchFlights = async (req, res) => {
                 amountLabel: '₹',
                 usedAmount: 0,
                 remainingAmount: tripTotalBudget,
-
                 selectOption: [
                     {
                         label: 'Outbound',
@@ -326,17 +273,15 @@ const searchFlights = async (req, res) => {
                     }
                 ]
             },
-
             flightDetails: {
-                oneWay: outBound,
-                roundTrip: returnFlights
+                oneWay: oneWayFlights,
+                roundTrip: roundTripFlights
             }
         });
 
     } catch (error) {
 
-        console.error('Flight search error:', error);
-
+        console.error( 'Flight search error:', error );
         return res.status(500).json({
             success: false,
             message: 'Failed to fetch flight details',

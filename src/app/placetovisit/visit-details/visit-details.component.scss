@@ -1,0 +1,42 @@
+.cls-visitContainer{
+    .cls-cardContainer{
+        .cls-placeHeader{
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 30px;
+            .cls-sectorDetails{
+                h1{
+                    font: 24px var(--primaryBold);
+                }
+                p{
+                    font: 14px var(--primaryRegular);
+                    color: #6c6a6a;
+                    margin-bottom: 0px;
+                }
+            }
+            .cls-myTrip{
+                background: #eee;
+                border-radius: 30px;
+                padding: 10px 20px;
+                align-self: center;
+                font: 14px var(--primaryBold);
+                cursor: pointer;
+                &.cls-placeSelected{
+                    background: #ff9700;
+                    color: #fff;
+                }
+                span{
+                    margin-right: 5px;
+                    font-weight: bold;
+                }
+            }
+        }
+        .cls-noDataContainer{
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            padding: 20px;
+            width: 50%;
+            margin: 0 auto;
+            border-radius: 15px;
+        }
+    }
+}

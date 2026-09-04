@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { SharedDataService } from 'src/app/services/shared-data.service';
 })
 export class GuideCardComponent implements OnInit {
 
-  @Input() public tripDays:any;
+  @Input() public requestForm:any;
 
   public selectedGuide:any = null;
 
@@ -18,7 +19,7 @@ export class GuideCardComponent implements OnInit {
 
   @Input() public guideResponseValue:any;
   
-  constructor(public sharedData: SharedDataService) { }
+  constructor(public sharedData: SharedDataService, public router: Router) { }
 
   ngOnInit(): void {
     console.log(this.guideResponseValue);
@@ -42,7 +43,7 @@ export class GuideCardComponent implements OnInit {
       guideDetails = {
         name: guide.name,
         icon: 'cls-22-single-person',
-        tripDays: this.tripDays,
+        tripDays: this.requestForm.totalDays,
         details: [
           {
             lable: 'Experience',
@@ -55,10 +56,10 @@ export class GuideCardComponent implements OnInit {
           },
           {
             lable: 'Duration',
-            value: this.tripDays + ' Days',
+            value: this.requestForm.totalDays + ' Days',
           }
         ],
-        totalCost: guide.perDayPrice * this.tripDays
+        totalCost: guide.perDayPrice * this.requestForm.totalDays
       }
     }
     console.log(this.selectedGuide);
@@ -67,6 +68,10 @@ export class GuideCardComponent implements OnInit {
       selectDetails: guideDetails,
       selectHoleValue: this.selectedGuide
     });
+  }
+
+  public goToTransport(){
+    this.router.navigate(['/transport']);
   }
 
 }

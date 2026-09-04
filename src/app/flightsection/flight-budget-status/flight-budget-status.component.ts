@@ -31,8 +31,8 @@ export class FlightBudgetStatusComponent implements OnChanges {
     
     if (changes['selectedValues'] && this.budgetValue?.pageName == "Flights" ) {
       const limitBudget = Number(this.budgetValue?.limit || 0);
-      const outBoundAmount = Number( this.selectedValues?.oneWay?.amount || 0 );
-      const returnAmount = Number( this.selectedValues?.roundTrip?.amount || 0 );
+      const outBoundAmount = Number( this.selectedValues?.oneWay?.totalValue || 0 );
+      const returnAmount = Number( this.selectedValues?.roundTrip?.totalValue || 0 );
       this.budgetValue.usedAmount = outBoundAmount + returnAmount;
       console.log(limitBudget, this.budgetValue.usedAmount);
       
@@ -57,6 +57,8 @@ export class FlightBudgetStatusComponent implements OnChanges {
   public continue(){
     console.log(this.selectedValues);
     if(this.selectedValues.oneWay != null && this.selectedValues.roundTrip != null){
+      this.selectedValues.flightAmount = this.budgetValue.usedAmount;
+      this.selectedValues.flightPercentage = this.progress;
       this.tripState.set('flightDeails', this.selectedValues);
       this.router.navigate(['/guide']);
     }

@@ -4,12 +4,25 @@
     <div class="popup-icon {{details.popupIcon}}"> </div>
     <h2>{{details.header}}</h2>
     <p class="popup-description">{{details.description}}</p>
-    <div class="budget-summary" *ngIf="details.packageAmount">
-      <span>Selected Package</span>
-      <strong> ₹{{ details.packageAmount | number }} </strong>
+    <div *ngIf="details.packageAmount">
+      <div class="budget-summary" >
+        <span>Selected Package</span>
+        <strong> ₹{{ details.packageAmount | number }} </strong>
+      </div>
+      <div class="cls-suggestSplit">
+        <p class="cls-head">Suggested split</p>
+        <div class="cls-suggestDetails" *ngFor="let splitAmount of details.suggestedSplit">
+          <div class="cls-iconName">
+            <span class="cls-icon {{splitAmount.icon}}"></span>
+            <span class="cls-splitName">{{splitAmount.name}}</span>
+          </div>
+          <div class="cls-percentage">{{splitAmount.percentage}}</div>
+          <div class="cls-amount">₹ {{splitAmount.amount | number}}</div>
+        </div>
+      </div>
     </div>
     <div class="popup-actions">
-      <button type="button" class="btn btn-no" (click)="buttonClick(action.index)" *ngFor="let action of details.actions">{{action.label}}</button>
+      <button type="button" class="btn btn-{{action.index}}" (click)="buttonClick(action.index)" *ngFor="let action of details.actions">{{action.label}}</button>
     </div>
   </div>
 </div>

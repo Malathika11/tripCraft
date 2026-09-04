@@ -66,9 +66,9 @@
                         </h2>
                     </div>
                     <div>
-                        <p class="cls-daysCount">{{tripDays}} days total</p>
+                        <p class="cls-daysCount">{{requestForm.totalDays}} days total</p>
                         <h3 class="cls-holePrice">
-                            ₹{{guide.perDayPrice * tripDays | number}}
+                            ₹{{guide.perDayPrice * requestForm.totalDays | number}}
                         </h3>
                     </div>
 
@@ -79,5 +79,14 @@
                 </button>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="cls-noGuide" *ngIf="!needGuide">
+    <div><span class="cls-27-info"></span></div>
+    <div class="cls-information">
+        <h5 class="cls-header">No guide selected</h5>
+        <p class="cls-para">Our guides also arrange your local travel by car. Without a guide, you'll need to plan your own transport for getting around in {{requestForm.toCity.split(',')[0].trim()}}</p>
+        <button class="cls-button" (click)="goToTransport()">Add Local Transport</button>
     </div>
 </div>

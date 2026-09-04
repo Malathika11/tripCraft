@@ -1,0 +1,49 @@
+<div class="cls-itinerary">
+    <div class="cls-itineraryHeader">
+        <h2>Day-wise itinerary</h2>
+        <button class="cls-expandAll" (click)="toggleAll()" >
+            {{ allExpanded ? 'Collapse all' : 'Expand all' }}
+            <span class="cls-2-arrow-right"></span>
+        </button>
+    </div>
+    <div class="cls-timeline">
+        <div class="cls-timelineItem" *ngFor="let day of days; let i = index" >
+            <div class="cls-dayNumber" [class.completed]="day.activitiesCount > 0" >
+                {{ day.day }}
+            </div>
+            <div class="cls-dayCard">
+                <div class="cls-dayHeader" (click)="toggle(i)" >
+                    <div class="cls-dayTitle">
+                        <strong> Day {{ day.day }} </strong>
+                        <span> {{ day.date }} </span>
+                        <b> • </b>
+                        <em> {{ day.title }} </em>
+                    </div>
+                    <div class="cls-dayRight">
+                        <span class="cls-activityTxt">
+                            {{ day.activitiesCount }}
+                            {{ day.activitiesCount === 1 ? 'activity' : 'activities' }}
+                        </span>
+                        <span class="cls-arrow" [ngClass]="day.expanded ? 'cls-upArrow cls-20-arrow-down' : 'cls-20-arrow-down'"> </span>
+                    </div>
+                </div>
+                <div class="cls-activities" *ngIf="day.expanded" >
+                    <div class="cls-activity" *ngFor="let activity of day.activities" >
+                        <div class="cls-activityIcon {{ activity.icon }}" [ngClass]="activity.className" >  </div>
+                        <div class="cls-activityInfo">
+                            <strong> {{ activity.title }} </strong>
+                            <span> {{ activity.description }} </span>
+                        </div>
+                        <div class="cls-activityPrice">
+                            <del *ngIf="activity.oldAmount"> ₹{{ activity.oldAmount | number }} </del>
+                            <strong> ₹{{ activity.amount | number }} </strong>
+                        </div>
+                    </div>
+                    <div class="cls-emptyActivity" *ngIf="day.activities.length === 0" >
+                        No activities planned for this day.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

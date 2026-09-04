@@ -47,12 +47,31 @@ export class HotelBudgetStatusComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
     this.sharedData.data$.subscribe(data => {
-      console.log('datadatadatadata', data);
-      
       if (data) {
-        console.log(data);
-        this.selectedHotel = [...this.selectedHotel, data];
-        console.log(this.selectedHotel);
+        const existingIndex = this.selectedHotel.findIndex(
+          (hotel: any) => hotel.hotelName === data.hotelName && hotel.roomName === data.roomName
+        );
+
+        if (existingIndex !== -1) {
+          const existing = this.selectedHotel[existingIndex];
+          const updatedHotel = {
+            ...existing,
+            nights: existing.nights + data.nights,
+            totalPrice: existing.totalPrice + data.totalPrice,
+            remainingNights: data.remainingNights,   
+            days: {
+              start: Math.min(existing.days.start, data.days.start),
+              end: Math.max(existing.days.end, data.days.end)
+            }
+          };
+          this.selectedHotel = [
+            ...this.selectedHotel.slice(0, existingIndex),
+            updatedHotel,
+            ...this.selectedHotel.slice(existingIndex + 1)
+          ];
+        } else {
+          this.selectedHotel = [...this.selectedHotel, data];
+        }
         this.usedBudget = this.selectedHotel.reduce(
           (total: number, hotel: any) => total + Number(hotel.totalPrice || 0),
           0
@@ -74,12 +93,8 @@ export class HotelBudgetStatusComponent implements OnInit {
       );
       console.log(nightsCount);
       if(nightsCount == this.packageDetails.totalDays ){
-        this.router.navigate([this.budgetDetails?.routerURL], {
-          state: {
-            previousData: history.state,
-            // [this.budgetDetails?.routerLabel]: this.selectedValues
-          }
-        });
+        this.tripState.set('hotelValue', this.selectedHotel);
+        this.router.navigate([this.budgetDetails?.routerURL]);
       }else{
         this.toast.info('Please complete hotel selection for all ' + this.packageDetails.totalDays + 'nights to continue');
       }

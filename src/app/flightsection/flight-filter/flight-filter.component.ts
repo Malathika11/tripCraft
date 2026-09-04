@@ -27,6 +27,8 @@ export class FlightFilterComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnInit(): void {
+    console.log(this.formData, this.filterValues);
+    
   }
 
   ngOnChanges( changes: SimpleChanges ): void {

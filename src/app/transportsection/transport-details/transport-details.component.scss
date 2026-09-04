@@ -1,14 +1,56 @@
 .cls-transport-main{
-    .cls-transport-body{
-        display: flex;
-        justify-content: space-between;
-        .cls-transport-container, .cls-budget-container{
-            width: 20%;
-            box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    .cls-transport-details{
+        padding: 0px 30px 30px;
+        .cls-transportHead{
+            border-radius: 10px;
+            padding: 20px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .cls-sector-details{
+                h1{
+                    margin: 0 0 5px;
+                    font: 24px var(--primaryBold);
+                }
+                p{
+                    color: #5e6b82;
+                    font: 14px var(--primaryRegular);
+                    margin-bottom: 10px;
+                }
+            }
         }
-        .cls-transportCard-container{
-            width: 55%;
-            box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+        .cls-transport-body{
+            display: flex;
+            justify-content: space-between;
+            .cls-filterContainer{
+                width: 20%;
+            }
+            .cls-budgetContainer{
+                width: 25%;
+            }
+            .cls-cardContainer{
+                width: 50%;
+                padding: 15px 20px;
+                &.cls-noValuesFound {
+                    margin: 0px auto;
+                }
+                .cls-transportListHead {
+                    margin-bottom: 15px;
+                    color: #666;
+                    .cls-resultCount{
+                        font: 15px var(--primaryMedium);
+                    }
+                }
+            }
+            .cls-filterContainer, .cls-budgetContainer, .cls-cardContainer{
+                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+                border-radius: 10px;
+            }
+            .cls-filterContainer, .cls-budgetContainer{
+                height: 100vh;
+                overflow: hidden;
+                overflow-y: auto;
+            }
         }
     }
 }

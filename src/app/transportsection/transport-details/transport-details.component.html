@@ -1,14 +1,33 @@
 <div class="cls-transport-main">
     <app-header></app-header>
-    <div class="cls-transport-body">
-        <div class="cls-transport-container">
-            <app-filter></app-filter>
+    <div class="cls-transport-details">
+        <div class="cls-transportHead">
+            <div class="cls-sector-details">
+                <h1>Local Transport Selection</h1>
+                <p>
+                    <span>{{requestFormValue.toCity.split(',')[0].trim()}}</span> •
+                    {{requestFormValue.totalDays}} days
+                </p>
+            </div>
         </div>
-        <div class="cls-transportCard-container">
-            <app-transport-card></app-transport-card>
-        </div>
-        <div class="cls-budget-container">
-            <app-budget-status></app-budget-status>
+        <div class="cls-transport-body" *ngIf="!loader">
+            <div class="cls-filterContainer" *ngIf="filterBudgetRemove">
+                <app-filter [filterValues]="filterData" (filterChange)="onFilterChange($event)"></app-filter>
+            </div>
+            <div class="cls-cardContainer" [ngClass]="{'cls-noValuesFound': filteredList.length === 0 }">
+                <div class="cls-transportListHead" *ngIf="filterBudgetRemove">
+                    <span class="cls-resultCount" *ngIf="filteredList.length"> {{ filteredList.length }} transport found </span>
+                </div>
+                <ng-container *ngIf="filteredList.length > 0">
+                    <app-transport-card [packageDetails]="filteredList"> </app-transport-card>
+                </ng-container>
+                <ng-container *ngIf="filteredList.length === 0 && !loader">
+                    <app-nodatafound [noDataPara]="noDataMessage"></app-nodatafound>
+                </ng-container>
+            </div>
+            <div class="cls-budgetContainer" *ngIf="filterBudgetRemove">
+                <app-budget-status [budgetDetails]="budgetStatusDetails" [cardData]="packageValue"></app-budget-status>
+            </div>
         </div>
     </div>
 </div>

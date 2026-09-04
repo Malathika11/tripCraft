@@ -39,7 +39,7 @@
                 .cls-Amount{
                     margin: 0px;
                     span{
-                        font: 16px var(--primarySemiBold);
+                        font: 18px var(--primarySemiBold);
                     }
                 }
                 .cls-perPerson{
@@ -51,13 +51,14 @@
         .cls-flightSector{
             display: flex;
             justify-content: space-between;
+            margin-bottom: 15px;
             .cls-arrivel,.cls-departure{
                 text-align: center;
                 p{
                     margin: 0px;
                 }
                 .cls-timing{
-                    font: 18px var(--primaryBold);
+                    font: 16px var(--primaryBold);
                 }
                 .cls-sector{
                     font: 12px var(--primaryRegular);
@@ -96,6 +97,33 @@
                     font: 12px var(--primaryBold);
                     color: green;
                     margin: 10px;
+                    &.cls-tooltip {
+                        position: relative;
+                        display: inline-block;
+                        border-bottom: 1px dotted black;
+                        cursor: pointer;
+                        .cls-tooltiptext {
+                            visibility: hidden;
+                            width: 300px;
+                            background-color: black;
+                            color: #ffffff;
+                            text-align: center;
+                            border-radius: 6px;
+                            padding: 8px 0;
+                            position: absolute;
+                            z-index: 1;
+                            bottom: 100%;
+                            left: 5%;
+                            margin-left: -65px;
+                            .cls-stopName{
+                                font: 12px var(--primaryRegular);
+                                letter-spacing: 0.3px;
+                            }
+                        }
+                        &:hover .cls-tooltiptext {
+                            visibility: visible;
+                        }
+                    }
                 }
             }
         }
@@ -112,8 +140,23 @@
                 vertical-align: bottom;
             }
         }
+        .cls-passengerCount{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0px;
+            .cls-passengerDetails{
+                span{
+                    font: 14px var(--primaryMedium);
+                }
+            }
+            .cls-passengerAmount{
+                span{
+                    font: 18px var(--primaryBold);
+                }
+            }
+        }
         .cls-selectBtn{
-            margin: 10px 0px 20px;
+            margin: 20px 0px;
             width: 100%;
             border: unset;
             border-radius: 5px;

@@ -9,14 +9,14 @@
             </p>
         </div>
     </div>
-    <div class="cls-hotelBody">
-        <div class="cls-filterContainer">
+    <div class="cls-hotelBody" *ngIf="!loader">
+        <div class="cls-filterContainer" *ngIf="filterBudgetRemove">
             <app-filter [filterValues]="filterData"(filterChange)="filterChanged($event)"></app-filter>
         </div>
-        <div class="cls-cardContainer">
-            <app-hotel-body [hotelDetails]="hotelValues" ></app-hotel-body>
+        <div class="cls-cardContainer" [ngClass]="{'cls-noValuesFound': !filterBudgetRemove}">
+            <app-hotel-body [hotelDetails]="filterHotelValues" ></app-hotel-body>
         </div>
-        <div class="cls-budgetContainer">
+        <div class="cls-budgetContainer" *ngIf="filterBudgetRemove">
             <app-hotel-budget-status [packageDetails]="requestFormValue" (hotelRemoved)="hotelRemovedFun($event)"></app-hotel-budget-status>
         </div>
     </div>

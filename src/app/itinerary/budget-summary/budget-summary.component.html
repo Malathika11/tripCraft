@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div class="cls-tripReviewPage" *ngIf="!loader">
+    <div class="cls-pageHeader">
+        <div class="cls-headerLeft">
+            <h1>Budget summary & trip review</h1>
+            <p>
+                <strong>{{ commonService.tripDetails.from }}</strong>
+                <span class="cls-2-arrow-right cls-icon"></span>
+                <strong>{{ commonService.tripDetails.to }}</strong>
+                <span class="cls-separator">•</span>
+                {{ commonService.tripDetails.startDate }}
+                –
+                {{ commonService.tripDetails.endDate }}
+                <span class="cls-separator">•</span>
+                {{ commonService.tripDetails.travelers }} traveller
+            </p>
+        </div>
+        <div class="cls-headerActions">
+            <button class="cls-outlineBtn">
+                <span class="cls-63-download"></span>
+                Download summary
+            </button>
+        </div>
+    </div>
+    <div class="cls-mainLayout">
+        <app-cost-breakdown> </app-cost-breakdown>
+        <app-day-itinerary> </app-day-itinerary>
+        <app-budget-card (continueBooking)="continueBooking()" (saveTrip)="saveTrip()"> </app-budget-card>
+    </div>
+</div>

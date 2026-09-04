@@ -17,4 +17,8 @@ export class SharedDataService {
     
     this.dataSubject.next(data);
   }
+
+  public clearTransport(): void {
+    this.dataSubject.next(null);
+  }
 }

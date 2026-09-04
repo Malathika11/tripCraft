@@ -1,0 +1,61 @@
+<div class="cls-placeOverlay" *ngIf="showInfo">
+    <div class="cls-overlayBg" (click)="closeInfo()"> </div>
+    <div class="cls-placeInfo">
+        <div class="cls-infoHeader"> 
+            <div>
+                <h2>My Trip</h2>
+                <p> {{ selectedPlaces.length }} places selected </p>
+            </div>
+            <button type="button" (click)="closeInfo()" class="cls-16-close"></button>
+        </div>
+        <div class="cls-selectedList">
+            <div class="cls-budgetProgress">
+                <div class="cls-progressHeader">
+                    <span>Attractions Budget</span>
+                    <span>{{ budgetPercentage }}%</span>
+                </div>
+                <div class="cls-progressBar">
+                    <div class="cls-progressFill" [style.width.%]="budgetPercentage" [class.overBudget]="totalAmount > formValue.breakdownForm.amountvisitingPlaces"> </div>
+                </div>
+                <div class="cls-progressAmount">
+                    <span>Used: ₹{{ totalAmount | number }}</span>
+                    <span>Limit: ₹{{ formValue.breakdownForm.amountvisitingPlaces | number }}</span>
+                </div>
+            </div>
+            <div class="cls-dayGroup" *ngFor="let day of dayNumbers">
+                <h4 class="cls-dayHeader">Day {{ day }}</h4>
+                <ng-container [ngSwitch]="true">
+                    <div class="cls-restDayCard" *ngSwitchCase="isRestDay(day)">
+                        <span class="cls-53-teacup cls-icon"></span>
+                        <div class="cls-restDayText">
+                            <h5>Rest Day</h5>
+                            <p>No activities planned — a day to relax.</p>
+                        </div>
+                        <button type="button" class="cls-removeRest" (click)="removeRestDay(day)">Remove</button>
+                    </div>
+                    <ng-container *ngSwitchCase="getActivities(day).length > 0">
+                        <div class="cls-selectedPlace" *ngFor="let place of getActivities(day)">
+                            <div class="cls-placeIcon">
+                                <span class="cls-58-location"></span>
+                            </div>
+                            <div class="cls-placeDetails">
+                                <h3>{{ place.name }}</h3>
+                                <p>{{ place.category }}</p>
+                            </div>
+                            <div class="cls-placeAmount">
+                                <strong>₹{{ place.price | number }}</strong>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <p class="cls-noActivity" *ngSwitchDefault>No activity selected</p>
+
+                </ng-container>
+            </div>
+        </div>
+        <div class="cls-total">
+            <span> Subtotal </span>
+            <strong> ₹{{ totalAmount | number }} </strong>
+        </div>
+        <button class="cls-completeBtn" (click)="complete()"> Complete Booking </button>
+    </div>
+</div>

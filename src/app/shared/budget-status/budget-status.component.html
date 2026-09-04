@@ -52,10 +52,13 @@
                 {{selectedValues?.name}}
             </h5>
             <div class="cls-labelValue" *ngFor="let loopData of selectedValues?.details">
-                <div class="cls-label">{{loopData.lable}}:</div>
+                <div class="cls-label"> {{ loopData.lable }}: </div>
                 <div class="cls-value">
-                    <span *ngIf="loopData?.amount">{{cardData?.amount_label}}</span>
-                    {{loopData.value}}
+                    <ng-container *ngIf="loopData?.amount; else normalValue">
+                        <span>{{ cardData?.amount_label }}</span>
+                        {{ loopData.value | number }}
+                    </ng-container>
+                    <ng-template #normalValue> {{ loopData.value }} </ng-template>
                 </div>
             </div>
             <div class="cls-divider"></div>
@@ -72,7 +75,11 @@
         </ng-template>
     </div>
     <div class="cls-divider"></div>
-    <button class="cls-selectGuideBtn" (click)="continue()" [disabled]="!selectedGuide">
-        {{ selectedGuide ? 'Guide Selected' : 'Select a Guide' }}
+    <div class="cls-warning" *ngIf="remainingBudget < 0">
+        ⚠ Your selected {{budgetDetails.pageName}} exceeds the budget by
+        <strong> ₹ {{remainingBudget | number}} </strong>
+    </div>
+    <button  class="cls-selectGuideBtn" (click)="continue()" [disabled]="!selectedGuide || remainingBudget < 0">
+        {{ selectedGuide  ? (budgetDetails.pageName + ' Selected')  : ('Select a ' + budgetDetails.pageName) }}
     </button>
 </div>

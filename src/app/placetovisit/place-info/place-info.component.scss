@@ -1,0 +1,194 @@
+.cls-placeOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    .cls-overlayBg {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(4px);
+    }
+    .cls-placeInfo {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 430px;
+        height: 100vh;
+        background: #fff;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15);
+        display: flex;
+        flex-direction: column;
+        .cls-infoHeader {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            h2 {
+                margin: 0;
+                font: 20px var(--primaryBold);
+            }
+            p {
+                margin: 5px 0 0;
+                color: #888;
+                font: 13px var(--primaryRegular);
+            }
+            button {
+                width: 30px;
+                height: 30px;
+                border: 0;
+                border-radius: 50%;
+                background: #f3f3f3;
+                font-size: 17px;
+                cursor: pointer;
+            }
+        }
+        .cls-selectedList {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+            .cls-budgetProgress {
+                margin: 5px 0px 30px;
+                background: rgb(255 251 235);
+                padding: 20px 15px;
+                border-radius: 10px;
+                .cls-progressHeader {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                    font: 13px var(--primaryBold);
+                    color: #59616d;
+                }
+                .cls-progressBar {
+                    width: 100%;
+                    height: 10px;
+                    overflow: hidden;
+                    background: #e5e7eb;
+                    border-radius: 10px;
+                    .cls-progressFill {
+                        height: 100%;
+                        border-radius: 10px;
+                        background: #2563eb;
+                        transition: width 0.3s ease;
+                        &.overBudget {
+                            background: #ef4444;
+                        }
+                    }
+                }
+                .cls-progressAmount {
+                    display: flex;
+                    justify-content: space-between;
+                    font: 11px var(--primaryRegular);
+                    margin-top: 10px;
+                    color: #7b818b;
+                }
+            }
+            .cls-dayGroup{
+                margin-bottom: 30px;
+                .cls-dayHeader{
+                    font: 18px var(--primaryBold);
+                }
+                .cls-restDayCard{
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    padding: 14px 16px;
+                    background: #FBF6EC;
+                    border: 1px dashed #E2D3A8;
+                    border-radius: 8px;
+                    .cls-icon{
+                        font-size: 22px;
+                        color: #A9812F;
+                    }
+                    .cls-restDayText {
+                        h5{
+                            font: 16px var(--primaryMedium);
+                        }
+                        p{
+                            font: 13px var(--primaryRegular);
+                            color: #6B7280;
+                        }
+                    }
+                    .cls-removeRest{
+                        margin-left: auto;
+                        background: none;
+                        border: none;
+                        color: #A2472F;
+                        font: 12px var(--primaryMedium);
+                    }
+                }
+                .cls-selectedPlace {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    padding: 12px;
+                    margin-bottom: 10px;
+                    border-radius: 12px;
+                    background: #f8f8f8;
+                    .cls-placeIcon {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 10px;
+                        background: #ff9700;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        span {
+                            color: #fff;
+                        }
+                    }
+                    .cls-placeDetails {
+                        flex: 1;
+                        h3 {
+                            margin: 0;
+                            font: 13px var(--primaryBold);
+                        }
+                        p {
+                            margin: 3px 0 0;
+                            color: #999;
+                            font: 11px var(--primaryRegular);
+                        }
+                    }
+                    .cls-placeAmount {
+                        text-align: right;
+                        strong {
+                            display: block;
+                            font: 13px var(--primaryBold);
+                        }
+                        small {
+                            color: #999;
+                            font-size: 10px;
+                        }
+                    }
+                }
+                .cls-noActivity{
+                    margin: 20px 0px;
+                    font: 14px var(--primaryRegular);
+                }
+            }
+        }
+        .cls-total {
+            padding: 20px 25px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            span {
+                color: #777;
+                font: 13px var(--primaryRegular);
+            }
+            strong {
+                color: #f28c00;
+                font: 16px var(--primaryBold);
+            }
+        }
+        .cls-completeBtn {
+            margin: 0 20px 20px;
+            height: 45px;
+            border: 0;
+            border-radius: 10px;
+            background: #ff9700;
+            color: #fff;
+            font: 14px var(--primaryBold);
+            cursor: pointer;
+        }
+    }
+}

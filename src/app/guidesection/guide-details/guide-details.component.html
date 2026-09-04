@@ -9,10 +9,10 @@
     </div>
     <div class="cls-guideBody" *ngIf="!loader">
         <div class="cls-guideCard">
-            <app-guide-card [tripDays]="formValues.totalDays" [guideResponseValue]="guideResponse"></app-guide-card>
+            <app-guide-card [requestForm]="formValues" [guideResponseValue]="guideResponse"></app-guide-card>
         </div>
         <div class="cls-guideBudget">
-            <app-budget-status [budgetDetails]="budgetStatusDetails" [cardData]="packageValue" [packageDetails]="formValues"></app-budget-status>
+            <app-budget-status [budgetDetails]="budgetStatusDetails" [cardData]="packageValue"></app-budget-status>
         </div>
     </div>
 </div>

@@ -1,167 +1,41 @@
-<div class="cls-transportCard" *ngFor="let transport of transportList" [ngClass]="transport.theme">
-
-    <!-- LEFT SIDE -->
-
-    <div class="cls-left">
-
-        <div class="cls-top">
-
-            <div class="cls-icon">
-
-                <span [class]="transport.icon"></span>
-
-            </div>
-
-            <div class="cls-head">
-
-                <div class="cls-titleRow">
-
-                    <h3>{{transport.name}}</h3>
-
-                    <span class="cls-badge">
-                        {{transport.badge}}
-                    </span>
-
+<div class="cls-transportList">
+    <div class="cls-transportCard" *ngFor="let pkg of packageDetails" [ngClass]="{ 'cls-selected': selectedPackage?.id === pkg.id }">
+        <div class="cls-transportCardTop">
+            <div class="cls-transportCardInfo">
+                <div class="cls-transportIconBox">
+                    <span class="cls-iconValue {{ pkg.icon }}"></span>
                 </div>
-
-                <div class="cls-price">
-
-                    ₹{{transport.price | number}}
-
-                    <small>
-                        Total for {{transport.days}} Days
-                    </small>
-
+                <div class="cls-transportTextInfo">
+                    <p class="cls-transportName">{{ pkg.name }}</p>
+                    <p class="cls-transportDesc">{{ pkg.description }}</p>
+                    <span class="cls-recommendedBadge" *ngIf="pkg.recommended">Recommended</span>
                 </div>
-
             </div>
-
+            <div class="cls-transportPriceInfo">
+                <p class="cls-transportPrice">₹{{ pkg.price | number }}</p>
+                <p class="cls-transportPriceSub">{{ pkg.tripDays }} days · ₹{{ pkg.perDayPrice | number }}/day</p>
+            </div>
         </div>
 
-
-        <!-- Vehicle -->
-
-        <div class="cls-vehicle">
-
-            <img [src]="transport.image">
-
-        </div>
-
-
-        <!-- Features -->
-
-        <ul class="cls-featureList">
-
-            <li *ngFor="let item of transport.features">
-
-                <span class="cls-checked"></span>
-
-                {{item}}
-
-            </li>
-
-        </ul>
-
-
-        <!-- Tags -->
-
-        <div class="cls-tags">
-
-            <span *ngFor="let tag of transport.tags" class="cls-tag">
-
-                {{tag}}
-
+        <div class="cls-transportTags">
+            <span class="cls-tagItem">
+                <span class="cls-iconValue {{ pkg.paxIcon }}"></span> Up to {{ pkg.maxPax }} pax
             </span>
-
+            <span class="cls-tagItem" *ngFor="let lang of pkg.languages">
+                <span class="cls-iconValue {{ pkg.languageIcon }}"></span> {{ lang | titlecase }}
+            </span>
+            <span class="cls-tagItem">
+                <span class="cls-iconValue {{ pkg.ratingIcon }}"></span> {{ pkg.rating }} ({{ pkg.reviewCount }})
+            </span>
         </div>
 
-
-        <!-- Bottom -->
-
-        <div class="cls-footerText">
-
-            <span class="cls-people"></span>
-
-            {{transport.footer}}
-
-        </div>
-
-    </div>
-
-
-
-    <!-- RIGHT SIDE -->
-
-    <div class="cls-right">
-
-        <!-- Wishlist -->
-
-        <button class="cls-like" (click)="toggleFavourite(transport)" [class.active]="transport.favourite">
-
-            <span class="cls-heart"></span>
-
+        <button class="cls-selectBtn" [ngClass]="{'cls-selected': selectedPackage?.id === pkg.id }" (click)="selectPackage(pkg)">
+            <span class="cls-36-tick" *ngIf=" selectedPackage?.id === pkg.id "> </span>
+            {{ selectedPackage?.id === pkg.id ? 'Selected' : 'Select Package' }}
         </button>
-
-
-        <!-- Map -->
-
-        <div class="cls-map">
-
-            <img [src]="transport.map">
-
-        </div>
-
-
-        <!-- Route -->
-
-        <div class="cls-route">
-
-            <span>
-                Total Coverage:
-                {{transport.coverage}}
-            </span>
-
-            <span>•</span>
-
-            <span>
-                {{transport.days}} Days
-            </span>
-
-            <span>•</span>
-
-            <span>
-                ~{{transport.distance}} KM
-            </span>
-
-        </div>
-
-
-        <!-- Buttons -->
-
-        <div class="cls-btnRow">
-
-            <button class="cls-details">
-
-                View Details
-
-            </button>
-
-
-            <button class="cls-select" (click)="selectTransport(transport)"
-                [class.active]="selectedTransport?.id==transport.id">
-
-                <span *ngIf="selectedTransport?.id==transport.id">
-                    ✔ Selected
-                </span>
-
-                <span *ngIf="selectedTransport?.id!=transport.id">
-                    Select This Option →
-                </span>
-
-            </button>
-
-        </div>
-
     </div>
 
+    <div class="cls-noResults" *ngIf="!packageDetails.length">
+        No transport packages match your filters.
+    </div>
 </div>

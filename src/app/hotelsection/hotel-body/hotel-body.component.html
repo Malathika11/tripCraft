@@ -1,46 +1,66 @@
 <div class="cls-hotelCard-details">
-    <div class="cls-cardHead">
+    <div class="cls-cardHead" *ngIf="hotelDetails">
         <div class="cls-headerText">{{hotelDetails.length}} hotels found</div>
         <div></div>
     </div>
-    <div class="cls-hotelList row">
-        <div class="cls-hotelCard" *ngFor="let hotel of hotelDetails; trackBy: trackByHotel">
+    <div class="cls-hotelList row" *ngIf="hotelDetails?.length != 0 && hotelDetails">
+        <div class="cls-hotelCard" *ngFor="let hotel of hotelDetails; trackBy: trackByHotel" >
             <div class="cls-imageWrapper">
-                <img class="cls-hotelImage" [src]="hotel.image" [alt]="hotel.hotelName" />
+                <img class="cls-hotelImage" [src]="hotel.images[hotel.activeImageIndex || 0]" [alt]="hotel.hotelName" />
                 <div class="cls-starBadge" *ngIf="hotel.discount != 0">
                     <span class="cls-starCount"> {{ hotel.discount }}% OFF </span>
                 </div>
+                <button type="button" class="cls-imageArrow cls-leftArrow" (click)="previousImage(hotel)" *ngIf="hotel.images?.length > 1" > 
+                    <span class="cls-20-arrow-down"></span>
+                </button>
+                <button type="button" class="cls-imageArrow cls-rightArrow" (click)="nextImage(hotel)" *ngIf="hotel.images?.length > 1" >
+                    <span class="cls-20-arrow-down"></span>
+                </button>
                 <div class="cls-distance">
                     <span class="cls-locationIcon cls-58-location"></span>
                     {{ hotel.distanceFromCenter.value }}
                     {{ hotel.distanceFromCenter.unit }}
                     from center
                 </div>
-                <div class="cls-rating">
-                    <span class="cls-thumb cls-57-thumb-up"></span>
-                    <strong> {{ hotel.rating.score }} </strong>
-                    <span> ({{ hotel.rating.reviewCount }}) </span>
+            </div>
+            <div class="cls-thumbnailList" *ngIf="hotel.images?.length > 1" >
+                <div class="cls-thumbnail" *ngFor="let image of hotel.images; let i = index" [class.cls-activeThumbnail]=" (hotel.activeImageIndex || 0) === i " (click)="changeImage(hotel, i)" >
+                    <img [src]="image" [alt]="hotel.hotelName + ' image ' + (i + 1)" />
                 </div>
             </div>
             <div class="cls-hotelContent">
+                <div class="cls-stars">
+                    <span *ngFor="let star of [].constructor(hotel.star)" class="cls-48-star cls-icon" > </span>
+                    <div class="cls-rating">
+                        <span class="cls-thumb cls-57-thumb-up"></span>
+                        <strong>{{ hotel.rating.score }}</strong>
+                        <span> ({{ hotel.rating.reviewCount }}) </span>
+                    </div>
+                </div>
                 <div class="cls-roomType">
                     <span class="cls-buildingIcon cls-51-hotel"></span>
                     {{ hotel.roomName }}
                 </div>
                 <h3 class="cls-hotelName"> {{ hotel.hotelName }} </h3>
-                <div class="cls-location"> {{ hotel.location }} </div>
+                <div class="cls-location">
+                    <span class="cls-58-location"> </span>
+                    {{ hotel.location }}
+                    <span *ngIf="hotel.city"> , {{ hotel.city | titlecase }} </span>
+                </div>
                 <p class="cls-description"> {{ hotel.description }} </p>
                 <div class="cls-amenities">
-                    <div class="cls-amenity" *ngFor="let amenity of hotel.amenities">
+                    <div class="cls-amenity" *ngFor="let amenity of hotel.amenities" >
                         <span class="cls-amenityIcon">
                             <ng-container [ngSwitch]="amenity.icon">
-                                <span *ngSwitchCase="'wifi'"> ⌁ </span>
-                                <span *ngSwitchCase="'pool'"> ♢ </span>
-                                <span *ngSwitchCase="'spa'"> ♡ </span>
+                                <span *ngSwitchCase="'wifi'" class="cls-56-wifi"> </span>
+                                <span *ngSwitchCase="'pool'"> ◇ </span>
+                                <span *ngSwitchCase="'spa'" class="cls-54-ecg-heart"> </span>
+                                <span *ngSwitchCase="'room-service'" class="cls-51-hotel"></span>
+                                <span *ngSwitchCase="'gym'"> ✦ </span>
                                 <span *ngSwitchDefault> • </span>
                             </ng-container>
                         </span>
-                        <span> {{ amenity.name }} </span>
+                        <span class="cls-amenityName"> {{ amenity.name }} </span>
                     </div>
                 </div>
                 <div class="cls-divider"></div>
@@ -49,14 +69,20 @@
                         <div class="cls-price">
                             {{ hotel.pricing.currencySymbol }}
                             {{ hotel.pricing.pricePerNight | number }}
-                            <span> /night </span>
+                            <span> / night </span>
                         </div>
                     </div>
-                    <button type="button" class="cls-selectBtn" (click)="selectHotel(hotel)"> Select </button>
+                    <button type="button" class="cls-selectBtn" (click)="selectHotel(hotel)" >
+                        Select
+                        <span class="cls-arrowIcon cls-2-arrow-right"></span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+    <ng-container *ngIf="!hotelDetails || hotelDetails?.length == 0">
+        <app-nodatafound [noDataPara]="noDataMessage"></app-nodatafound>
+    </ng-container>
 </div>
 <ng-container *ngIf="showPopup">
     <app-hotel-incdec [noOfDays]="nightCount" [selectHotelDetails]="selectedHotel" [usedNights]="usedNights" (closePopup)="closePopupFun($event)" (hotelSelected)="hotelSelectedFun($event)"></app-hotel-incdec>

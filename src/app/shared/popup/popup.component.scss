@@ -73,7 +73,7 @@ h2 {
 /* Description */
 
 .popup-description {
-    margin: 22px auto 30px;
+    margin: 22px auto;
     color: #667085;
     font: 14px var(--primaryRegular);
 }
@@ -84,13 +84,9 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    margin: 0 0 30px;
-    padding: 16px 20px;
-
-    border: 1px solid #e4e7ec;
+    margin: 0 0 20px;
+    padding: 10px 20px;
     border-radius: 12px;
-
     background: #f9fafb;
 
     span {
@@ -108,10 +104,7 @@ h2 {
 .popup-actions {
     display: flex;
     gap: 16px;
-
     padding-top: 30px;
-
-    border-top: 1px solid #eaecf0;
 }
 
 .btn {
@@ -119,40 +112,27 @@ h2 {
     flex: 1;
     padding: 10px 20px;
     border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
-}
-
-/* No */
-
-.btn-no {
-    border: 1px solid #b8bfd0;
-
-    background: #fff;
-
-    color: #475467;
-
-    &:hover {
-        background: #f9fafb;
-        border-color: #98a2b3;
+    &.btn-no {
+        border: 1px solid #b8bfd0;
+        background: #fff;
+        color: #475467;
+        &:hover {
+            background: #f9fafb;
+            border-color: #98a2b3;
+        }
+    }
+    &.btn-yes {
+        border: 1px solid #4f46e5;
+        background: #4f46e5;
+        color: #fff;
+        &:hover {
+            background: #4338ca;
+        }
     }
 }
 
-/* Yes */
-
-.btn-yes {
-    border: 1px solid #4f46e5;
-
-    background: #4f46e5;
-
-    color: #fff;
-
-    &:hover {
-        background: #4338ca;
-    }
-}
 
 
 /* Responsive */
@@ -179,4 +159,39 @@ h2 {
         width: 100%;
     }
 
+}
+.cls-suggestSplit{
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: left;
+    .cls-head{
+        font: 14px var(--primaryRegular);
+        color: #545353;
+    }
+    .cls-suggestDetails{
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 15px;
+        .cls-iconName{
+            width: 30%;
+            .cls-icon{
+                margin-right: 10px;
+            }
+            .cls-splitName{
+                font: 14px var(--primaryBold);
+            }
+        }
+        .cls-percentage{
+            font: 13px var(--primaryRegular);
+            color: #7a7878;
+            width: 30%;
+            text-align: center;
+        }
+        .cls-amount{
+            font: 14px var(--primaryBold);
+            width: 30%;
+            text-align: right;
+        }
+    }
 }

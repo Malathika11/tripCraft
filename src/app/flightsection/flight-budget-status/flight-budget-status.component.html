@@ -7,6 +7,10 @@
         <p class="cls-totalAmount">{{budgetValue?.amountLabel}} {{packageDetails?.packageCardDetails?.price | number}}</p>
         <p class="cls-budgetLabel"> Total Package Budget </p>
     </div>
+    <div class="cls-passengerDetails">
+        <span class="cls-64-person-2 cls-icon"></span>
+        <span>{{packageDetails.requestFormValue.adults}} Adults, {{packageDetails.requestFormValue.children}} Child, {{packageDetails.requestFormValue.infants}} infants</span>
+    </div>
     <div class="cls-progressSection">
         <div class="cls-progressHeader">
             <span>{{budgetValue?.pageName}} Budget</span>
@@ -64,5 +68,5 @@
         ⚠ Your selected flight exceeds the budget by
         <strong> {{budgetValue?.amountLabel}} {{budgetValue.remainingAmount | number}} </strong>
     </div>
-    <button class="cls-continueBtn" [ngClass]="{ 'cls-disable': budgetValue.remainingAmount > 0 && selectedValues.oneWay == null && selectedValues.roundTrip == null }" (click)="continue()"> Continue to Guide Selection → </button>
+    <button class="cls-continueBtn" [ngClass]="{ 'cls-disable': budgetValue.remainingAmount < 0 || (selectedValues.oneWay == null && selectedValues.roundTrip == null) }" (click)="continue()"> Continue to Guide Selection → </button>
 </div>

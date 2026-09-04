@@ -1,0 +1,38 @@
+.cls-noDataFound {
+    margin: 0 auto;
+    text-align: center;
+    width: 60%;
+    border-radius: 10px;
+
+    img {
+        width: 60%;
+        margin-bottom: 20px;
+    }
+
+    .cls-header {
+        font: 24px var(--primaryBold);
+    }
+
+    .cls-para {
+        font: 14px var(--primaryRegular);
+        margin: 20px 0px;
+    }
+
+    .cls-btn {
+        display: flex;
+        justify-content: space-around;
+
+        button {
+            background: unset;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font: 14px var(--primaryMedium);
+        }
+
+        .cls-changepackage {
+            background: blue;
+            color: #fff;
+        }
+    }
+}

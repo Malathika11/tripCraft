@@ -105,6 +105,8 @@ export class RequestFormComponent implements OnInit {
 
     if(history.state?.backto){
       let formValue =  this.tripState.get<any>('requestFormValue') || {};
+      console.log(formValue,this.requestForm);
+      
       this.requestForm.setValue(formValue);
       this.requestForm.get('breakdownForm')?.setValue(formValue?.breakdownForm)
       this.setBudgetMode(this.requestForm.value.budgetMode);
@@ -288,7 +290,7 @@ export class RequestFormComponent implements OnInit {
 
   public findPackage(){
     this.submit = true;
-    let fields = ['flight','hotel','food','transport','visa','visitingPlaces']
+    let fields = ['flight','hotel','visa','visitingPlaces']
     console.log(this.requestForm);   
     if(this.requestForm.value.budgetMode == "custom"){
       if(this.requestForm.value.breakdownForm.breakdownTotal != 100){

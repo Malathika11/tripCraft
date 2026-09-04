@@ -22,10 +22,10 @@ const routes: Routes = [
     path: 'guide',
     loadChildren: () => import('./guidesection/guidesection.module').then(m => m.GuidesectionModule)
   },
-  // {
-  //   path: 'transport',
-  //   loadChildren: () => import('./transportsection/transportsection.module').then(m => m.TransportsectionModule)
-  // },
+  {
+    path: 'transport',
+    loadChildren: () => import('./transportsection/transportsection.module').then(m => m.TransportsectionModule)
+  },
   {
     path: 'hotel',
     loadChildren: () => import('./hotelsection/hotelsection.module').then(m => m.HotelsectionModule)
@@ -33,7 +33,15 @@ const routes: Routes = [
   {
     path: 'restaurant',
     loadChildren: () => import('./restaurantssection/restaurantssection.module').then(m => m.RestaurantssectionModule)
-  }
+  },
+  {
+    path: 'visitPlace',
+    loadChildren: () => import('./placetovisit/placetovisit.module').then(m => m.PlacetovisitModule)
+  },
+  {
+    path: 'itinerary',
+    loadChildren: () => import('./itinerary/itinerary.module').then(m => m.ItineraryModule)
+  },
 ];
 
 @NgModule({

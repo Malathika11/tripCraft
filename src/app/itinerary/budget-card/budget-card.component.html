@@ -1,0 +1,56 @@
+<div class="cls-budgetWrapper">
+    <div class="cls-budgetCard">
+        <div class="cls-budgetTop">
+            <span>Package total budget</span>
+            <h2> ₹{{ commonService?.totalBudget | number }} </h2>
+            <div class="cls-budgetStatus">
+                <span class="cls-statusDot"></span>
+                <strong> Within budget </strong>
+                <span> · ₹{{ remaining | number }} left </span>
+            </div>
+            <div class="cls-budgetCardBG"> ♜ </div>
+        </div>
+        <div class="cls-budgetContent">
+            <h3> Where the planned cost goes </h3>
+            <div class="cls-budgetBar">
+                <div *ngFor="let item of costBreakdown" [ngClass]="item.className" [style.width.%]="item.percentage">
+                </div>
+            </div>
+            <div class="cls-legend">
+                <div class="cls-legendRow" *ngFor="let item of costBreakdown">
+                    <div class="cls-legendName">
+                        <span class="cls-legendDot" [ngClass]="item.className"></span>
+                        {{ item.type }}
+                    </div>
+                    <div class="cls-legendAmount">
+                        ₹{{ item.amount | number }}
+                        <span> ({{ item.percentage }}%) </span>
+                    </div>
+                </div>
+            </div>
+            <div class="cls-budgetFooter">
+                <div>
+                    <span>Planned cost</span>
+                    <strong> ₹{{ commonService.plannedCost | number }} </strong>
+                </div>
+                <div>
+                    <span>Remaining</span>
+                    <strong class="cls-remaining"> ₹{{ remaining | number }} </strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="cls-continueBtn" (click)="continueBooking.emit()">
+        Continue to book
+        <span class="cls-2-arrow-right"></span>
+    </button>
+    <div class="cls-budgetSuccess">
+        <div class="cls-successIcon cls-36-tick"> </div>
+        <div>
+            <strong> Your trip is within budget. </strong>
+            <span> You can proceed to book with confidence. </span>
+        </div>
+    </div>
+</div>
+
+<app-login></app-login>

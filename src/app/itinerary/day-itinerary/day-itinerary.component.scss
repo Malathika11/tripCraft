@@ -1,0 +1,202 @@
+.cls-itinerary {
+    width: 100%;
+    .cls-itineraryHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+        h2 {
+            margin: 0;
+            font: 16px var(--primaryMedium);
+        }
+        .cls-expandAll {
+            border: 0;
+            background: transparent;
+            color: #ad7b17;
+            font: 12px var(--primaryBold);
+            cursor: pointer;
+            span{
+                margin-left: 5px;
+            }
+        }
+    }
+    .cls-timeline {
+        position: relative;
+        &::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            bottom: 20px;
+            width: 1px;
+            background: #d9ddd9;
+        }
+        .cls-timelineItem {
+            position: relative;
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            .cls-dayNumber {
+                position: relative;
+                z-index: 2;
+                min-width: 30px;
+                width: 30px;
+                height: 30px;
+                margin-top: 15px;
+                border-radius: 50%;
+                background: white;
+                border: 1px solid #d8dce0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font: 12px var(--primaryBold);
+                &.completed {
+                    background: #3d9560;
+                    border-color: #3d9560;
+                    color: white;
+                }
+            }
+            .cls-dayCard {
+                flex: 1;
+                border-radius: 9px;
+                border: 1px solid #e2e3e5;
+                box-shadow: 0 3px 12px rgba(0, 0, 0, .035);
+                overflow: hidden;
+                .cls-dayHeader {
+                    min-height: 61px;
+                    padding: 0 18px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    cursor: pointer;
+                    .cls-dayTitle {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        min-width: 0;
+                        strong {
+                            font: 16px var(--primaryBold);
+                        }
+                        span {
+                            font: 12px var(--primaryRegular);
+                            color: #606b7c;
+                        }
+                        b {
+                            color: #c4c6c9;
+                        }
+                        em {
+                            font: 12px var(--primaryRegular);
+                            color: #a97413;
+                        }
+                    }
+                    .cls-dayRight {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        .cls-activityTxt{
+                            font: 13px var(--primaryRegular);
+                        }
+                        .cls-arrow {
+                            font-size: 18px;
+                            &.cls-upArrow{
+                                transform: rotate(181deg);
+                            }
+                        }
+                    }
+                }
+                .cls-activities {
+                    margin: 0 18px;
+                    border-top: 1px solid #ececec;
+                    .cls-activity {
+                        min-height: 70px;
+                        display: flex;
+                        align-items: center;
+                        gap: 13px;
+                        border-bottom: 1px solid #ededed;
+                        &:last-child {
+                            border-bottom: 0;
+                        }
+                        .cls-activityIcon {
+                            width: 38px;
+                            height: 38px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            flex-shrink: 0;
+                            &.flight {
+                                background: #edf4ff;
+                                color: #2a66b1;
+                            }
+                            &.visit {
+                                background: #fff0ed;
+                                color: #d7654b;
+                            }
+                            &.activity {
+                                background: #fff1df;
+                                color: #d9811e;
+                            }
+                        }
+                        .cls-activityInfo {
+                            flex: 1;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 4px;
+                            strong {
+                                font: 14px var(--primaryMedium);
+                            }
+                            span {
+                                font: 12px var(--primaryRegular);
+                                margin-top: 3px;
+                                color: #667184;
+                            }
+                        }
+                        .cls-activityPrice {
+                            display: flex;
+                            align-items: center;
+                            gap: 7px;
+                            font: 14px var(--primaryBold);
+                            del {
+                                color: #777;
+                                font: 12px var(--primaryRegular);
+                            }
+                        }
+                    }
+                    .cls-emptyActivity {
+                        padding: 20px 5px;
+                        color: #8a919c;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+}
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 700px) {
+    .cls-dayTitle {
+        flex-wrap: wrap;
+        gap: 5px;
+        em {
+            width: 100%;
+        }
+    }
+    .cls-dayHeader {
+        padding: 10px 14px;
+    }
+
+    .cls-activity {
+        padding: 10px 0;
+    }
+
+    .cls-activityPrice {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .cls-activitySuggestion {
+        padding: 10px;
+        flex-wrap: wrap;
+    }
+}

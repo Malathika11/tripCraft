@@ -21,6 +21,8 @@ export class HotelBodyComponent implements OnInit {
 
   public selectedHotels: any[] = [];
 
+  public noDataMessage = "We couldn't find any hotel matching your search.";
+
   constructor(public toast: ToastService, public tripState: TripStateService) { }
 
   ngOnInit(): void {
@@ -56,6 +58,30 @@ export class HotelBodyComponent implements OnInit {
 
   get remainingNights(): number {
     return Math.max( this.nightCount - this.usedNights, 0 );
+  }
+
+  previousImage(hotel: any): void {
+    if (!hotel.images || hotel.images.length <= 1) {
+      return;
+    }
+    if (hotel.activeImageIndex === undefined) {
+      hotel.activeImageIndex = 0;
+    }
+    hotel.activeImageIndex = hotel.activeImageIndex === 0 ? hotel.images.length - 1 : hotel.activeImageIndex - 1;
+  }
+
+  nextImage(hotel: any): void {
+    if (!hotel.images || hotel.images.length <= 1) {
+      return;
+    }
+    if (hotel.activeImageIndex === undefined) {
+      hotel.activeImageIndex = 0;
+    }
+    hotel.activeImageIndex = hotel.activeImageIndex === hotel.images.length - 1 ? 0 : hotel.activeImageIndex + 1;
+  }
+
+  changeImage(hotel: any, index: number): void {
+    hotel.activeImageIndex = index;
   }
 
 }

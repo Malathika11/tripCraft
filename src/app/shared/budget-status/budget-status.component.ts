@@ -16,8 +16,6 @@ export class BudgetStatusComponent implements OnInit {
   
   public usedBudget: number = 0;
 
-  @Input() public packageDetails:any;
-
   @Input() public budgetDetails:any;
 
   @Input() public cardData:any;
@@ -29,7 +27,6 @@ export class BudgetStatusComponent implements OnInit {
   constructor(public sharedData: SharedDataService, public router: Router, public tripState:TripStateService) { }
 
   ngOnInit(): void {
-    console.log(this.packageDetails);
   }
   
   ngOnChanges(changes: SimpleChanges): void {

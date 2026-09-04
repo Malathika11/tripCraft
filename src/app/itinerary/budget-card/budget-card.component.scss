@@ -1,0 +1,196 @@
+.cls-budgetWrapper {
+    width: 100%;
+    .cls-budgetCard {
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+        .cls-budgetTop {
+            position: relative;
+            overflow: hidden;
+            background: #17223e;
+            color: white;
+            padding: 25px 22px 27px;
+            span {
+                position: relative;
+                z-index: 2;
+                font: 12px var(--primaryRegular);
+                color: #c4cada;
+            }
+            h2 {
+                position: relative;
+                z-index: 2;
+                margin: 6px 0 14px;
+                font: 28px var(--primaryBold);
+            }
+            .cls-budgetStatus {
+                position: relative;
+                z-index: 2;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                font: 12px var(--primaryRegular);
+                .cls-statusDot {
+                    width: 8px;
+                    height: 8px;
+                    background: #6acb7e;
+                    border-radius: 50%;
+                }
+                strong{
+                    font: 12px var(--primaryBold);
+                }
+            }
+            .cls-budgetCardBG {
+                position: absolute;
+                right: 15px;
+                bottom: -15px;
+                font-size: 115px;
+                opacity: .08;
+                transform: rotate(-5deg);
+            }
+        }
+        .cls-budgetContent {
+            padding: 25px 22px 20px;
+            h3 {
+                margin: 0 0 15px;
+                font: 14px var(--primaryRegular);
+                color: #4d586b;
+            }
+            .cls-budgetBar {
+                height: 8px;
+                display: flex;
+                overflow: hidden;
+                border-radius: 10px;
+                background: #eee;
+                div {
+                    height: 100%;
+                    &.flight {
+                        background: #3167ae;
+                    }
+                    &.transport {
+                        background: #aa852b;
+                    }
+                    &.hotel {
+                        background: #7f57a7;
+                    }
+                    &.visiting {
+                        background: #b04b2c;
+                    }
+                }
+            }
+            .cls-legend {
+                padding: 13px 0 5px;
+                .cls-legendRow {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    min-height: 27px;
+                    font: 13px var(--primaryRegular);
+                    .cls-legendName {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        font: 14px var(--primaryRegular);
+                        .cls-legendDot {
+                            width: 8px;
+                            height: 8px;
+                            border-radius: 50%;
+                            &.flight {
+                                background: #3167ae;
+                            }
+                            &.transport {
+                                background: #aa852b;
+                            }
+                            &.hotel {
+                                background: #7f57a7;
+                            }
+                            &.visiting {
+                                background: #b04b2c;
+                            }
+                        }
+                    }
+                    .cls-legendAmount {
+                        color: #273146;
+                        font: 12px var(--primaryRegular);
+                        span {
+                            color: #687184;
+                        }
+                    }
+                }
+            }
+            .cls-budgetFooter {
+                border-top: 1px solid #e4e4e4;
+                margin-top: 12px;
+                padding-top: 15px;
+                display: flex;
+                justify-content: space-between;
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    span {
+                        font: 12px var(--primaryRegular);
+                        color: #687184;
+                    }
+                    strong {
+                        font: 18px var(--primaryBold);
+                        &.remaining {
+                            color: #338048;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .cls-continueBtn {
+        width: 100%;
+        margin-top: 20px;
+        border: 0;
+        border-radius: 8px;
+        background: #b18728;
+        color: white;
+        padding: 13px;
+        font: 15px var(--primaryBold);
+        cursor: pointer;
+        transition: .2s;
+        span{
+            margin-left: 5px;
+        }
+        :hover {
+            background: #98741e;
+        }
+    }
+    .cls-budgetSuccess {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 15px;
+        padding: 13px;
+        border-radius: 10px;
+        background: #eef8ef;
+        border: 1px solid #dcefdc;
+        .cls-successIcon {
+            min-width: 30px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 2px solid #42915a;
+            color: #42915a;
+            font-weight: bold;
+        }
+        strong {
+            display: block;
+            font: 12px var(--primaryBold);
+            color: #347444;
+            margin-bottom: 3px;
+        }
+        span {
+            display: block;
+            font: 12px var(--primaryRegular);
+            color: #657366;
+        }
+    }
+}

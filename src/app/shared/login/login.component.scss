@@ -1,0 +1,402 @@
+// ===== TripCraft — Login Modal =====
+$cls-purple: #7C6CF0;
+$cls-purple-dark: #6B5AE8;
+$cls-purple-light: #A79BFA;
+$cls-text-dark: #1F2233;
+$cls-text-muted: #6B7280;
+$cls-border: #E5E7EB;
+$cls-radius: 16px;
+
+.cls-loginOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 15, 25, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.cls-loginModal {
+    position: relative;
+    width: 100%;
+    max-width: 820px;
+    min-height: 480px;
+    background: #fff;
+    border-radius: $cls-radius;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+    display: flex;
+    overflow: hidden;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.cls-closeBtn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+
+    &:hover {
+        background: #fff;
+    }
+}
+
+/* ===================== LEFT PANEL ===================== */
+.cls-leftPanel {
+    position: relative;
+    width: 50%;
+    background: radial-gradient(120% 120% at 15% 10%, #8F82F5 0%, $cls-purple 45%, $cls-purple-dark 100%);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 50% 50% 0;
+}
+
+.cls-brand {
+    position: absolute;
+    top: 24px;
+    left: 28px;
+    font-weight: 700;
+    font-size: 17px;
+    color: #fff;
+    z-index: 4;
+
+    span {
+        font-weight: 400;
+        opacity: 0.85;
+    }
+}
+
+/* decorative bubbles — pure CSS, no images */
+.cls-decoCircle {
+    position: absolute;
+    border-radius: 50%;
+    background: $cls-purple-light;
+    opacity: 0.55;
+    &.cls-deco1 {
+        width: 70px;
+        height: 70px;
+        bottom: -20px;
+        left: 35px;
+        background: #fff;
+        opacity: 0.9;
+    }
+    &.cls-deco2 {
+        width: 7px;
+        height: 7px;
+        bottom: 39%;
+        left: 74%;
+        background: #fff;
+    }
+    &.cls-deco4 {
+        width: 7px;
+        height: 7px;
+        bottom: 32%;
+        left: 65%;
+        background: #fff;
+    }
+    &.cls-deco5 {
+        width: 7px;
+        height: 7px;
+        bottom: 31%;
+        right: 20%;
+        background: #fff;
+    }
+}
+
+
+/* white blob shape behind the girl illustration — pure CSS */
+.cls-blobShape {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    left: 3%;
+    top: 22%;
+    transform: rotate(350deg);
+    opacity: 0.87;
+    img{
+        width: 300px;
+        height: auto;
+    }
+}
+
+/* dotted route + pins */
+.cls-routeSvg {
+    position: absolute;
+    inset: 0;
+    width: 80%;
+    left: 22%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+    top: -2.5%;
+    .cls-routeDash {
+        opacity: 0.9;
+        stroke: black;
+    }
+    .cls-locationCircle{
+        fill: black;
+    }
+}
+.cls-pin {
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+}
+
+/* the ONLY raster image in this component */
+.cls-girlImg {
+    position: absolute;
+    left: 32%;
+    top: 24.5%;
+    bottom: 60px;
+    transform: translateX(-58%);
+    height: 50%;
+    max-height: 320px;
+    width: auto;
+    z-index: 3;
+    object-fit: contain;
+}
+
+.cls-bottomLine {
+    position: absolute;
+    left: 32px;
+    right: 32px;
+    bottom: 26%;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 3;
+}
+
+/* ===================== RIGHT PANEL ===================== */
+.cls-rightPanel {
+    width: 54%;
+    padding: 56px 48px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cls-welcomeTitle {
+    font-size: 26px;
+    font-weight: 700;
+    color: $cls-text-dark;
+    margin: 0 0 10px;
+    line-height: 1.3;
+
+    span {
+        color: $cls-purple;
+    }
+}
+
+.cls-welcomeSub {
+    font-size: 14px;
+    color: $cls-text-muted;
+    margin: 0 0 26px;
+    line-height: 1.5;
+}
+
+.cls-loginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.cls-fieldGroup {
+    margin-bottom: 18px;
+}
+
+.cls-fieldLabel {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: $cls-text-dark;
+    margin-bottom: 8px;
+}
+
+.cls-inputWrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid $cls-border;
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: #F9FAFB;
+    transition: border-color 0.15s;
+
+    &:focus-within {
+        border-color: $cls-purple;
+        background: #fff;
+    }
+
+    input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        outline: none;
+        font-size: 14px;
+        color: $cls-text-dark;
+
+        &::placeholder {
+            color: #B0B4BD;
+        }
+    }
+}
+
+.cls-fieldIcon {
+    flex-shrink: 0;
+}
+
+.cls-eyeBtn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.cls-formRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.cls-rememberMe {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: $cls-text-dark;
+    cursor: pointer;
+
+    input {
+        display: none;
+    }
+
+    .cls-checkBox {
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+        border: 1.5px solid $cls-border;
+        background: #fff;
+        position: relative;
+        display: inline-block;
+    }
+
+    input:checked+.cls-checkBox {
+        background: $cls-purple;
+        border-color: $cls-purple;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 4px;
+            height: 8px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+}
+
+.cls-forgotLink {
+    font-size: 13px;
+    color: $cls-text-muted;
+    text-decoration: underline;
+
+    &:hover {
+        color: $cls-purple;
+    }
+}
+
+.cls-loginBtn {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(180deg, $cls-purple 0%, $cls-purple-dark 100%);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 22px;
+    transition: opacity 0.15s;
+
+    &:hover {
+        opacity: 0.92;
+    }
+}
+
+.cls-socialRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: $cls-text-muted;
+}
+
+.cls-socialBtn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid $cls-border;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+        border-color: $cls-purple;
+    }
+}
+
+.cls-signupText {
+    text-align: center;
+    font-size: 13px;
+    color: $cls-text-dark;
+    margin: 0;
+
+    a {
+        color: $cls-purple;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 720px) {
+    .cls-loginModal {
+        flex-direction: column;
+        max-height: 92vh;
+        overflow-y: auto;
+    }
+
+    .cls-leftPanel {
+        width: 100%;
+        height: 220px;
+    }
+
+    .cls-girlImg {
+        bottom: -10px;
+        max-height: 220px;
+    }
+
+    .cls-rightPanel {
+        width: 100%;
+        padding: 32px 24px;
+    }
+}

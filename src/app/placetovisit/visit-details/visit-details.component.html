@@ -1,0 +1,28 @@
+<div class="cls-visitContainer">
+    <div class="cls-visitHeader">
+        <app-header></app-header>
+    </div>
+    <div class="cls-cardContainer">
+        <div class="cls-placeHeader">
+            <div class="cls-sectorDetails">
+                <h1>{{formValue.toCity.split(',')[0].trim()}} Attractions</h1>
+                <p>
+                    {{formValue.adults + formValue.children + formValue.infants }} travelers
+                </p>
+            </div>
+            <div class="cls-myTrip" (click)="selectedPlaces.length == 0 ? null : showMyTrip = true" [ngClass]="{ 'cls-placeSelected': selectedPlaces.length != 0 }">
+                <span class="cls-59-camera"></span>
+                <span>My Trip</span>
+                <span *ngIf="selectedPlaces.length != 0">({{selectedPlaces.length}})</span>
+            </div>
+        </div>
+        <ng-container *ngIf="!loader && visitDetails">
+            <app-visit-cards [visitDetails]="visitDetails" (selectedPlacesChange)="selectedPlacesFun($event)"> </app-visit-cards>
+        </ng-container>
+        <div class="cls-noDataContainer" *ngIf="!visitDetails && !loader">
+            <app-nodatafound [noDataPara]="noDataMessage"></app-nodatafound>
+        </div>
+    </div>
+</div>
+
+<app-place-info [selectedPlaces]="selectedPlaces" [itineraryValue]="visitCard?.itinerary" [showInfo]="showMyTrip" (closeInfoChange)="showMyTrip = $event"></app-place-info>

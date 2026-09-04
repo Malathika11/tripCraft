@@ -1,0 +1,127 @@
+<div class="cls-loginOverlay">
+  <div class="cls-loginModal">
+
+    <button class="cls-closeBtn" (click)="closeModal()" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M1 1L17 17M17 1L1 17" stroke="#6B7280" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <!-- ===================== LEFT PANEL (all code, no image except girl) ===================== -->
+    <div class="cls-leftPanel">
+
+      <!-- brand -->
+      <div class="cls-brand">Trip<span>Craft</span></div>
+
+      <!-- decorative floating circles -->
+      <span class="cls-decoCircle cls-deco1"></span>
+      <span class="cls-decoCircle cls-deco2"></span>
+      <span class="cls-decoCircle cls-deco3"></span>
+      <span class="cls-decoCircle cls-deco4"></span>
+      <span class="cls-decoCircle cls-deco5"></span>
+
+      <!-- white blob behind the girl -->
+      <div class="cls-blobShape">
+        <img src="../../../assets/images/login_center_circle.png" alt="">
+      </div>
+
+      <!-- dotted path + location pins (SVG, no image) -->
+      <svg class="cls-routeSvg" viewBox="0 0 400 420" preserveAspectRatio="xMidYMid meet">
+        <path class="cls-routeDash" d="M120 130 L215 165 L300 235 L340 320"
+              fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round"/>
+        <circle class="cls-locationCircle" cx="215" cy="165" r="5" fill="#FFFFFF"/>
+        <circle class="cls-locationCircle" cx="300" cy="235" r="5" fill="#FFFFFF"/>
+
+        <!-- pin 1 -->
+        <g class="cls-pin" transform="translate(105,95)">
+          <path d="M15 0C7 0 0 7 0 15c0 11 15 27 15 27s15-16 15-27c0-8-7-15-15-15z" fill="#FFFFFF"/>
+          <circle cx="15" cy="15" r="6" fill="#7C6CF0"/>
+        </g>
+
+        <!-- pin 2 -->
+        <g class="cls-pin" transform="translate(320,300)">
+          <path d="M15 0C7 0 0 7 0 15c0 11 15 27 15 27s15-16 15-27c0-8-7-15-15-15z" fill="#FFFFFF"/>
+          <circle cx="15" cy="15" r="6" fill="#7C6CF0"/>
+        </g>
+      </svg>
+
+      <!-- ONLY the girl is an actual image, everything else is code -->
+      <img class="cls-girlImg" src="../../../assets/images/login_girl.png" alt="Traveler illustration">
+
+      <div class="cls-bottomLine"></div>
+    </div>
+
+    <!-- ===================== RIGHT PANEL ===================== -->
+    <div class="cls-rightPanel">
+
+      <h2 class="cls-welcomeTitle">Welcome to <span>TripCraft</span></h2>
+      <p class="cls-welcomeSub">
+        If you already have an account on TripCraft, please sign in below.
+      </p>
+
+      <form class="cls-loginForm" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+        <div class="cls-fieldGroup">
+          <label class="cls-fieldLabel">E-mail or user name</label>
+          <div class="cls-inputWrap">
+            <svg class="cls-fieldIcon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 22c0-4.4 4-8 9-8s9 3.6 9 8"
+                    stroke="#9CA3AF" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <input type="text" formControlName="userName" placeholder="enter your e-mail or user name">
+          </div>
+        </div>
+
+        <div class="cls-fieldGroup">
+          <label class="cls-fieldLabel">Password</label>
+          <div class="cls-inputWrap">
+            <svg class="cls-fieldIcon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <rect x="4" y="10" width="16" height="10" rx="2" stroke="#9CA3AF" stroke-width="1.6"/>
+              <path d="M8 10V7a4 4 0 018 0v3" stroke="#9CA3AF" stroke-width="1.6"/>
+            </svg>
+            <input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="enter your password">
+            <button type="button" class="cls-eyeBtn" (click)="togglePassword()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" stroke="#9CA3AF" stroke-width="1.6"/>
+                <circle cx="12" cy="12" r="3" stroke="#9CA3AF" stroke-width="1.6"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="cls-formRow">
+          <label class="cls-rememberMe">
+            <input type="checkbox" formControlName="rememberMe">
+            <span class="cls-checkBox"></span>
+            Remember me
+          </label>
+          <a href="javascript:void(0)" class="cls-forgotLink">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="cls-loginBtn">Login</button>
+
+        <div class="cls-socialRow">
+          <span>Log in with</span>
+          <button type="button" class="cls-socialBtn" (click)="loginWithGoogle()" aria-label="Login with Google">
+            <svg width="18" height="18" viewBox="0 0 48 48">
+              <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.6-6 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 3l6-6C34 5.1 29.3 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.4-.1-2.7-.4-3.5z"/>
+              <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.9 18.9 13 24 13c3.1 0 5.8 1.1 8 3l6-6C34 5.1 29.3 3 24 3c-7.5 0-14 4.2-17.7 10.4z"/>
+              <path fill="#4CAF50" d="M24 45c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 36.2 26.7 37 24 37c-5.3 0-9.7-3.4-11.3-8l-6.6 5.1C9.9 40.7 16.4 45 24 45z"/>
+              <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.6l6.2 5.2C40.9 36 44 30.8 44 24c0-1.4-.1-2.7-.4-3.5z"/>
+            </svg>
+          </button>
+          <button type="button" class="cls-socialBtn" (click)="loginWithFacebook()" aria-label="Login with Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24">
+              <path fill="#1877F2" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/>
+            </svg>
+          </button>
+        </div>
+
+        <p class="cls-signupText">
+          Don't have an account? Click here to <a href="javascript:void(0)" (click)="goToSignup()">Sign up now</a>
+        </p>
+      </form>
+    </div>
+
+  </div>
+</div>

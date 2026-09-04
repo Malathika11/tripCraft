@@ -23,7 +23,17 @@
         .cls-budgetLabel {
             font: 16px var(--primaryExtraBold);
             color: #777;
-            margin-bottom: 25px;
+        }
+    }
+    .cls-passengerDetails{
+        margin-bottom: 25px;
+        font: 14px var(--primaryBold);
+        background: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+        .cls-icon{
+            font-size: 18px;
+            margin-right: 10px;
         }
     }
     .cls-progressSection {

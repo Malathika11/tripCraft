@@ -1,0 +1,28 @@
+<div class="cls-costCard">
+    <div class="cls-cardHeader">
+        <h2>Cost breakdown</h2>
+        <button class="cls-editAll"> <span class="cls-68-edit"></span> Edit all </button>
+    </div>
+    <div class="cls-costItem" *ngFor="let item of costBreakdown" [ngClass]="item.className">
+        <div class="cls-costIcon {{ item.icon }}">  </div>
+        <div class="cls-costInfo">
+            <div class="cls-costTitleRow">
+                <strong> {{ item.type }} </strong>
+                <strong class="cls-amount"> ₹{{ item.amount | number }} </strong>
+            </div>
+            <div class="cls-descriptionPercentage">
+                <p> {{ item.description }} </p>
+                <span class="cls-percentage"> {{ item.percentage }}% </span>
+            </div>
+            <button class="cls-editLink"> {{ item.status }} </button>
+        </div>
+    </div>
+    <div class="cls-plannedCost">
+        <span>Planned cost</span>
+        <strong> ₹{{ plannedCost | number }} </strong>
+    </div>
+    <div class="cls-infoMessage">
+        <span class="cls-27-info"></span>
+        <p> You can reallocate budgets in any category. </p>
+    </div>
+</div>

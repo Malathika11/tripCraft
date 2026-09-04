@@ -30,9 +30,17 @@ const guideRoutes = require('./routes/guide.routes');
 
 app.use('/api/guides', guideRoutes);
 
+const transportRoutes = require('./routes/transport');
+
+app.use( '/api/transport', transportRoutes);
+
 const hotelRoutes = require('./routes/hotel.routes');
 
 app.use( '/api/hotels', hotelRoutes);
+
+const visitingPlacesRoutes = require('./routes/visitingPlaces.routes');
+
+app.use('/api/visiting-places', visitingPlacesRoutes);
 
 // Sector Search API
 app.get('/api/sectors/search', (req, res) => {

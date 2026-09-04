@@ -15,11 +15,15 @@ export class FlightCardComponent implements OnInit {
 
   public loader:boolean = true;
 
+  @Input() public formValue:any;
+
+  public noDataMessage:any = "We couldn't find any flights matching your search.";
+
   constructor() { }
 
   ngOnInit(): void {
     console.log(this.flightDetails,this.tripTypeValue);
-    
+
   }
 
   ngOnChanges( changes: SimpleChanges ): void {
@@ -29,6 +33,7 @@ export class FlightCardComponent implements OnInit {
   }
 
   public flightSelect( selectedFlight: any ): void {
+    selectedFlight.totalValue = this.totalFlightPrice(selectedFlight)
     if (selectedFlight.selected) {
       selectedFlight.selected = false;
       this.emitSelectedFlight(null);
@@ -47,4 +52,11 @@ export class FlightCardComponent implements OnInit {
       flight: selectedFlight
     });
   }
+
+  public totalFlightPrice(card: any): number {
+    const { adults, children, infants } = this.formValue;
+    const infantFareRate = 0.10;
+    return (card.amount * (adults + children)) + (card.amount * infantFareRate * infants);
+  }
+  
 }
