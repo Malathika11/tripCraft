@@ -22,7 +22,7 @@ export class HotelBudgetStatusComponent implements OnInit {
     limit: 0,
     pageName: 'Hotel',
     routerLabel: 'hotelDetails',
-    routerURL: 'restaurant'
+    routerURL: 'itinerary'
   }
 
   public cardData:any;
