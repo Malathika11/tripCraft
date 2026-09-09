@@ -16,7 +16,7 @@
             </button>
         </ng-container>
     </div>
-    <div class="cls-placeSection" *ngFor="let section of visitDetails">
+    <div class="cls-placeSection" *ngFor="let section of visitDetails; let i = index">
         <div class="cls-sectionHeader">
             <div class="cls-sectionTitle">
                 <div class="cls-sectionIcon">
@@ -28,11 +28,11 @@
                 </div>
             </div>
             <div class="cls-sectionArrows">
-                <button type="button" class="cls-20-arrow-down cls-leftArrow" (click)="scrollLeft()" [disabled]="isLeftDisabled"></button>
-                <button type="button" class="cls-20-arrow-down cls-rightArrow" (click)="scrollRight()" [disabled]="isRightDisabled"> </button>
+                <button type="button" class="cls-20-arrow-down cls-leftArrow" (click)="scrollLeft(i)" [disabled]="isLeftDisabled[i]"> </button>
+                <button type="button" class="cls-20-arrow-down cls-rightArrow" (click)="scrollRight(i)" [disabled]="isRightDisabled[i]"> </button>
             </div>
         </div>
-        <div class="cls-cardWrapper" #cardWrapper>
+        <div class="cls-cardWrapper cls-cardValues{{i}}">
             <div class="cls-placeCard" *ngFor="let place of section.places" [class.selected]="isSelected(place)" (click)="selectPlace(place)">
                 <div class="cls-discount" *ngIf="place.discount"> {{ place.discount }} </div>
                 <div class="cls-image">

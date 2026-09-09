@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { TripStateService } from 'src/app/services/trip-state.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-hotel-budget-status',
@@ -22,7 +24,7 @@ export class HotelBudgetStatusComponent implements OnInit {
     limit: 0,
     pageName: 'Hotel',
     routerLabel: 'hotelDetails',
-    routerURL: 'itinerary'
+    routerURL: 'visitPlace'
   }
 
   public cardData:any;
@@ -35,6 +37,8 @@ export class HotelBudgetStatusComponent implements OnInit {
 
   public submit:boolean = false;
 
+  private destroy$ = new Subject<void>();
+
   constructor(public sharedData: SharedDataService, public router: Router, public toast: ToastService, public tripState: TripStateService) { }
 
   ngOnInit(): void {
@@ -44,12 +48,20 @@ export class HotelBudgetStatusComponent implements OnInit {
     this.budgetDetails.limit = this.packageDetails.breakdownForm.amounthotel;
   }
   
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    this.sharedData.data$.subscribe(data => {
-      if (data) {
+  ngOnChanges(): void {
+    this.sharedData.data$.pipe( takeUntil(this.destroy$) ).subscribe(data => {
+
+      if(this.budgetDetails.pageName == data?.key){
+        data = data.value;
+        console.log(this.selectedHotel);
         const existingIndex = this.selectedHotel.findIndex(
-          (hotel: any) => hotel.hotelName === data.hotelName && hotel.roomName === data.roomName
+          (hotel: any) =>
+            hotel.hotelName === data.hotelName &&
+            hotel.roomName === data.roomName &&
+            (
+              hotel.days.end + 1 === data.days.start ||  
+              data.days.end + 1 === hotel.days.start      
+            )
         );
 
         if (existingIndex !== -1) {
@@ -58,7 +70,6 @@ export class HotelBudgetStatusComponent implements OnInit {
             ...existing,
             nights: existing.nights + data.nights,
             totalPrice: existing.totalPrice + data.totalPrice,
-            remainingNights: data.remainingNights,   
             days: {
               start: Math.min(existing.days.start, data.days.start),
               end: Math.max(existing.days.end, data.days.end)
@@ -72,11 +83,15 @@ export class HotelBudgetStatusComponent implements OnInit {
         } else {
           this.selectedHotel = [...this.selectedHotel, data];
         }
+
         this.usedBudget = this.selectedHotel.reduce(
           (total: number, hotel: any) => total + Number(hotel.totalPrice || 0),
           0
         );
         this.budgetPercentage = Math.round((this.usedBudget / this.budgetDetails.limit) * 100);
+        console.log(this.selectedHotel);
+        this.selectedHotel = [...this.selectedHotel].sort((a, b) => a.days.start - b.days.start);
+        console.log(this.selectedHotel);
       }
     });
   }

@@ -4,19 +4,17 @@ exports.getGuides = (req, res) => {
 
     const {
         toCityId,
-        totalDays
+        totalDays,
+        amount
     } = req.body;
 
-    console.log('Guide Request:', {
-        toCityId,
-        totalDays
-    });
+    console.log('Guide Request:', { toCityId, totalDays, amount });
 
-    if (!toCityId || !totalDays) {
+    if (!toCityId || !totalDays || amount == null) {
 
         return res.status(400).json({
             success: false,
-            message: 'toCityId and totalDays are required'
+            message: 'toCityId, totalDays and amount are required'
         });
 
     }
@@ -29,6 +27,7 @@ exports.getGuides = (req, res) => {
             g.reviews,
             g.experience,
             p.per_day_price AS perDayPrice,
+            (p.per_day_price * ?) AS totalPrice,
             g.description,
             g.languages,
             g.specialities,
@@ -41,21 +40,18 @@ exports.getGuides = (req, res) => {
 
         WHERE g.city_id = ?
         AND p.total_days = ?
+        AND (p.per_day_price * ?) <= ?
 
         ORDER BY g.rating DESC
     `;
 
     db.query(
-        sql,
-        [toCityId, Number(totalDays)],
+        sql, [ Number(totalDays), toCityId, Number(totalDays), Number(totalDays), Number(amount) ],
         (err, result) => {
 
             if (err) {
 
-                console.error(
-                    '❌ Guide query error:',
-                    err
-                );
+                console.error( '❌ Guide query error:', err );
 
                 return res.status(500).json({
                     success: false,
@@ -64,10 +60,7 @@ exports.getGuides = (req, res) => {
                 });
             }
 
-            console.log(
-                '✅ Guides found:',
-                result.length
-            );
+            console.log( '✅ Guides found:', result.length );
 
             const guides = result.map(guide => ({
 
@@ -81,23 +74,15 @@ exports.getGuides = (req, res) => {
 
                 experience: guide.experience,
 
-                perDayPrice: Number(
-                    guide.perDayPrice
-                ),
+                perDayPrice: Number( guide.perDayPrice ),
+
+                totalPrice: Number( guide.totalPrice ),
 
                 description: guide.description,
 
-                languages: guide.languages
-                    ? guide.languages
-                        .split(',')
-                        .map(item => item.trim())
-                    : [],
+                languages: guide.languages ? guide.languages.split(',').map(item => item.trim()) : [],
 
-                specialities: guide.specialities
-                    ? guide.specialities
-                        .split(',')
-                        .map(item => item.trim())
-                    : [],
+                specialities: guide.specialities ? guide.specialities.split(',').map(item => item.trim()) : [],
 
                 image: guide.image
 

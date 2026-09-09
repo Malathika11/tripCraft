@@ -50,6 +50,10 @@ export class FlightDetailsComponent implements OnInit {
     guide: 0
   };
 
+  public noDataMessage:any;
+
+  public noDataFoundShow:boolean = false;
+
   constructor(public apiService: ApiService, public tripState: TripStateService) { }
 
   ngOnInit(): void {
@@ -113,6 +117,11 @@ export class FlightDetailsComponent implements OnInit {
   getFlightDetails() {
     console.log(this.requestFormValue);
 
+    const adults = Number(this.requestFormValue.adults) || 0;
+    const children = Number(this.requestFormValue.children) || 0;
+    const infants = Number(this.requestFormValue.infants) || 0;
+    const effectiveTravelers = adults + children + (infants * 0.10);
+
     const request = {
       fromCityId: this.requestFormValue.fromCityId,
       toCityId: this.requestFormValue.toCityId,
@@ -121,20 +130,25 @@ export class FlightDetailsComponent implements OnInit {
       adults: this.requestFormValue.adults,
       children: this.requestFormValue.children,
       infants: this.requestFormValue.infants,
-      amount: this.requestFormValue.breakdownForm['amountflight'] / 2 || 0,
+      amount: effectiveTravelers > 0  ? Math.round(this.percentage.flight / (2 * effectiveTravelers))  : 0,
       totalBudget: this.packageCardDetails.price
     };
 
     this.apiService.searchFlights(request).subscribe({
       next: (response: any) => {
         console.log(response);
-
         if (response.success) {
           this.loader = false;
           this.flightResponse = response;
           this.changeTripType('oneWay');
           this.budgetStatus.limit = this.requestFormValue.breakdownForm['amountflight'];
         }
+      },
+      error: (error:any) => {
+        console.log(error);
+        
+        this.noDataFoundShow = true;
+        this.noDataMessage = error.error.message;
       }
     });
   }

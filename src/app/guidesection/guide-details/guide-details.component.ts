@@ -42,7 +42,8 @@ export class GuideDetailsComponent implements OnInit {
   public getPackageDetails() {
     const request = {
       toCityId: this.formValues.toCityId,
-      totalDays: this.formValues.totalDays
+      totalDays: this.formValues.totalDays,
+      amount: this.formValues.breakdownForm.amountguide
     };
     this.apiService.searchGuide(request).subscribe({
       next: (response: any) => {
@@ -53,6 +54,20 @@ export class GuideDetailsComponent implements OnInit {
         }
       }
     });
+  }
+
+  public transportSelection(event:any){
+    if(!event){
+      this.budgetStatusDetails = {
+        budget: 0,
+        limit: 0,
+        pageName: 'Transport',
+        routerLabel: 'transportDetails',
+        routerURL: 'hotel'
+      }
+      this.budgetStatusDetails.budget = this.formValues.budget;
+      this.budgetStatusDetails.limit = this.formValues.breakdownForm.amountguide;
+    }
   }
 
 }

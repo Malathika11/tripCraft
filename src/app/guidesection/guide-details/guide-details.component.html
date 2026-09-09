@@ -9,7 +9,7 @@
     </div>
     <div class="cls-guideBody" *ngIf="!loader">
         <div class="cls-guideCard">
-            <app-guide-card [requestForm]="formValues" [guideResponseValue]="guideResponse"></app-guide-card>
+            <app-guide-card [requestForm]="formValues" [guideResponseValue]="guideResponse" (transportSelect)="transportSelection($event)"></app-guide-card>
         </div>
         <div class="cls-guideBudget">
             <app-budget-status [budgetDetails]="budgetStatusDetails" [cardData]="packageValue"></app-budget-status>

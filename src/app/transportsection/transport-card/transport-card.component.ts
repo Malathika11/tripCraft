@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SharedDataService } from 'src/app/services/shared-data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-transport-card',
@@ -12,9 +13,17 @@ export class TransportCardComponent implements OnInit {
 
   public selectedPackage:any; 
 
+  private subscription!: Subscription;
+
   constructor(public sharedData: SharedDataService) { }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
+    console.log('destroy');
+    
   }
 
   public selectPackage(pkg: any): void {
@@ -46,7 +55,7 @@ export class TransportCardComponent implements OnInit {
         totalCost: pkg.perDayPrice * pkg.tripDays
       }
     }
-    this.sharedData.setData({
+    this.sharedData.setData('Transport',{
       selectDetails: transportSelectValue,
       selectHoleValue: this.selectedPackage
     });

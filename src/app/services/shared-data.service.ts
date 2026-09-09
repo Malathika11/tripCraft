@@ -10,15 +10,9 @@ export class SharedDataService {
 
   private dataSubject = new BehaviorSubject<any>(null);
 
-  public data$ = this.dataSubject.asObservable();
+  data$ = this.dataSubject.asObservable();
 
-  public setData(data: any) {
-    console.log(data);
-    
-    this.dataSubject.next(data);
-  }
-
-  public clearTransport(): void {
-    this.dataSubject.next(null);
+  setData(key: string, value: any) {
+    this.dataSubject.next({ key, value });
   }
 }

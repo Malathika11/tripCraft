@@ -2,8 +2,8 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { TripStateService } from 'src/app/services/trip-state.service';
-// import { Budget } from '../../models/budget.model';
-// import { Flight } from '../../models/flight.model';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-budget-status',
@@ -24,6 +24,8 @@ export class BudgetStatusComponent implements OnInit {
 
   public budgetPercentage:any = 0;
 
+  private destroy$ = new Subject<void>();
+
   constructor(public sharedData: SharedDataService, public router: Router, public tripState:TripStateService) { }
 
   ngOnInit(): void {
@@ -31,24 +33,26 @@ export class BudgetStatusComponent implements OnInit {
   
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
-    this.sharedData.data$.subscribe(data => {
-      console.log('datadatadatadata', data);
-      
-      if (data && data?.selectHoleValue != '') {
-        console.log(data);
-        this.selectedGuide = data?.selectHoleValue;
-        this.selectedValues = data.selectDetails;
-        this.usedBudget = this.selectedGuide.perDayPrice * this.selectedValues.tripDays;
-        console.log(this.usedBudget, this.budgetDetails.limit, this.budgetPercentage);
-        console.log(this.usedBudget / this.budgetDetails.limit ,(this.usedBudget / this.budgetDetails.limit ) * 100);
-        
-        this.budgetPercentage = Math.round((this.usedBudget / this.budgetDetails.limit ) * 100);   
-      }
-
-      if(data?.selectHoleValue == ''){
-        this.selectedGuide = '';
-        this.usedBudget = 0;
-        this.budgetPercentage = 0;
+    this.sharedData.data$.pipe( takeUntil(this.destroy$) ).subscribe(data => {
+      console.log('datadatadatadata', data, this.budgetDetails);
+      if(this.budgetDetails.pageName == data?.key){
+        data = data.value;
+        if (data && data?.selectHoleValue != '') {
+          console.log(data);
+          this.selectedGuide = data?.selectHoleValue;
+          this.selectedValues = data.selectDetails;
+          this.usedBudget = this.selectedGuide.perDayPrice * this.selectedValues.tripDays;
+          console.log(this.usedBudget, this.budgetDetails.limit, this.budgetPercentage);
+          console.log(this.usedBudget / this.budgetDetails.limit ,(this.usedBudget / this.budgetDetails.limit ) * 100);
+          
+          this.budgetPercentage = Math.round((this.usedBudget / this.budgetDetails.limit ) * 100);   
+        }
+  
+        if(data?.selectHoleValue == ''){
+          this.selectedGuide = '';
+          this.usedBudget = 0;
+          this.budgetPercentage = 0;
+        }
       }
     });
   }

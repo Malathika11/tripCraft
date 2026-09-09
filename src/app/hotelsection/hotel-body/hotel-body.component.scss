@@ -247,3 +247,97 @@
         }
     }
 }
+.cls-modalBackdrop{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(15, 28, 55, 0.28);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    animation: fadeIn 0.2s ease-out;
+    .cls-gapSelectorModal {
+        position: relative;
+        width: 57%;
+        max-height: calc(100vh - 48px);
+        overflow-y: auto;
+        padding: 30px 40px 36px;
+        background: #ffffff;
+        border: 1px solid #e2e7f0;
+        border-radius: 18px;
+        box-shadow: 0 20px 60px rgba(20, 43, 87, 0.18), 0 5px 20px rgba(20, 43, 87, 0.08);
+        animation: slideUp 0.25s ease-out;
+        box-sizing: border-box;
+        .cls-gapTitle{
+            font: 24px var(--primaryBold);
+        }
+        .cls-gapSub{
+            font: 16px var(--primaryRegular);
+            margin: 15px 0;
+        }
+        .cls-gapCard{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            .cls-gapOption{
+                display: flex;
+                cursor: pointer;
+                margin: 20px 0px;
+                align-items: center;
+                width: 47%;
+                border: 1px solid #eee;
+                padding: 10px 20px;
+                border-radius: 10px;
+                justify-content: space-between;
+                .cls-icon{
+                    font-size: 18px;
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 30%;
+                    background: #edf5ff;
+                    text-align: center;
+                    align-content: center;
+                    font-weight: bold;
+                }
+                .cls-gapText{
+                    .cls-gapLabel{
+                        font: 14px var(--primaryBold);
+                        margin-bottom: 10px;
+                    }
+                    .cls-gapLength{
+                        font: 14px var(--primaryRegular);
+                        margin-bottom: 3px;
+                        .cls-dot{
+                            color: #12d312;
+                            font-size: 24px;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+                .cls-gapArrow{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background: #edf5ff;
+                    text-align: center;
+                    align-content: center;
+                    font-size: 14px;
+                }
+            }
+        }
+        .cls-gapCancelBtn{
+            background: unset;
+            border: 1px solid #ddd;
+            padding: 10px 30px;
+            border-radius: 10px;
+            margin: 30px auto 0px;
+            width: 30%;
+            font: 14px var(--primaryBold);
+        }
+    }
+}

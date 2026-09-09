@@ -202,7 +202,10 @@ const searchFlights = async (req, res) => {
             fromCityId,
             toCityId,
             amount,
-            totalBudget
+            totalBudget,
+            adults,
+            children,
+            infants
         } = req.body;
 
         if (!fromCityId || !toCityId) {
@@ -212,24 +215,36 @@ const searchFlights = async (req, res) => {
             });
         }
 
+        const adultCount = Number(adults) || 0;
+        const childCount = Number(children) || 0;
+        const infantCount = Number(infants) || 0;
+
         const flightAmount = Number(amount) || 0;
         const tripTotalBudget = Number(totalBudget) || 0;
+
+        // ✅ ADD pannunga — passengerSummary calculate pannра function call
+        const passengerSummary = buildPassengerSummary(adultCount, childCount, infantCount);
+
         const oneWayRows = await getFlights( fromCityId, toCityId, flightAmount );
         const roundTripRows = await getFlights( toCityId, fromCityId, flightAmount );
+
         if ( !oneWayRows.length && !roundTripRows.length ) {
             return res.status(404).json({
                 success: false,
                 status: 'NO_FLIGHT_FOUND',
-                message: flightAmount > 0 ? `No flights found within ₹${flightAmount}` : 'No flights found for this sector',
+                message: flightAmount > 0
+                    ? `No flights found for ${passengerSummary} within your flight budget of ₹${tripTotalBudget > 0 ? Math.round(tripTotalBudget / 2).toLocaleString('en-IN') : 0} — that's ₹${flightAmount.toLocaleString('en-IN')} per person.`
+                    : 'No flights found for this sector',
                 amount: flightAmount,
                 totalBudget: tripTotalBudget
             });
         }
+
         const oneWayFlights = oneWayRows.map( formatFlight );
         const roundTripFlights = roundTripRows.map( formatFlight );
         const oneWayFilter = buildFilterData( oneWayRows );
         const roundTripFilter = buildFilterData( roundTripRows );
-        
+
         return res.json({
             success: true,
             tripType: 'roundTrip',
@@ -247,7 +262,6 @@ const searchFlights = async (req, res) => {
                 oneWay: oneWayFilter,
                 roundTrip: roundTripFilter
             },
-
             budgetStatus: {
                 totalBudget: tripTotalBudget,
                 limit: 0,
@@ -280,7 +294,6 @@ const searchFlights = async (req, res) => {
         });
 
     } catch (error) {
-
         console.error( 'Flight search error:', error );
         return res.status(500).json({
             success: false,
@@ -289,6 +302,24 @@ const searchFlights = async (req, res) => {
         });
     }
 };
+
+// ✅ ADD pannunga — file-la, module.exports ku munnadi
+const buildPassengerSummary = (adults, children, infants) => {
+    const parts = [];
+
+    if (adults > 0) {
+        parts.push(`${adults} Adult${adults > 1 ? 's' : ''}`);
+    }
+    if (children > 0) {
+        parts.push(`${children} Child${children > 1 ? 'ren' : ''}`);
+    }
+    if (infants > 0) {
+        parts.push(`${infants} Infant${infants > 1 ? 's' : ''}`);
+    }
+
+    return parts.join(', ');
+};
+
 
 module.exports = {
     searchFlights

@@ -68,5 +68,5 @@
         ⚠ Your selected flight exceeds the budget by
         <strong> {{budgetValue?.amountLabel}} {{budgetValue.remainingAmount | number}} </strong>
     </div>
-    <button class="cls-continueBtn" [ngClass]="{ 'cls-disable': budgetValue.remainingAmount < 0 || (selectedValues.oneWay == null && selectedValues.roundTrip == null) }" (click)="continue()"> Continue to Guide Selection → </button>
+    <button class="cls-continueBtn" [disabled]="budgetValue.remainingAmount < 0 || (selectedValues.oneWay == null || selectedValues.roundTrip == null) " (click)="(budgetValue.remainingAmount < 0 || (selectedValues.oneWay == null && selectedValues.roundTrip == null)) ? null : continue()"> Continue to Guide Selection → </button>
 </div>

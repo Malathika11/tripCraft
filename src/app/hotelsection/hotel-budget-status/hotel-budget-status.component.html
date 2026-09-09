@@ -50,22 +50,22 @@
             <h5 class="cls-selectHead">Selected Hotel</h5>
             <div class="cls-selectDetails" *ngFor="let hotelValue of selectedHotel; let i = index">
                 <div class="cls-hotelImg">
-                    <img [src]="hotelValue.image" [alt]="hotelValue.hotelName" />
+                    <img [src]="hotelValue?.image" [alt]="hotelValue?.hotelName" />
                 </div>
                 <div class="cls-hotelDetails">
-                    <h3 class="cls-hotelName">{{hotelValue.hotelName}}</h3>
-                    <p class="cls-roomName">{{hotelValue.roomName}}</p>
+                    <h3 class="cls-hotelName">{{hotelValue?.hotelName}}</h3>
+                    <p class="cls-roomName">{{hotelValue?.roomName}}</p>
                     <div class="cls-nightDetails">
-                        <span>{{hotelValue.nights}}</span>
+                        <span>{{hotelValue?.nights}}</span>
                         Nights 
-                        (Day {{hotelValue.days.start}} - {{hotelValue.days.end}})
+                        (Day {{hotelValue?.days?.start}} - {{hotelValue?.days?.end}})
                     </div>
                     <div class="cls-priceandRemove">
                         <div class="cls-priceDetails">
-                            <p class="cls-totalPrice">₹ {{hotelValue.totalPrice}}</p>
+                            <p class="cls-totalPrice">₹ {{hotelValue?.totalPrice | number}}</p>
                             <div class="cls-amountCount">
-                                <span class="cls-perDay">₹ {{hotelValue.pricePerNight}}</span>
-                                <span class="cls-nights"> x {{hotelValue.nights}} N</span>
+                                <span class="cls-perDay">₹ {{hotelValue?.pricePerNight | number}}</span>
+                                <span class="cls-nights"> x {{hotelValue?.nights}} N</span>
                             </div>
                         </div>
                         <div class="cls-remove" (click)="remove(i, hotelValue)"> <span class="cls-16-close"></span> Remove</div>

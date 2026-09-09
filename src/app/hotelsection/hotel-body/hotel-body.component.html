@@ -85,5 +85,28 @@
     </ng-container>
 </div>
 <ng-container *ngIf="showPopup">
-    <app-hotel-incdec [noOfDays]="nightCount" [selectHotelDetails]="selectedHotel" [usedNights]="usedNights" (closePopup)="closePopupFun($event)" (hotelSelected)="hotelSelectedFun($event)"></app-hotel-incdec>
+    <app-hotel-incdec [selectHotelDetails]="selectedHotel" [selectedGap]="selectedGap" (closePopup)="closePopupFun($event)" (hotelSelected)="hotelSelectedFun($event)"></app-hotel-incdec>
+</ng-container>
+<!-- ✅ NEW — Gap Selector (multiple gaps irундha mattum kaanum) -->
+<ng-container *ngIf="showGapSelector">
+    <div class="cls-modalBackdrop">
+        <div class="cls-gapSelectorModal">
+            <h3 class="cls-gapTitle">Which days would you like to book for {{ selectedHotel?.hotelName }}?</h3>
+            <p class="cls-gapSub">You have {{ availableGaps.length }} open date ranges in your trip.</p>
+            <div class="cls-gapCard">
+                <div class="cls-gapOption" *ngFor="let gap of availableGaps" (click)="chooseGap(gap)">
+                    <span class="cls-icon cls-21-calender"></span>
+                    <div class="cls-gapText">
+                        <p class="cls-gapLabel">Day {{ gap.start }} - {{ gap.end }}</p>
+                        <p class="cls-gapLength">
+                            <span class="cls-dot">•</span>
+                            {{ gap.length }} night{{ gap.length > 1 ? 's' : '' }} available
+                        </p>
+                    </div>
+                    <span class="cls-gapArrow cls-2-arrow-right"></span>
+                </div>
+            </div>
+            <button type="button" class="cls-gapCancelBtn" (click)="showGapSelector = false">Cancel</button>
+        </div>
+    </div>
 </ng-container>

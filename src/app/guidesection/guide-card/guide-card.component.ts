@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 
@@ -10,6 +10,8 @@ import { SharedDataService } from 'src/app/services/shared-data.service';
 export class GuideCardComponent implements OnInit {
 
   @Input() public requestForm:any;
+
+  @Output() public transportSelect = new EventEmitter<any>();
 
   public selectedGuide:any = null;
 
@@ -28,6 +30,7 @@ export class GuideCardComponent implements OnInit {
 
   public toggle(value: boolean) {
     this.needGuide = value;
+    this.transportSelect.emit(value);
   }
 
   public selectGuide(guide: any) {
@@ -64,7 +67,7 @@ export class GuideCardComponent implements OnInit {
     }
     console.log(this.selectedGuide);
     
-    this.sharedData.setData({
+    this.sharedData.setData('Guide' , {
       selectDetails: guideDetails,
       selectHoleValue: this.selectedGuide
     });

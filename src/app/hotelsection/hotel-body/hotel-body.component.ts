@@ -2,6 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ToastService } from 'src/app/services/toast.service';
 import { TripStateService } from 'src/app/services/trip-state.service';
 
+interface AvailableGap {
+  start: number;
+  end: number;
+  length: number;
+}
+
 @Component({
   selector: 'app-hotel-body',
   templateUrl: './hotel-body.component.html',
@@ -12,14 +18,14 @@ export class HotelBodyComponent implements OnInit {
   @Input() public hotelDetails: any;
 
   public nightCount: any;
-
   public selectedHotel: any;
-  
   public showPopup = false;
-
-  public usedNights: number = 0;
-
   public selectedHotels: any[] = [];
+
+  // ✅ NEW — gap tracking
+  public availableGaps: AvailableGap[] = [];
+  public selectedGap: AvailableGap | null = null;
+  public showGapSelector = false;
 
   public noDataMessage = "We couldn't find any hotel matching your search.";
 
@@ -28,14 +34,69 @@ export class HotelBodyComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // ✅ NEW — ella booked days-ஐயும் collect pannும்
+  private getOccupiedDays(): Set<number> {
+    const occupied = new Set<number>();
+    this.selectedHotels.forEach(hotel => {
+      for (let d = hotel.days.start; d <= hotel.days.end; d++) {
+        occupied.add(d);
+      }
+    });
+    return occupied;
+  }
+
+  // ✅ NEW — ella free gaps-ஐயும் kandுpudiкும் (oru gap illa, multiple-um kидைкும்)
+  private findAllAvailableGaps(): AvailableGap[] {
+    const occupied = this.getOccupiedDays();
+    const gaps: AvailableGap[] = [];
+    let gapStart: number | null = null;
+
+    for (let day = 1; day <= this.nightCount; day++) {
+      if (!occupied.has(day)) {
+        if (gapStart === null) {
+          gapStart = day;
+        }
+      } else {
+        if (gapStart !== null) {
+          gaps.push({ start: gapStart, end: day - 1, length: day - gapStart });
+          gapStart = null;
+        }
+      }
+    }
+
+    if (gapStart !== null) {
+      gaps.push({ start: gapStart, end: this.nightCount, length: this.nightCount - gapStart + 1 });
+    }
+
+    return gaps;
+  }
+
   public selectHotel(hotel: any): void {
-    let requestForm =  this.tripState.get<any>('requestFormValue') || {};
+    let requestForm = this.tripState.get<any>('requestFormValue') || {};
     this.nightCount = requestForm.totalDays;
-    if (this.usedNights >= this.nightCount) {
+
+    this.availableGaps = this.findAllAvailableGaps();
+
+    if (!this.availableGaps.length) {
       this.toast.info('All package nights are already selected.');
       return;
     }
+
     this.selectedHotel = hotel;
+
+    if (this.availableGaps.length === 1) {
+      // ✅ oru gap mattum irундha, direct-ah nights popup ku pogum
+      this.selectedGap = this.availableGaps[0];
+      this.showPopup = true;
+    } else {
+      // ✅ multiple gaps — user muthalla enna gap-ku vேண்டும் nu choose pandанум
+      this.showGapSelector = true;
+    }
+  }
+
+  public chooseGap(gap: AvailableGap): void {
+    this.selectedGap = gap;
+    this.showGapSelector = false;
     this.showPopup = true;
   }
 
@@ -43,21 +104,17 @@ export class HotelBodyComponent implements OnInit {
     return hotel.hotelName + '-' + index;
   }
 
-  public closePopupFun(event:any) {
+  public closePopupFun(event: any) {
     this.showPopup = event;
   }
 
   public hotelSelectedFun(selection: any): void {
-    console.log( 'Hotel selected from incdec:', selection );
     this.selectedHotels.push(selection);
-    this.usedNights += Number( selection.nights || 0 );
-    console.log( 'Used nights:', this.usedNights );
-    console.log( 'Remaining nights:', this.remainingNights );
     this.showPopup = false;
   }
 
   get remainingNights(): number {
-    return Math.max( this.nightCount - this.usedNights, 0 );
+    return Math.max(this.nightCount - this.getOccupiedDays().size, 0);
   }
 
   previousImage(hotel: any): void {

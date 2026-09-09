@@ -102,12 +102,16 @@ export class HotelDetailsComponent implements OnInit {
     });
   }
 
-  public hotelRemovedFun(event:any){
-    console.log(event, this.hotelBody);
-    this.hotelBody.selectedHotels.splice(event.index, 1);
-    this.hotelBody.usedNights = this.hotelBody.usedNights - event.hotelValue.nights;
-    console.log(this.hotelBody);
-    
+  public hotelRemovedFun(event: any) {
+    // ✅ index-ku badhila, actual hotel object match pannitu remove pannуறோம்
+    // (merge logic-la irундhு array length mismatch aagi index misalign aaguм் sadhyатை iruккаthинала)
+    this.hotelBody.selectedHotels = this.hotelBody.selectedHotels.filter(
+      (h: any) => !(
+        h.hotelName === event.hotelValue.hotelName &&
+        h.days.start === event.hotelValue.days.start &&
+        h.days.end === event.hotelValue.days.end
+      )
+    );
   }
 
 }

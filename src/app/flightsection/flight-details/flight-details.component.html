@@ -44,3 +44,7 @@
 <ng-container *ngIf="showPopup">
     <app-popup [details]="popupDetails" (emitPopupDetails)="emitPopupDetailsFun($event)"></app-popup>
 </ng-container>
+
+<div class="cls-noDataValue" *ngIf="noDataFoundShow">
+    <app-nodatafound [noDataPara]="noDataMessage"></app-nodatafound>
+</div>

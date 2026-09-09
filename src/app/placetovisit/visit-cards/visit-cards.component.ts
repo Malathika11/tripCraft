@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastService } from 'src/app/services/toast.service';
 import { TripStateService } from 'src/app/services/trip-state.service';
 
@@ -13,13 +13,11 @@ export class VisitCardsComponent implements OnInit {
 
   @Output() public selectedPlacesChange = new EventEmitter<any[]>();
 
-  @ViewChild('cardWrapper') cardWrapper!: ElementRef<HTMLDivElement>;
-
   public tripDays: { dayNumber: number; date: Date }[] = [];
   public selectedPlaces: any[] = [];
   public singlePlaceSelect: any;
-  public isLeftDisabled = true;
-  public isRightDisabled = false;
+  public isLeftDisabled: boolean[] = [];
+  public isRightDisabled: boolean[] = [];
   public itinerary: { [dayNumber: number]: any[] } = {};
   public formValue: any;
   public showDayStrip = false;
@@ -39,7 +37,7 @@ export class VisitCardsComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => this.updateArrowState(), 0);
+    setTimeout(() => { this.visitDetails.forEach((_, index) => { this.updateArrowState(index); }); });
   }
 
   public selectPlace(place: any): void {
@@ -58,7 +56,7 @@ export class VisitCardsComponent implements OnInit {
     this.selectedPlacesChange.emit([...this.selectedPlaces]);
   }
 
-  private removeFromItinerary(place: any): void {
+  public removeFromItinerary(place: any): void {
     Object.keys(this.itinerary).forEach(dayKey => {
       const day = Number(dayKey);
       this.itinerary[day] = this.itinerary[day].filter(p => p.id !== place.id);
@@ -72,34 +70,37 @@ export class VisitCardsComponent implements OnInit {
     return this.selectedPlaces.some(item => item.id === place.id);
   }
 
-  public scrollLeft(): void {
-    this.scroll(-300);
+  public scrollLeft(index:any): void {
+    this.scroll(-300,index);
   }
 
-  public scrollRight(): void {
-    this.scroll(300);
+  public scrollRight(index:any): void {
+    this.scroll(300,index);
   }
 
-  private scroll(amount: number): void {
-    if (!this.cardWrapper) {
+  public scroll(amount: number, index:any): void {
+    const container = document.getElementsByClassName( 'cls-cardValues' + index )[0] as HTMLElement;
+    console.log(container);
+    
+    if (!container) {
       return;
     }
-    this.cardWrapper.nativeElement.scrollBy({ left: amount, behavior: 'smooth' });
-    setTimeout(() => this.updateArrowState(), 350);
+    container.scrollBy({ left: amount, behavior: 'smooth' });
+    setTimeout(() => this.updateArrowState(index), 350);
   }
 
-  private updateArrowState(): void {
-    const el = this.cardWrapper?.nativeElement;
-    if (!el) {
+  public updateArrowState(index: number): void {
+    const container = document.getElementsByClassName( 'cls-cardValues' + index )[0] as HTMLElement;
+    if (!container) {
       return;
     }
-    const scrollLeft = el.scrollLeft;
-    const maxScrollLeft = el.scrollWidth - el.clientWidth;
-    this.isLeftDisabled = scrollLeft <= 0;
-    this.isRightDisabled = scrollLeft >= maxScrollLeft - 1;
+    const scrollLeft = container.scrollLeft;
+    const maxScrollLeft = container.scrollWidth - container.clientWidth;
+    this.isLeftDisabled[index] = scrollLeft <= 0;
+    this.isRightDisabled[index] = maxScrollLeft <= 0 || scrollLeft >= maxScrollLeft - 1;
   }
 
-  private generateTripDays(startDate: any, totalDays: any) {
+  public generateTripDays(startDate: any, totalDays: any) {
     const days = Number(totalDays) || 0;                
     return Array.from({ length: days }, (_, i) => {
       const date = new Date(startDate);

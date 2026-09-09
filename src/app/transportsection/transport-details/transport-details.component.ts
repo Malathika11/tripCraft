@@ -46,14 +46,11 @@ export class TransportDetailsComponent implements OnInit {
     
   }
 
-  ngOnDestroy(): void {
-    this.shareData.clearTransport();
-  }
-  
   public getResponse(){
     const request = {
       city: this.requestFormValue.toCity.split(',')[0].trim(),
-      tripDays: this.requestFormValue.totalDays
+      tripDays: this.requestFormValue.totalDays,
+      amount: this.requestFormValue.breakdownForm.amountguide
     };
     this.apiService.searchTransport(request).subscribe({
       next: (response: any) => {
