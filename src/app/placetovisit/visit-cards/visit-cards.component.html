@@ -9,8 +9,8 @@
                 <span class="cls-dayLabel">Day {{ day.dayNumber }}</span>
                 <span class="cls-dayDate">{{ day.date | date:'dd MMM' }}</span>
                 <span class="cls-activityCount" *ngIf="!isRestDay(day.dayNumber) && itinerary[day.dayNumber] && itinerary[day.dayNumber].length > 0">
-                    {{ itinerary[day.dayNumber]?.length }} 
-                    {{ itinerary[day.dayNumber]?.length === 1 ? 'activity' : 'activities' }}
+                    {{ itinerary[day.dayNumber].length }} 
+                    {{ itinerary[day.dayNumber].length === 1 ? 'activity' : 'activities' }}
                 </span>
                 <span class="cls-restDay" *ngIf="isRestDay(day.dayNumber)">Rest Day</span>
             </button>
